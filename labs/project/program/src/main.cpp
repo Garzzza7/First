@@ -1,9 +1,16 @@
-#include <iostream>
-#include "Student.h"
-int main ()
-{
-std::cout <<"Hello, OOP1!"<<std::endl;
-Student student("Thomas", "Edison");
-std::cout<<"Student"<<student.firstName<<" "<<student.lastName<<std::endl;
-return 0;
+#include <cstdlib>
+#include <ctime>
+
+#include "World.h"
+
+using namespace std;
+
+int main() {
+
+    srand(time(NULL));
+
+    World world;
+    world.startSimulation(5);
+
+    return EXIT_SUCCESS;
 }
