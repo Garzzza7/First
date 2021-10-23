@@ -77,6 +77,17 @@ target_link_libraries (TestMonster
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
         )
 
+set(SOURCE_TEST_CREATURE_FILES
+        test/master.cpp
+        test/CreatureTest.cpp)
+
+add_executable (TestCreature ${SOURCE_TEST_CREATURE_FILES})
+
+target_link_libraries (TestCreature
+        Library
+        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+        )
+
 enable_testing()
 add_test(TestLibrary1 TestHuman
         --report_level=detailed
@@ -84,6 +95,11 @@ add_test(TestLibrary1 TestHuman
         --color_output=yes
         )
 add_test(NAME TestLibrary2 COMMAND TestMonster
+        --report_level=detailed
+        --log_level=all
+        --color_output=yes
+        )
+add_test(TestLibrary3 TestCreature
         --report_level=detailed
         --log_level=all
         --color_output=yes
