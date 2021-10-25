@@ -11,28 +11,28 @@ class Container{
         Container();
         Container(int number);
 
-        getNumber();
+        int getNumber();
 
-        getTare();
+        double getTare();
 
-        setTare(double tareWeight);
+        void setTare(double tareWeight);
 
-        getMaxWeight();
+        double getMaxWeight();
 
-        setMaxWeight(double maxWeight);
+        void setMaxWeight(double maxWeight);
 
-        getStrength();
+        double getStrength();
 
-        setStrength(double strength);
+        void setStrength(double strength);
 
-        getGrossWeight();
+        double getGrossWeight();
 
-        getNetWeight();
+        double getNetWeight();
 
-        getMaxWeight();
+        double getMaxCargo();
 
-        loadCargo(double amount);
+        void loadCargo(double amount);
 
-        unloadCargo(double amount);
+        void unloadCargo(double amount);
 
 };
