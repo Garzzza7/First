@@ -26,6 +26,8 @@ public:
     void print();
 
     virtual ~Creature();
+
+    double distanceTo(Creature*);
 };
 
 
