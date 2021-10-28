@@ -34,3 +34,20 @@ if(MSVC)
 else()
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 endif()
+
+set(SOURCE_TEST_CONTAINER_FILES
+        test/master.cpp
+        test/ContainerTest.cpp)
+
+add_executable (ContainerTest ${SOURCE_TEST_CONTAINER_FILES})
+
+target_link_libraries (ContainerTest
+        Library
+        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+        )
+
+enable_testing()
+
+add_custom_target(check ${CMAKE_COMMAND} -E env CTEST_OUTPUT_ON_FAILURE=1 BOOST_TEST_LOG_LEVEL=all
+        ${CMAKE_CTEST_COMMAND} -C $<CONFIG> --verbose
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
