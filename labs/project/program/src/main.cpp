@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Container.h"
 
-using namespace std;
+//using namespace std;
 
 int main ()
 {
@@ -11,13 +11,13 @@ return 0;
 
 void display(Container c)
 {
-    cout << "Container number: " << c.getNumber() << "\n";
-    cout << "Container tare weight: " << c.getTare() << "\n";
-    cout << "Container max weight: " << c.getMaxWeight() << "\n";
-    cout << "Container strength: " << c.getStrength() << "\n";
-    cout << "Container gross weight: " << c.getGrossWeight() << "\n";
-    cout << "Container net weight: " << c.getNetWeight() << "\n";
-    cout << "Container max cargo: " << c.getMaxCargo() << "\n";
+    std::cout << "Container number: " << c.getNumber() << "\n";
+    std::cout << "Container tare weight: " << c.getTare() << "\n";
+    std::cout << "Container max weight: " << c.getMaxWeight() << "\n";
+    std::cout << "Container strength: " << c.getStrength() << "\n";
+    std::cout << "Container gross weight: " << c.getGrossWeight() << "\n";
+    std::cout << "Container net weight: " << c.getNetWeight() << "\n";
+    std::cout << "Container max cargo: " << c.getMaxCargo() << "\n";
 
 }
 
@@ -39,7 +39,7 @@ void testLocalObject()
 
 void displayCargo(Container& c)
 {
-    cout << "Current cargo weight (net weight): " << c.getNetWeight();
+    std::cout << "Current cargo weight (net weight): " << c.getNetWeight();
 }
 
 void loadAndSend(Container& c, double goods)

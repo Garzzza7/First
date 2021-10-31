@@ -1,15 +1,16 @@
 class Container{
 
-    int number;
-    double tareWeight;
-    double maxWeight;
-    double strength;
-    double cargo;
+    int number; //registration number
+    double tareWeight; //own weight of an empty container
+    double maxWeight; //maximum container weight with a load
+    double strength; //maximum external weight of other containers placed upon this one
+    double cargo; //weight of the load in the container (cargo=netWeight)
 
     public:
 
         Container();
-        Container(int number);
+        //Container(int, double, double, double, double);
+        Container(int);
 
         int getNumber();
 
@@ -34,5 +35,7 @@ class Container{
         void loadCargo(double amount);
 
         void unloadCargo(double amount);
+
+        virtual ~Container();
 
 };
