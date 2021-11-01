@@ -3,12 +3,6 @@
 
 //using namespace std;
 
-int main ()
-{
-
-return 0;
-}
-
 void display(Container c)
 {
     std::cout << "Container number: " << c.getNumber() << "\n";
@@ -61,4 +55,11 @@ void testDynamicObject()
     Container *c = prepare(4, 1020.32);
     display(c);
     delete(c);
+}
+
+int main ()
+{
+    testLocalObject();
+    testDynamicObject();
+    return 0;
 }

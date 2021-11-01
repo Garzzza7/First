@@ -12,11 +12,13 @@ Container::Container(int number , double tareWeight , double maxWeight , double 
 */
 Container::Container()
 {
-    number=0;
+    number = 0;
+    cargo = 0;
 }
-Container::Container(int)
+Container::Container(int num)
 {
-    number;
+    number = num;
+    cargo = 0;
 }
 Container::~Container()
 {
