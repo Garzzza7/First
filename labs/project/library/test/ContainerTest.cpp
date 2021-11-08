@@ -39,6 +39,7 @@ BOOST_AUTO_TEST_SUITE(TestLoadCargoBelowMax)
 
         BOOST_AUTO_TEST_CASE(ContainerLoad) {
         Container container;
+        container.setMaxWeight(500.0);
         container.loadCargo(420.69);
         BOOST_REQUIRE_EQUAL(container.getNetWeight(), 420.69);
     }

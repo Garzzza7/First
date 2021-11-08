@@ -2,7 +2,7 @@
 // Created by student on 10/25/21.
 //
 #include <iostream>
-
+#include <assert.h>
 #include "Container.h"
 /*
 Container::Container(int number , double tareWeight , double maxWeight , double strength, double cargo)
@@ -30,7 +30,12 @@ int Container::getNumber()
 }
 void Container::setTare(double tareWeight)
 {
-    this->tareWeight=tareWeight;
+    if(cargo+tareWeight<=maxWeight) {
+        this->tareWeight = tareWeight;
+    }
+    else{
+        std::cout<<"The tare weight given is exceeding the max weight!"<<std::endl;
+    }
 }
 double Container::getTare()
 {
@@ -38,7 +43,12 @@ double Container::getTare()
 }
 void Container::setMaxWeight(double maxWeight)
 {
-    this->maxWeight=maxWeight;
+    if(cargo+tareWeight<=maxWeight) {
+        this->maxWeight = maxWeight;
+    }
+    else{
+        std::cout << "The max weight set is lighter than cargo and tare weight!" << std::endl;
+    }
 }
 double Container::getMaxWeight()
 {
@@ -68,8 +78,10 @@ double Container::getMaxCargo()
 void Container::loadCargo(double amount)
 {
     cargo += amount;
+    if(cargo+tareWeight>maxWeight) cargo = maxWeight-tareWeight;
 }
 void Container::unloadCargo(double amount)
 {
     cargo -= amount;
+    if(cargo<0) cargo = 0;
 }
