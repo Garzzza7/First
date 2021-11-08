@@ -4,7 +4,9 @@ project(Library)
 
 set(SOURCE_FILES
         include/Container.h
-        src/Container.cpp)
+        src/Container.cpp
+        include/ContainerStack.h
+        src/ContainerStack.cpp)
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -42,6 +44,19 @@ set(SOURCE_TEST_CONTAINER_FILES
 add_executable (ContainerTest ${SOURCE_TEST_CONTAINER_FILES})
 
 target_link_libraries (ContainerTest
+        Library
+        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+        )
+
+
+set(SOURCE_TEST_CONTAINER_STACK_FILES
+        test/master.cpp
+        test/ContainerStackTest.cpp
+)
+
+add_executable (ContainerStackTest ${SOURCE_TEST_CONTAINER_STACK_FILES})
+
+target_link_libraries (ContainerStackTest
         Library
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
         )

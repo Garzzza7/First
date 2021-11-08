@@ -1,15 +1,6 @@
-//
-// Created by student on 10/25/21.
-//
 #include <iostream>
-#include <assert.h>
 #include "Container.h"
-/*
-Container::Container(int number , double tareWeight , double maxWeight , double strength, double cargo)
-{
-    std::cout<<"Constructor"<<std::endl;
-}
-*/
+
 Container::Container()
 {
     number = 0;
