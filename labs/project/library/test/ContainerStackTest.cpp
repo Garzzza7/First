@@ -20,5 +20,11 @@ BOOST_AUTO_TEST_SUITE(TestContainerStackSuite)
         }
         BOOST_REQUIRE_EQUAL(stack.getSize(), 9);
     }
+    BOOST_AUTO_TEST_CASE(LoadMoreThanCapacity)
+            ContainerStack stack;
+            BOOST_REQUIRE_EQUAL(stack.getCapacity);
+
+
+            )
 
 BOOST_AUTO_TEST_SUITE_END()
