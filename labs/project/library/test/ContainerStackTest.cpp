@@ -21,4 +21,40 @@ BOOST_AUTO_TEST_SUITE(TestContainerStackSuite)
         BOOST_REQUIRE_EQUAL(stack.getSize(), 9);
     }
 
+    BOOST_AUTO_TEST_CASE(GetLogicErrorWhenStackExceedsCapacity) {
+        ContainerStack stack;
+        Container c[11];
+        for(int i = 0; i < 10; i++){
+            stack.take(c[i]);
+        }
+        BOOST_CHECK_THROW(
+                stack.take(c[11]),
+                std::logic_error);
+    }
+
+    BOOST_AUTO_TEST_CASE(GetEmptyWhenLastContainerFromStackRemoved) {
+        ContainerStack stack;
+        Container container(12);
+
+        stack.take(container);
+
+        BOOST_REQUIRE_EQUAL(stack.give().getNumber(), container.getNumber());
+        BOOST_REQUIRE_EQUAL(stack.getSize(), 0);
+    }
+
+    //Test 8:
+    BOOST_AUTO_TEST_CASE(GetExceptionWhenAttemptingToAccessNonExistingContainerFromStack) {
+        ContainerStack stack;
+
+        for(int i =0; i < 4; i++){
+            Container container(i);
+            stack.take(container);
+        }
+
+        BOOST_REQUIRE_THROW(
+                stack.at(5),
+                std::runtime_error);
+    }
+
+
 BOOST_AUTO_TEST_SUITE_END()
