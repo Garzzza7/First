@@ -6,7 +6,9 @@ set(SOURCE_FILES
         include/Container.h
         src/Container.cpp
         include/ContainerStack.h
-        src/ContainerStack.cpp)
+        src/ContainerStack.cpp
+        include/Crane.h
+        src/Crane.cpp)
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -57,6 +59,18 @@ set(SOURCE_TEST_CONTAINER_STACK_FILES
 add_executable (ContainerStackTest ${SOURCE_TEST_CONTAINER_STACK_FILES})
 
 target_link_libraries (ContainerStackTest
+        Library
+        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+        )
+
+set(SOURCE_TEST_CRANE_FILES
+        test/master.cpp
+        test/CraneTest.cpp
+        )
+
+add_executable (CraneTest ${SOURCE_TEST_CRANE_FILES})
+
+target_link_libraries (CraneTest
         Library
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
         )
