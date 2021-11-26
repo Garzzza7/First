@@ -1,6 +1,8 @@
 #include "Crane.h"
 
 Crane::Crane() {
+    Container c(0);
+    container = c;
     position = 0;
 }
 
@@ -8,10 +10,10 @@ bool Crane::isParked(){
     return position == -1;
 }
 bool Crane::isLoaded(){
-    return container.getNumber() != 0 && position <= -2;
+    return container.getNumber() != 0 && position < 0;
 }
 bool Crane::isUnloaded(){
-    return container.getNumber() == 0 && position <= -2;
+    return container.getNumber() == 0 && position < 0;
 }
 bool Crane::isWaitingEmpty(){
     return container.getNumber() == 0 && position >= 0;
@@ -21,7 +23,7 @@ bool Crane::isWaitingFull(){
 }
 
 void Crane::park(){
-    if(isUnloaded() && isWaitingEmpty()){
+    if((isUnloaded() || isWaitingEmpty() )&& isWaitingEmpty()){
         position = -1;
     }else{
         throw std::logic_error("Tried to park a crane with container loaded!");
