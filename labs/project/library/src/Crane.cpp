@@ -94,3 +94,13 @@ ContainerStack& Crane::stackAt(int position){
 bool Crane::canPutDown(){
     return position >= 0 && stackAt(position).getSize() < stackAt(position).getCapacity();
 }
+
+
+void Crane::loadFrom (Loadable& truck)
+{
+
+}
+void Crane::unloadOnto (Loadable& truck)
+{
+
+}

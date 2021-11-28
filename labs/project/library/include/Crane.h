@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ContainerStack.h"
+#include "Loadable.h"
 
 constexpr unsigned MAX_STACKS = 5;
 
@@ -34,4 +35,7 @@ public:
     ContainerStack& stackAt(int position);
 
     bool canPutDown();
+
+    void loadFrom (Loadable& truck);
+    void unloadOnto (Loadable& truck);
 };

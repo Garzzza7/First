@@ -8,7 +8,7 @@ set(SOURCE_FILES
         include/ContainerStack.h
         src/ContainerStack.cpp
         include/Crane.h
-        src/Crane.cpp)
+        src/Crane.cpp src/Loadable.cpp src/Truck.cpp)
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -54,7 +54,7 @@ target_link_libraries (ContainerTest
 set(SOURCE_TEST_CONTAINER_STACK_FILES
         test/master.cpp
         test/ContainerStackTest.cpp
-)
+        include/Crane.h include/Loadable.h include/Truck.h test/TruckTest.cpp)
 
 add_executable (ContainerStackTest ${SOURCE_TEST_CONTAINER_STACK_FILES})
 
