@@ -8,7 +8,11 @@ set(SOURCE_FILES
         include/ContainerStack.h
         src/ContainerStack.cpp
         include/Crane.h
-        src/Crane.cpp src/Loadable.cpp src/Truck.cpp)
+        src/Crane.cpp
+        include/Loadable.h
+        src/Loadable.cpp
+        include/Truck.h
+        src/Truck.cpp)
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -54,7 +58,7 @@ target_link_libraries (ContainerTest
 set(SOURCE_TEST_CONTAINER_STACK_FILES
         test/master.cpp
         test/ContainerStackTest.cpp
-        include/Crane.h include/Loadable.h include/Truck.h test/TruckTest.cpp)
+)
 
 add_executable (ContainerStackTest ${SOURCE_TEST_CONTAINER_STACK_FILES})
 
@@ -71,6 +75,17 @@ set(SOURCE_TEST_CRANE_FILES
 add_executable (CraneTest ${SOURCE_TEST_CRANE_FILES})
 
 target_link_libraries (CraneTest
+        Library
+        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+        )
+
+set(SOURCE_TEST_TRUCK_FILES
+        test/master.cpp
+        test/TruckTest.cpp)
+
+add_executable (TruckTest ${SOURCE_TEST_TRUCK_FILES})
+
+target_link_libraries (TruckTest
         Library
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
         )

@@ -2,21 +2,21 @@
 
 ContainerStack::ContainerStack() {}
 
-int ContainerStack::getCapacity() {
+unsigned ContainerStack::getCapacity() {
     return MAX_HEIGHT;
 }
 
-int ContainerStack::getSize() {
+unsigned ContainerStack::getSize() {
     return containers.size();
 }
 
-const Container &ContainerStack::at(int height) {
+Container &ContainerStack::at(int height) {
     if(containers.size() < height) throw std::runtime_error("Attempted to access non-existing container from the stack!");
     return containers.at(height);
 }
 
 void ContainerStack::take(Container aContainer) {
-    if(containers.size() < MAX_HEIGHT)
+    if(canTake())
     {
         containers.push_back(aContainer);
     }
@@ -27,8 +27,14 @@ void ContainerStack::take(Container aContainer) {
 }
 
 Container ContainerStack::give() {
-    if(containers.size() <= 0) throw std::runtime_error("Container stack contains no containers!");
+    if(canGive())
+    {
     Container c = containers.back();
     containers.pop_back();
     return c;
+    }
+    else
+    {
+        throw std::runtime_error("Container stack contains no containers!");
+    }
 }

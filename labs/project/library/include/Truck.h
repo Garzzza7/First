@@ -1,24 +1,12 @@
-//
-// Created by student on 11/28/21.
-//
-#include "string.h"
 #include "Loadable.h"
 
-#ifndef OOPPROJECT_TRUCK_H
-#define OOPPROJECT_TRUCK_H
-
-#endif //OOPPROJECT_TRUCK_H
+const unsigned MAX_TRAILER = 2;
 
 class Truck : public Loadable{
-
-    Container[2] trailer;
+    Container trailer[MAX_TRAILER];
 public:
-    Truck();
     unsigned getCapacity();
     unsigned getSize();
-    Container& at(int index);
+    Container& at(int height);
     void take(Container aContainer);
-    Container give();
-
-};
-
+    Container give();};
