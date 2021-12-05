@@ -29,7 +29,7 @@ void Crane::park(){
         throw std::logic_error("Tried to park a crane with container loaded!");
     }
 }
-
+/*
 void Crane::load(Container container){
     if(isUnloaded()){
         this->container = container;
@@ -47,7 +47,26 @@ Container Crane::unload(){
         throw std::logic_error("Tried to unload a crane that isn't above the trailer or is already unloaded!");
     }
 }
+*/
+void Crane::loadFrom (Loadable& truck)
+{
+    if(isLoaded() || truck.getSize()==0){
+        throw std::logic_error("Tried to load a crane that is already loaded or trailer is empty!");
+    }
+    else
+        truck.give();
+}
+void Crane::unloadOnto (Loadable& truck)
+{
+    if(isLoaded() || truck.getSize()==2){
+        throw std::logic_error("Tried to load a crane that is already loaded or trailer is already full!");
+    }
+    else
+        truck.getSize()+1;
+        ContainerStack stack;
+        stack.getSize()-1;
 
+}
 void Crane::forward(int numSteps){
     if(position+numSteps<MAX_STACKS){
         position += numSteps;
@@ -96,11 +115,3 @@ bool Crane::canPutDown(){
 }
 
 
-void Crane::loadFrom (Loadable& truck)
-{
-
-}
-void Crane::unloadOnto (Loadable& truck)
-{
-
-}

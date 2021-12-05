@@ -33,5 +33,11 @@ BOOST_AUTO_TEST_SUITE(TestCraneSuite)
 
         BOOST_REQUIRE_THROW(crane.park(), std::logic_error);
     }
+    BOOST_AUTO_TEST_CASE(loadFromTest) {
+
+    }
+    BOOST_AUTO_TEST_CASE(unloadFromTest) {
+
+    }
 
 BOOST_AUTO_TEST_SUITE_END()
