@@ -96,6 +96,17 @@ target_link_libraries (TruckTest
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
         )
 
+set(SOURCE_TEST_LOAD_STRATEGY_FILES
+        test/master.cpp
+        test/LoadStrategyTest.cpp)
+
+add_executable (LoadStrategyTest ${SOURCE_TEST_LOAD_STRATEGY_FILES})
+
+target_link_libraries (LoadStrategyTest
+        Library
+        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+        )
+
 enable_testing()
 
 add_custom_target(check ${CMAKE_COMMAND} -E env CTEST_OUTPUT_ON_FAILURE=1 BOOST_TEST_LOG_LEVEL=all
