@@ -4,8 +4,7 @@ project(Program)
 
 #specify set of project's source files
 set(SOURCE_FILES
-        src/main.cpp
-        ../library/src/Container.cpp ../library/src/ContainerStack.cpp ../library/src/Crane.cpp ../library/src/Loadable.cpp ../library/src/Truck.cpp)
+        src/main.cpp)
 #add following files to executable file 'Program'
 add_executable(Program ${SOURCE_FILES})
 

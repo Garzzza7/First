@@ -12,7 +12,13 @@ set(SOURCE_FILES
         include/Loadable.h
         src/Loadable.cpp
         include/Truck.h
-        src/Truck.cpp)
+        src/Truck.cpp
+        include/Strategies/LoadStrategy.h
+        src/Strategies/LoadStrategy.cpp
+        include/Strategies/CheckFreePlaceStrategy.h
+        src/Strategies/CheckFreePlaceStrategy.cpp
+        include/Strategies/CheckPlaceAndWeightStrategy.h
+        src/Strategies/CheckPlaceAndWeightStrategy.cpp)
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 

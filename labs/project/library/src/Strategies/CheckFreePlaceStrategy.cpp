@@ -1,0 +1,1 @@
+#include "Strategies/CheckFreePlaceStrategy.h"
