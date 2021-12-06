@@ -13,9 +13,9 @@ BOOST_AUTO_TEST_SUITE(TestTruckSuite)
             BOOST_REQUIRE_EQUAL(truck.getSize(), 1);
     }
     //2
-    BOOST_AUTO_TEST_CASE(GetCorrectSizeWhenStackHasContainers) {
+    BOOST_AUTO_TEST_CASE(GetCorrectSizeWhenTruckHasContainers) {
         Truck truck;
-        Container c[2];
+        Container c[2] = {1, 2};
         for(int i = 0; i < 2; i++){
             truck.take(c[i]);
         }
@@ -23,10 +23,10 @@ BOOST_AUTO_TEST_SUITE(TestTruckSuite)
     }
 
     //3
-    BOOST_AUTO_TEST_CASE(GetLogicErrorWhenStackExceedsCapacity) {
+    BOOST_AUTO_TEST_CASE(GetLogicErrorWhenTruckExceedsCapacity) {
         Truck truck;
-        Container c[3];
-        for(int i = 0; i < 3; i++){
+        Container c[3] = {1,2,3};
+        for(int i = 0; i < 2; i++){
             truck.take(c[i]);
         }
         BOOST_CHECK_THROW(
@@ -62,23 +62,23 @@ BOOST_AUTO_TEST_SUITE(TestTruckSuite)
     //6
     BOOST_AUTO_TEST_CASE(GetTheSameContainerRegistryNumberWhenUsingAtAndGetNumber) {
         Truck truck;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 1; i < 3; i++) {
             Container container(i);
             truck.take(container);
         }
         for(int i = 0; i < 2; i++) {
             Container container = truck.at(i);
-            BOOST_REQUIRE_EQUAL(i, container.getNumber());
+            BOOST_REQUIRE_EQUAL(i+1, container.getNumber());
         }
     }
 
     //7
-    BOOST_AUTO_TEST_CASE(GetARuntimeErrorWhenRemovingFromAnEmptyTrailer){
+    BOOST_AUTO_TEST_CASE(GetALogicErrorWhenRemovingFromAnEmptyTrailer){
         Truck truck;
         BOOST_REQUIRE_EQUAL(truck.getSize(), 0);
         BOOST_REQUIRE_THROW(
                 truck.give(),
-                std::runtime_error);
+                std::logic_error);
 
     }
 
@@ -86,13 +86,13 @@ BOOST_AUTO_TEST_SUITE(TestTruckSuite)
     BOOST_AUTO_TEST_CASE(GetExceptionWhenAttemptingToAccessNonExistingContainerFromTrailer) {
         Truck truck;
 
-        for(int i =0; i < 2; i++){
+        for(int i = 0; i < 2; i++){
             Container container(i);
             truck.take(container);
         }
 
         BOOST_REQUIRE_THROW(
                 truck.at(5),
-                std::runtime_error);
+                std::out_of_range);
     }
 BOOST_AUTO_TEST_SUITE_END()

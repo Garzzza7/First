@@ -19,6 +19,7 @@ Container& Truck::at(int position)
 {
     if(position < getCapacity())
     {
+        std::cout << position << std::endl;
         return trailer[position];
     }
     else
@@ -33,8 +34,11 @@ void Truck::take(Container aContainer)
     {
         for (int i = 0; i < getCapacity(); ++i)
         {
-            if(trailer[i].getNumber() == 0) trailer[i] = aContainer;
-            break;
+            if(trailer[i].getNumber() == 0)
+            {
+                trailer[i] = aContainer;
+                break;
+            }
         }
     }
     else
@@ -49,7 +53,7 @@ Container Truck::give()
     {
         for (int i = getCapacity() - 1; i >= 0; --i)
         {
-            std::cout << i;
+            std::cout << i << std::endl;
             if(trailer[i].getNumber() != 0) {
                 Container oldContainer, newContainer;
                 oldContainer = trailer[i];
