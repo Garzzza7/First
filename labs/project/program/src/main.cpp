@@ -1,37 +1,23 @@
-#include <X11/Xlib.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <SFML/Graphics.hpp>
 
 int main(void) {
-    Display *d;
-    Window w;
-    XEvent e;
-    const char *msg = "Hello, World!";
-    int s;
+    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
 
-    d = XOpenDisplay(NULL);
-    if (d == NULL) {
-        fprintf(stderr, "Cannot open display\n");
-        exit(1);
-    }
-
-    s = DefaultScreen(d);
-    w = XCreateSimpleWindow(d, RootWindow(d, s), 10, 10, 100, 100, 1,
-                            BlackPixel(d, s), WhitePixel(d, s));
-    XSelectInput(d, w, ExposureMask | KeyPressMask);
-    XMapWindow(d, w);
-
-    while (1) {
-        XNextEvent(d, &e);
-        if (e.type == Expose) {
-            XFillRectangle(d, w, DefaultGC(d, s), 20, 20, 10, 10);
-            XDrawString(d, w, DefaultGC(d, s), 10, 50, msg, strlen(msg));
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
         }
-        if (e.type == KeyPress)
-            break;
+
+        window.clear();
+        window.draw(shape);
+        window.display();
     }
 
-    XCloseDisplay(d);
     return 0;
 }

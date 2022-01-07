@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.4)
 project(Library)
+
 set(SOURCE_FILES
         include/Player.h src/Player.cpp)
 add_library(Library ${SOURCE_FILES})
@@ -35,9 +36,8 @@ if(MSVC)
 else()
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 endif()
-    find_package(X11 REQUIRED)
-    target_link_libraries(Library X11)
-
+    #find_package(X11 REQUIRED)
+    #target_link_libraries(Library X11)
 #[[
 
 set(SOURCE_TEST_PLAYER_FILES
