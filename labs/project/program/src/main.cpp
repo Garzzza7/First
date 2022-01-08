@@ -1,9 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include "Game.h"
 
-int main(void) {
+int main() {
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
+
+    Game * game = Game::GetInstance(); //Creating a game singleton.
 
     while (window.isOpen())
     {
