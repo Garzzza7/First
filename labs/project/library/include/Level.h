@@ -3,6 +3,8 @@
 
 class Level{
 
+    
+
 };
 
 #endif //OOPPROJECT_LEVEL_H

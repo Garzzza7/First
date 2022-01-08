@@ -5,6 +5,7 @@
 #include <mutex>
 #include <SFML/Graphics.hpp>
 #include "Level.h"
+#include "Player.h"
 
 class Game{
 
@@ -13,9 +14,12 @@ class Game{
     static std::mutex mutex;
 
     //The rest of variables:
+
+    Player * player;
+
     bool running;
 
-    sf::RenderWindow * window;
+    sf::RenderWindow window;
     sf::VideoMode videoMode;
     sf::Event ev;
 
@@ -36,8 +40,8 @@ public:
 
     //Game functions:
 
-    void Update();
-    void Render();
+    void update();
+    void render();
 
     void pollEvents();
 

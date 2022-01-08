@@ -18,13 +18,14 @@ Game * Game::GetInstance() {
 }
 
 Game::Game() {
+    this->player = new Player();
+
     initWindow();
     running = true;
 }
 
 Game::~Game() {
-    delete this->window;
-    delete this->instance;
+    delete this->player;
 }
 
 void Game::initWindow() {
@@ -32,22 +33,26 @@ void Game::initWindow() {
     this->videoMode.height = 600;
     this->videoMode.width = 800;
 
-    this->window = new sf::RenderWindow(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
+    this->window.create(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
 
-    this->window->setFramerateLimit(60);
+    this->window.setFramerateLimit(60);
 }
 
-void Game::Render() {
-    this->window->clear(sf::Color::Cyan);
-    this->window->display();
+//Rendering code:
+void Game::render() {
+    this->window.clear(sf::Color::Cyan);
+
+    this->player->render(this->window);
+
+    this->window.display();
 }
 
 //Code that runs every frame of the game:
-void Game::Update() {
+void Game::update() {
 
     this->pollEvents();
 
-    if(!this->window->isOpen()){
+    if(!this->window.isOpen()){
         running = false;
     }
 }
@@ -55,16 +60,19 @@ void Game::Update() {
 //Event polling
 void Game::pollEvents() {
 
-    while (this->window->pollEvent(this->ev))
+    while (this->window.pollEvent(this->ev))
     {
         switch (this->ev.type)
         {
             case sf::Event::Closed:
-                this->window->close();
+                this->window.close();
+                running = false;
                 break;
             case sf::Event::KeyPressed:
-                if (this->ev.key.code == sf::Keyboard::Escape)
-                    this->window->close();
+                if (this->ev.key.code == sf::Keyboard::Escape) {
+                    this->window.close();
+                    running = false;
+                }
                 break;
         }
     }

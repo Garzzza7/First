@@ -6,8 +6,8 @@ int main() {
 
     while (game->isRunning())
     {
-        game->Update();
-        game->Render();
+        game->update();
+        game->render();
     }
 
     return 0;
