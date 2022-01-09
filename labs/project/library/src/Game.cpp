@@ -52,9 +52,10 @@ void Game::update() {
 
     this->pollEvents();
 
-    if(!this->window.isOpen()){
-        running = false;
-    }
+    //Passing on the update event.
+    this->player->update();
+
+    if(!this->window.isOpen()) running = false;
 }
 
 //Event polling
