@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 
 set(SOURCE_FILES
+        include/Tiles/Tile.h src/Tiles/Tile.cpp
         include/Player.h src/Player.cpp
         include/Game.h src/Game.cpp)
 add_library(Library ${SOURCE_FILES})
