@@ -11,27 +11,31 @@ class Player{
 
     //Physics:
     sf::Vector2f velocity{0,0};
-    float gravity{0.f};
+    float gravity{10.f};
     float acceleration{0.2f};
     float maxVelocity{2.0f};
     float friction{0.5f};
     sf::Event event;
-    bool IsJumping {false};
+    bool IsJumping {};
 
 public:
-    Player();
+    Player(float x , float y);
     ~Player();
     sf::Event lol;
     //Update functions run every frame.
-    void update();
+    void update(sf::RenderTarget & target);
     void updatePhysics();
     void updateMovement();
+
+    sf::Vector2f GetPos() {return sprite.getPosition();};
 
     void move(const float dir_x, const float dir_y);
     void jump(const float dir_x, const float dir_y);
     void stop(const float dir_x, const float dir_y);
 
     void render(sf::RenderTarget & target);
+
+    void windowBounds(sf::RenderTarget & target);
 
 };
 

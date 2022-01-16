@@ -4,7 +4,9 @@ project(Library)
 set(SOURCE_FILES
         include/Tiles/Tile.h src/Tiles/Tile.cpp
         include/Player.h src/Player.cpp
-        include/Game.h src/Game.cpp)
+        include/Game.h src/Game.cpp
+        include/Enemies/Enemy.h
+        include/Enemies/Goomba.h)
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC include)
 

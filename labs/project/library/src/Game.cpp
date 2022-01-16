@@ -18,7 +18,7 @@ Game * Game::GetInstance() {
 }
 
 Game::Game() {
-    this->player = new Player();
+    this->player = new Player(300,300);
 
     initWindow();
     running = true;
@@ -41,7 +41,8 @@ void Game::initWindow() {
 //Rendering code:
 void Game::render() {
     this->window.clear(sf::Color::Blue);
-
+    view.setCenter(this->player->GetPos());
+    this->window.setView(view);
     this->player->render(this->window);
 
     this->window.display();
@@ -53,7 +54,7 @@ void Game::update() {
     this->pollEvents();
 
     //Passing on the update event.
-    this->player->update();
+    this->player->update(this->window);
 
     if(!this->window.isOpen()) running = false;
 }
@@ -86,4 +87,6 @@ bool Game::isRunning() {
 void Game::loadLevel(int levelId) {
 
 }
+
+
 

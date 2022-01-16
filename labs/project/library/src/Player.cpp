@@ -4,7 +4,9 @@
 #include <iostream>
 #include "Player.h"
 
-Player::Player() {
+Player::Player(float x , float y) {
+    this->sprite.setPosition(x,y);
+
 
     if(!this->textureSheet.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/player.png")){
         std::cout << "ERROR: Could not load texture" << "\n";
@@ -51,9 +53,11 @@ void Player::stop(const float dir_x, const float dir_y) {
 
 
 
-void Player::update(){
+void Player::update(sf::RenderTarget & target){
+
     this->updatePhysics();
     this->updateMovement();
+    this->windowBounds(target);
 }
 
 void Player::updatePhysics() {
@@ -107,12 +111,24 @@ void Player::updateMovement() {
 
 
     if(sf::Keyboard::isKeyPressed(::sf::Keyboard::Key::W)){
-                    this->jump(0,-1);
+            this->jump(0,-1);
 
-    }
+        }
+
+
+
   // else if
 }
 
 void Player::render(sf::RenderTarget & target) {
     target.draw(this->sprite);
+}
+
+
+void Player::windowBounds(sf::RenderTarget & target) {
+
+    if(this->sprite.getGlobalBounds().left <=0.f) this->sprite.setPosition(0.f , this->sprite.getPosition().y);
+    else if(this->sprite.getGlobalBounds().left+this->sprite.getGlobalBounds().width>=target.getSize().x) this->sprite.setPosition(target.getSize().x - this->sprite.getGlobalBounds().width,this->sprite.getGlobalBounds().top);
+
+    if(this->sprite.getGlobalBounds().top+this->sprite.getGlobalBounds().height >= target.getSize().y-100.f) this->sprite.setPosition(this->sprite.getGlobalBounds().left, target.getSize().y - this->sprite.getGlobalBounds().height - 100.f);
 }
