@@ -13,6 +13,9 @@ class Game{
     static Game * instance;
     static std::mutex mutex;
 
+
+
+
     //The rest of variables:
 
     Player * player;

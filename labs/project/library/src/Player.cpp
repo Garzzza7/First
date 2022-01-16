@@ -6,10 +6,11 @@
 
 Player::Player() {
 
-    if(!this->textureSheet.loadFromFile("../../textures/player.png")){
+    if(!this->textureSheet.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/player.png")){
         std::cout << "ERROR: Could not load texture" << "\n";
     }
     this->sprite.setTexture(this->textureSheet);
+   // this->sprite.setPosition(100.f,100.f);
 }
 
 Player::~Player() {
@@ -18,10 +19,37 @@ Player::~Player() {
 
 void Player::move(const float dir_x, const float dir_y) {
     this->velocity.x += dir_x * acceleration;
-    if(abs(this->velocity.x) > this->maxVelocity){
+    if (std::abs(this->velocity.x) > this->maxVelocity) {
         this->velocity.x = this->maxVelocity * ((this->velocity.x < 0.f) ? -1.f : 1.f);
     }
+ //   if (event.type == sf::Event::KeyReleased) {
+   //     if (event.key.code == sf::Keyboard::Key::D || event.key.code == sf::Keyboard::Key::A) {
+     //       this->velocity.x = 0;
+       // }
+    //}
 }
+void Player::jump(const float dir_x, const float dir_y) {
+    this->velocity.x += dir_x * acceleration;
+    this->velocity.y +=dir_y * gravity;
+    if(std::abs(this->velocity.x) > this->maxVelocity){
+        this->velocity.x = this->maxVelocity * ((this->velocity.x < 0.f) ? -1.f : 1.f);
+    }
+    if(std::abs(this->velocity.y) > this->maxVelocity){
+        this->velocity.y = this->maxVelocity * ((this->velocity.y < 0.f) ? -1.f : 1.f);
+    }
+}
+void Player::stop(const float dir_x, const float dir_y) {
+    //this->velocity.x -= dir_x * acceleration;
+    for(int i=0; i<3 ; i++)
+    {
+        this->velocity.x -= dir_x * i *acceleration;
+    }
+}
+
+
+
+
+
 
 void Player::update(){
     this->updatePhysics();
@@ -35,8 +63,54 @@ void Player::updatePhysics() {
 }
 
 void Player::updateMovement() {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) this->move(-1,0);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) this->move(1,0);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+    {
+        if(!this->textureSheet.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/marioLeft.png")){
+            std::cout << "ERROR: Could not load texture" << "\n";
+        }
+        this->sprite.setTexture(this->textureSheet);
+        this->move(-1,0);
+      //  this->stop(-1,0);
+    }
+  // else this->velocity.x=0;;
+
+
+
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+    {
+        if(!this->textureSheet.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/player.png")){
+            std::cout << "ERROR: Could not load texture" << "\n";
+        }
+        this->sprite.setTexture(this->textureSheet);
+        this->move(1,0);
+    }
+    if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
+        this->velocity.x=0;;
+    }
+
+
+
+    /*
+    if(event.type==sf::Event::KeyReleased)
+    {
+      if(event.key.code==sf::Keyboard::Key::D || event.key.code==sf::Keyboard::Key::A)
+        {
+            this->stop(this->velocity.x,0);
+        }
+
+    }
+*/
+    //if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Key::A)
+    //{
+    //    this->velocity.x=0;
+    //}
+
+
+    if(sf::Keyboard::isKeyPressed(::sf::Keyboard::Key::W)){
+                    this->jump(0,-1);
+
+    }
+  // else if
 }
 
 void Player::render(sf::RenderTarget & target) {

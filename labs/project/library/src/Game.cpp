@@ -30,8 +30,8 @@ Game::~Game() {
 
 void Game::initWindow() {
 
-    this->videoMode.height = 600;
-    this->videoMode.width = 800;
+    this->videoMode.height = 800;
+    this->videoMode.width = 1000;
 
     this->window.create(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
 
@@ -40,7 +40,7 @@ void Game::initWindow() {
 
 //Rendering code:
 void Game::render() {
-    this->window.clear(sf::Color::Cyan);
+    this->window.clear(sf::Color::Blue);
 
     this->player->render(this->window);
 
