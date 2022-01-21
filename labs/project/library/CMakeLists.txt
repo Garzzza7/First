@@ -2,15 +2,15 @@ cmake_minimum_required(VERSION 3.4)
 project(Library)
 
 set(SOURCE_FILES
-        include/Tiles/TilePreset.h src/Tiles/TilePreset.cpp
+        include/Tiles/ObjectBase.h src/Tiles/ObjectBase.cpp
         include/Tiles/Tile.h src/Tiles/Tile.cpp
         include/Player.h src/Player.cpp
         include/Game.h src/Game.cpp
-        src/Level.cpp
-        include/Tiles/TileRegistry.h
-        src/Tiles/TileRegistry.cpp
-        include/Enemies/Enemy.h src/Enemy.cpp
-        include/Enemies/Goomba.h src/Goomba.cpp include/Enemies/PPlant.h src/PPlant.cpp)
+        include/Level.h src/Level.cpp
+        include/Tiles/ObjectRegistry.h src/Tiles/ObjectRegistry.cpp
+        include/Enemies/Enemy.h src/Enemies/Enemy.cpp
+        include/Enemies/Goomba.h src/Enemies/Goomba.cpp
+        include/Enemies/PPlant.h src/Enemies/PPlant.cpp)
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC include)
 

@@ -3,13 +3,9 @@
 //
 
 #include "Tiles/Tile.h"
-#include "Tiles/TileRegistry.h"
+#include "Tiles/ObjectRegistry.h"
 
-Tile::Tile(){
-
-}
-
-Tile::Tile(TilePreset * type) {
+Tile::Tile(ObjectBase * type) {
 
     this->type = type;
     this->sprite.setTexture(type->texture);
@@ -23,7 +19,7 @@ Tile::~Tile() {
 }
 
 void Tile::setTilePosition(int x, int y) {
-    TileRegistry * tileRegistry = TileRegistry::GetInstance();
+    ObjectRegistry * tileRegistry = ObjectRegistry::GetInstance();
     this->sprite.setPosition(x*tileRegistry->getTileSize(), y*tileRegistry->getTileSize());
 }
 
@@ -35,7 +31,7 @@ sf::FloatRect Tile::getGlobalBounds() {
     return this->sprite.getGlobalBounds();
 }
 
-TilePreset * Tile::getTilePreset() {
+ObjectBase * Tile::getTilePreset() {
     return this->type;
 }
 

@@ -7,7 +7,7 @@
 class Level{
 
     Tile ** tiles;
-    std::vector<Enemy> enemies;
+    std::vector<Enemy*> enemies;
     int length{10};
     int width{10};
 

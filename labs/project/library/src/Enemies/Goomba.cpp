@@ -3,22 +3,22 @@
 //
 
 #include <iostream>
-#include <Enemies/Goomba.h>
+#include "Enemies/Goomba.h"
 
-Goomba::Goomba(std::string id, int hp, int damage, float acceleration):Enemy(id,hp,damage,acceleration) {
-    if(!this->textureSheet.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/gooomba.png")){
-        std::cout << "ERROR: Could not load texture" << "\n";
-    }
-    this->goomba.setTexture(this->textureSheet);
+Goomba::Goomba(ObjectBase * base, int hp, int damage, float acceleration) : Enemy(base, hp, damage, acceleration) {
+
+    this->sprite.setTexture(Enemy::getBase()->texture);
 }
 
 Goomba::~Goomba() {
 
 }
 
+
+
 void Goomba::updatePhysics() {
     velocity.y += gravity/1000;
-    this->goomba.move(velocity);
+    this->sprite.move(velocity);
 }
 void Goomba::updateMovement() {
 
@@ -37,11 +37,8 @@ void Goomba::move(const float dir_x, const float dir_y) {
 
     }
 }
-void Goomba::render(sf::RenderTarget &target) {
-  target.draw(this->goomba);
-}
 
-void Goomba::update(sf::RenderTarget &target) {
+void Goomba::update() {
 
     this->updatePhysics();
     this->updateMovement();

@@ -3,13 +3,11 @@
 //
 
 #include <iostream>
-#include <Enemies/PPlant.h>
+#include "Enemies/PPlant.h"
 
-PPlant::PPlant(std::string id, int hp, int damage):Enemy(id,hp,damage,0) {
-    if(!this->textureSheet.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/pplant.png")){
-        std::cout << "ERROR: Could not load texture" << "\n";
-    }
-    this->pplant.setTexture(this->textureSheet);
+PPlant::PPlant(ObjectBase * base, int hp, int damage) : Enemy(base, hp, damage,0) {
+
+    this->sprite.setTexture(Enemy::getBase()->texture);
 }
 
 PPlant::~PPlant() {
@@ -18,7 +16,7 @@ PPlant::~PPlant() {
 
 void PPlant::updatePhysics() {
     velocity.y += gravity/1000;
-    this->pplant.move(velocity);
+    this->sprite.move(velocity);
 }
 void PPlant::updateMovement() {
 
@@ -37,11 +35,8 @@ void PPlant::move(const float dir_x, const float dir_y) {
 
     }
 }
-void PPlant::render(sf::RenderTarget &target) {
-    target.draw(this->pplant);
-}
 
-void PPlant::update(sf::RenderTarget &target) {
+void PPlant::update() {
 
     this->updatePhysics();
     this->updateMovement();

@@ -2,17 +2,17 @@
 #define OOPPROJECT_TILE_H
 
 #include <SFML/Graphics.hpp>
-#include "TilePreset.h"
+#include "ObjectBase.h"
 
 class Tile{
 
-    TilePreset * type;
+    ObjectBase * type;
     sf::Sprite sprite;
 
 public:
 
-    Tile();
-    Tile(TilePreset * type);
+    Tile(){};
+    Tile(ObjectBase * type);
     ~Tile();
     void update();
 
@@ -20,8 +20,7 @@ public:
     void render(sf::RenderTarget & renderTarget);
 
     sf::FloatRect getGlobalBounds();
-    //void getCollisionEffect();
-    TilePreset * getTilePreset();
+    ObjectBase * getTilePreset();
 };
 
 #endif //OOPPROJECT_TILE_H

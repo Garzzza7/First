@@ -6,12 +6,9 @@
 #include <ctime>
 
 class Goomba : public Enemy{
-private:
-    sf::Sprite goomba;
-    sf::Texture textureSheet;
 
 public:
-    Goomba(std::string id,int hp,int damage,float acceleration);
+    Goomba(ObjectBase * base, int hp, int damage, float acceleration);
 
     ~Goomba();
   //  void updatePhysics();
@@ -20,7 +17,7 @@ public:
 
     //sf::Event lol;
     //Update functions run every frame.
-    void update(sf::RenderTarget & target) override;
+    void update() override;
      void updatePhysics() override ;
      void updateMovement() override;
 
@@ -30,9 +27,7 @@ public:
     //void jump(const float dir_x, const float dir_y);
     //void stop(const float dir_x, const float dir_y);
 
-    void render(sf::RenderTarget & target) override;
-
-    //void windowBounds(sf::RenderTarget & target);
+    //void checkCollisions(sf::RenderTarget & target);
 };
 
 #endif //OOPPROJECT_GOOMBA_H

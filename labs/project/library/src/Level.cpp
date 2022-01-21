@@ -7,11 +7,13 @@
 #include <iostream>
 
 #include "Level.h"
-#include "Tiles/TileRegistry.h"
+#include "Tiles/ObjectRegistry.h"
+#include "Enemies/Goomba.h"
+#include "Enemies/PPlant.h"
 
 Level::Level(const std::string fileName) {
 
-    TileRegistry * tileRegistry = TileRegistry::GetInstance();
+    ObjectRegistry * tileRegistry = ObjectRegistry::GetInstance();
 
     std::fstream levelFile;
     levelFile.open( "../../levels/" + fileName, std::ios::in);
@@ -50,8 +52,27 @@ Level::Level(const std::string fileName) {
 
                 int num = atoi(&c);
 
-                Tile* newTile = new Tile(tileRegistry->getPresetById(num));
-                tiles[j][i-1] = *newTile;
+                if(tileRegistry->getPresetById(num)->getType() == TILE) {
+                    Tile *newTile = new Tile(tileRegistry->getPresetById(num));
+                    tiles[j][i - 1] = *newTile;
+                }else if(tileRegistry->getPresetById(num)->getType() == ENTITY){
+                    Tile *newTile = new Tile(tileRegistry->getPresetById(0));
+                    tiles[j][i - 1] = *newTile;
+
+                    Enemy * enemy;
+
+                    //I wanted to do it better, but I have no idea how...
+                    if(num == 2){
+                        enemy = new Goomba(tileRegistry->getPresetById(num),1,3,4);
+                    }
+                    if(num == 3){
+                        enemy = new PPlant(tileRegistry->getPresetById(num),1,3);
+                    }
+
+                    enemy->setTilePosition(j, i-1);
+
+                    enemies.push_back(enemy);
+                }
 
                 j++;
             }
@@ -89,6 +110,16 @@ void Level::render(sf::RenderTarget & renderTarget) {
         for (int j = 0; j < length; ++j) {
             tiles[i][j].render(renderTarget);
         }
+    }
+
+    for(auto enemy : enemies){
+        enemy->render(renderTarget);
+    }
+}
+
+void Level::update() {
+    for(auto enemy : enemies){
+        enemy->update();
     }
 }
 

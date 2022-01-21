@@ -2,25 +2,30 @@
 #define OOPPROJECT_ENEMY_H
 
 #include <SFML/Graphics.hpp>
+#include "Tiles/ObjectBase.h"
 
 class Enemy{
 
+    ObjectBase * base;
+
     int hp;
     int damage;
-    std::string id;
 
 protected:
-//Physics:
-sf::Vector2f velocity{0,0};
+    //Physics:
+    sf::Vector2f velocity{0,0};
     float maxVelocity{2.0f};
     float acceleration{0.2f};
     float gravity{10.f};
+
+    sf::Sprite sprite;
+
 public:
-    Enemy(std::string id,int hp,int damage,float acceleration);
+    Enemy(ObjectBase * base,int hp,int damage,float acceleration);
     ~Enemy();
     //sf::Event lol;
     //Update functions run every frame.
-    virtual void update(sf::RenderTarget & target)=0;
+    virtual void update()=0;
     virtual void updatePhysics()=0;
     virtual void updateMovement()=0;
 
@@ -30,9 +35,15 @@ public:
     //void jump(const float dir_x, const float dir_y);
     //void stop(const float dir_x, const float dir_y);
 
-    virtual void render(sf::RenderTarget & target)=0;
+    void render(sf::RenderTarget & target);
 
-    //void windowBounds(sf::RenderTarget & target);
+    void setPosition(float x, float y);
+    void setPosition(sf::Vector2f position);
+
+    void setTilePosition(float x, float y);
+
+    ObjectBase * getBase(){ return base; };
+    //void checkCollisions(sf::RenderTarget & target);
 
 };
 

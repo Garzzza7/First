@@ -10,13 +10,6 @@ class Player{
 
     sf::Event event;
 
-    //Physics:
-    sf::Vector2f velocity{0,0};
-    float gravity{10.f};
-    float acceleration{0.2f};
-    float maxVelocity{2.0f};
-    float friction{0.5f};
-
     bool lockMovement[4];
     /*
     0 - top
@@ -31,6 +24,14 @@ class Player{
 
     void setPositionX(float x);
     void setPositionY(float y);
+
+protected:
+    //Physics:
+    sf::Vector2f velocity{0,0};
+    float gravity{10.f};
+    float acceleration{0.2f};
+    float maxVelocity{2.0f};
+    float friction{0.5f};
 
 public:
     Player(float x , float y);
@@ -48,7 +49,7 @@ public:
 
     void render(sf::RenderTarget & target);
 
-    void windowBounds(sf::RenderTarget & target);
+    void checkCollisions(sf::RenderTarget & target);
 
 };
 

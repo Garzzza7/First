@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Game.h"
-#include "Tiles/TileRegistry.h"
+#include "Tiles/ObjectRegistry.h"
 
 Player::Player(float x , float y) {
 
@@ -54,7 +54,7 @@ void Player::update(sf::RenderTarget & target){
 
     this->updatePhysics();
     this->updateMovement();
-    this->windowBounds(target);
+    this->checkCollisions(target);
 }
 
 void Player::updatePhysics() {
@@ -107,7 +107,7 @@ void Player::setPositionY(float y) {
     this->sprite.setPosition(this->sprite.getPosition().x, y);
 }
 
-void Player::windowBounds(sf::RenderTarget & target) {
+void Player::checkCollisions(sf::RenderTarget & target) {
 
     //Get all the tiles from the current level:
     Game * game = Game::GetInstance();
@@ -115,8 +115,8 @@ void Player::windowBounds(sf::RenderTarget & target) {
     Tile** allTiles = currentLevel->getAllTiles();
 
     //Get the tile preset that is not solid:
-    TileRegistry * tileRegistry = TileRegistry::GetInstance();
-    TilePreset * airPreset = tileRegistry->getPresetById(0);
+    ObjectRegistry * tileRegistry = ObjectRegistry::GetInstance();
+    ObjectBase * airPreset = tileRegistry->getPresetById(0);
 
     for (int i = 0; i < currentLevel->getLevelWidth(); ++i) {
         for (int j = 0; j < currentLevel->getLevelLength(); ++j) {
@@ -189,93 +189,11 @@ void Player::windowBounds(sf::RenderTarget & target) {
                     lockMovement[2] = false;
                 }
 
-                /*if(playerBoundsRight >= tileLeft && playerBoundsLeft <= tileRight){
-                    if(velocity.y > 0){
-                        setPositionY(tileTop);
-                        velocity.y = 0;
-                    }
-                    else if(velocity.y < 0 && getPlayerBounds().top > tileTop){
-                        setPositionY(tileBottom + getPlayerBounds().height);
-                        velocity.y = 2;
-                    }
-                }
-                else{
-                    if(velocity.y > 1.0f && !onGround || velocity.y < 1.0f && !onGround){
-                        if(this->getPos().x > tilePos.x) setPositionX(tileRight + getPlayerBounds().width / 2);
-                        else setPositionX(tileLeft - getPlayerBounds().width / 2);
-
-                        stuckOn = true;
-                        velocity.x = 0;
-                    }
-                }*/
-/*                //If the player bottom is below the surface of the tile
-                if (tileBounds.top > getPlayerBounds().top - getPlayerBounds().height) {
-
-                    //If the player top is above the surface of tile
-                    if (tileBounds.top - tileBounds.height > getPlayerBounds().top) {
-                        this->sprite.setPosition(
-                                this->sprite.getPosition().x,
-                                tileBounds.top - getPlayerBounds().height - 0.1f
-                                );
-                        this->velocity.y = 0;
-                    }
-                    //If the player top is below the surface of tile
-                    else{
-                        this->sprite.setPosition(
-                                this->sprite.getPosition().x,
-                                tileBounds.top + tileBounds.height + 0.1f
-                                );
-                        this->velocity.y = 0;
-                    }
-                }
-                else
-                if (tileBounds.left > getPlayerBounds().left - getPlayerBounds().width) {
-
-                    //If the player top is above the surface of tile
-                    if (tileBounds.left - tileBounds.width > getPlayerBounds().left) {
-                        this->sprite.setPosition(
-                                tileBounds.left - getPlayerBounds().width - 0.1f,
-                                this->sprite.getPosition().y
-                        );
-                        this->velocity.y = 0;
-                    }
-                        //If the player top is below the surface of tile
-                    else {
-                        this->sprite.setPosition(
-                                tileBounds.left + tileBounds.width + 0.1f,
-                                this->sprite.getPosition().y
-                        );
-                        this->velocity.y = 0;
-                    }
-                }*/
             }
             lockMovement[0] = false;
             lockMovement[1] = false;
             lockMovement[2] = false;
             lockMovement[3] = false;
-            /*else {
-                if(onGround){
-                    onGround = false;
-                    velocity.y = -2.0f;
-                }
-                if(stuckOn){
-                    if (abs(this->getPos().x - tilePos.x) > 60 || abs(this->getPos().y - tilePos.y) > 100) {
-                        stuckOn = false;
-                    }
-                }
-            }*/
         }
     }
-
-/*
-    if(getPlayerBounds().left <=0.f)
-        this->sprite.setPosition(0.f , this->sprite.getPosition().y);
-
-    else if(getPlayerBounds().left+getPlayerBounds().width>=target.getSize().x)
-        this->sprite.setPosition(target.getSize().x - getPlayerBounds().width,getPlayerBounds().top);
-
-    if(getPlayerBounds().top+getPlayerBounds().height >= target.getSize().y-100.f)
-        this->sprite.setPosition(getPlayerBounds().left, target.getSize().y - getPlayerBounds().height - 100.f);
-*/
-
 }
