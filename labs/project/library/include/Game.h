@@ -13,6 +13,9 @@ class Game{
     static Game * instance;
     static std::mutex mutex;
 
+
+
+
     //The rest of variables:
 
     Player * player;
@@ -22,6 +25,7 @@ class Game{
     sf::RenderWindow window;
     sf::VideoMode videoMode;
     sf::Event ev;
+    sf::View view {sf::Vector2f(0.0f,0.0f),sf::Vector2f(512.0f,512.0f)};
 
     std::vector<Level*> levels;
 

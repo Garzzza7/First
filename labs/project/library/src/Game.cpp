@@ -18,7 +18,7 @@ Game * Game::GetInstance() {
 }
 
 Game::Game() {
-    this->player = new Player();
+    this->player = new Player(300,300);
 
     initWindow();
     initLevels();
@@ -31,10 +31,10 @@ Game::~Game() {
 
 void Game::initWindow() {
 
-    this->videoMode.height = 600;
-    this->videoMode.width = 800;
+    this->videoMode.height = 800;
+    this->videoMode.width = 1000;
 
-    this->window.create(this->videoMode, "Piwo piwo", sf::Style::Titlebar | sf::Style::Close);
+    this->window.create(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
 
     this->window.setFramerateLimit(60);
 }
@@ -47,8 +47,9 @@ void Game::initLevels() {
 
 //Rendering code:
 void Game::render() {
-    this->window.clear(sf::Color::Cyan);
-
+    this->window.clear(sf::Color::Blue);
+    view.setCenter(this->player->GetPos());
+    this->window.setView(view);
     this->player->render(this->window);
     this->levels.at(0)->render(this->window);
 
@@ -62,7 +63,7 @@ void Game::update() {
     this->render();
 
     //Passing on the update event.
-    this->player->update();
+    this->player->update(this->window);
 
     if(!this->window.isOpen()) running = false;
 }
@@ -92,6 +93,7 @@ bool Game::isRunning() {
     return this->running;
 }
 
-sf::RenderWindow Game::getWindow() {
-    return sf::RenderWindow();
+void Game::loadLevel(int levelId) {
+
 }
+
