@@ -2,16 +2,25 @@
 #define OOPPROJECT_TILE_H
 
 #include <SFML/Graphics.hpp>
+#include "TilePreset.h"
 
 class Tile{
 
+    TilePreset * type;
+
     sf::Sprite sprite;
-    sf::Texture texture;
-    sf::Vector2i position;
 
 public:
 
     Tile();
+    Tile(TilePreset * type);
+    ~Tile();
+    void update();
+    void setTilePosition(int x, int y);
+    void render(sf::RenderTarget & renderTarget);
+    void getGlobalBounds();
+    //void getCollisionEffect();
+    TilePreset getTilePreset();
 };
 
 #endif //OOPPROJECT_TILE_H

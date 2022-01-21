@@ -14,13 +14,14 @@ Game * Game::GetInstance() {
     if(instance == nullptr){
         instance = new Game();
     }
-    return  instance;
+    return instance;
 }
 
 Game::Game() {
     this->player = new Player();
 
     initWindow();
+    initLevels();
     running = true;
 }
 
@@ -33,9 +34,15 @@ void Game::initWindow() {
     this->videoMode.height = 600;
     this->videoMode.width = 800;
 
-    this->window.create(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
+    this->window.create(this->videoMode, "Piwo piwo", sf::Style::Titlebar | sf::Style::Close);
 
     this->window.setFramerateLimit(60);
+}
+
+void Game::initLevels() {
+
+    Level * level1 = new Level("level_1");
+    levels.push_back(level1);
 }
 
 //Rendering code:
@@ -43,6 +50,7 @@ void Game::render() {
     this->window.clear(sf::Color::Cyan);
 
     this->player->render(this->window);
+    this->levels.at(0)->render(this->window);
 
     this->window.display();
 }
@@ -51,6 +59,7 @@ void Game::render() {
 void Game::update() {
 
     this->pollEvents();
+    this->render();
 
     //Passing on the update event.
     this->player->update();
@@ -83,7 +92,6 @@ bool Game::isRunning() {
     return this->running;
 }
 
-void Game::loadLevel(int levelId) {
-
+sf::RenderWindow Game::getWindow() {
+    return sf::RenderWindow();
 }
-

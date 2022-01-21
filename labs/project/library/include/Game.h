@@ -23,7 +23,7 @@ class Game{
     sf::VideoMode videoMode;
     sf::Event ev;
 
-    std::vector<Level> levels;
+    std::vector<Level*> levels;
 
 protected:
     //The constructor and destructor are protected to prevent calls with "new/delete".
@@ -46,13 +46,16 @@ public:
     void pollEvents();
 
     void initWindow();
+    void initLevels();
 
     bool isRunning();
 
+    sf::RenderWindow getWindow();
+
+    void addLevel(Level level);
     void loadLevel(int levelId);
     void loadLevel(Level level);
     Level loadLevelsFolder();
-    Level getLevelById(int levelId);
 };
 
 #endif //OOPPROJECT_GAME_H
