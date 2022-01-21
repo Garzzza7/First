@@ -24,7 +24,7 @@ TileRegistry * TileRegistry::GetInstance()
 
 void TileRegistry::initTiles() {
 
-    sf::IntRect basicRect(0, 0, 16, 16);
+    sf::IntRect basicRect(0, 0, tileSize, tileSize);
 
     auto* airTile = new TilePreset("air.png", basicRect);
     auto* brickTile = new TilePreset("brick.png", basicRect);
@@ -38,6 +38,10 @@ void TileRegistry::deleteTiles() {
     for(auto tile : tilePresets){
         delete tile;
     }
+}
+
+unsigned int TileRegistry::getTileSize() {
+    return tileSize;
 }
 
 TilePreset * TileRegistry::getPresetById(int id) {

@@ -97,3 +97,16 @@ Level::~Level() {
         delete [] tiles[i];
     delete [] tiles;
 }
+
+Tile** Level::getAllTiles() {
+
+    return tiles;
+}
+
+int Level::getLevelWidth() {
+    return width;
+}
+
+int Level::getLevelLength() {
+    return length;
+}

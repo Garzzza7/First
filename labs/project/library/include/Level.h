@@ -20,6 +20,10 @@ public:
 
     void render(sf::RenderTarget & renderTarget);
 
+    Tile** getAllTiles();
+    int getLevelWidth();
+    int getLevelLength();
+
     void update();
 
 };

@@ -7,7 +7,6 @@
 class Tile{
 
     TilePreset * type;
-
     sf::Sprite sprite;
 
 public:
@@ -16,11 +15,13 @@ public:
     Tile(TilePreset * type);
     ~Tile();
     void update();
+
     void setTilePosition(int x, int y);
     void render(sf::RenderTarget & renderTarget);
-    void getGlobalBounds();
+
+    sf::FloatRect getGlobalBounds();
     //void getCollisionEffect();
-    TilePreset getTilePreset();
+    TilePreset * getTilePreset();
 };
 
 #endif //OOPPROJECT_TILE_H

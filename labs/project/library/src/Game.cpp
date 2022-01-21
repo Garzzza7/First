@@ -47,11 +47,16 @@ void Game::initLevels() {
 
 //Rendering code:
 void Game::render() {
+
     this->window.clear(sf::Color::Blue);
-    view.setCenter(this->player->GetPos());
+
+    this->levels.at(0)->render(this->window);
+
+    view.setCenter(this->player->getPos());
     this->window.setView(view);
     this->player->render(this->window);
-    this->levels.at(0)->render(this->window);
+
+
 
     this->window.display();
 }
@@ -93,7 +98,7 @@ bool Game::isRunning() {
     return this->running;
 }
 
-void Game::loadLevel(int levelId) {
-
+Level *Game::getCurrentLevel() {
+    return levels.at(this->currentLevel);
 }
 

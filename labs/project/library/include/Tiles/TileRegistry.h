@@ -14,6 +14,7 @@ class TileRegistry{
     static std::mutex mutex;
 
     std::vector<TilePreset*> tilePresets;
+    const unsigned int tileSize{16};
 
 protected:
     TileRegistry();
@@ -34,6 +35,7 @@ public:
     void initTiles();
     void deleteTiles();
 
+    unsigned int getTileSize();
     TilePreset * getPresetById(int id);
 
 };

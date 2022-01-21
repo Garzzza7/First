@@ -13,14 +13,12 @@ class Game{
     static Game * instance;
     static std::mutex mutex;
 
-
-
-
     //The rest of variables:
 
     Player * player;
 
     bool running;
+    int currentLevel{0};
 
     sf::RenderWindow window;
     sf::VideoMode videoMode;
@@ -54,12 +52,7 @@ public:
 
     bool isRunning();
 
-    sf::RenderWindow getWindow();
-
-    void addLevel(Level level);
-    void loadLevel(int levelId);
-    void loadLevel(Level level);
-    Level loadLevelsFolder();
+    Level * getCurrentLevel();
 };
 
 #endif //OOPPROJECT_GAME_H

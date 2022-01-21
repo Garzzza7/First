@@ -3,6 +3,7 @@
 //
 
 #include "Tiles/Tile.h"
+#include "Tiles/TileRegistry.h"
 
 Tile::Tile(){
 
@@ -22,10 +23,19 @@ Tile::~Tile() {
 }
 
 void Tile::setTilePosition(int x, int y) {
-    this->sprite.setPosition(x*16, y*16);
+    TileRegistry * tileRegistry = TileRegistry::GetInstance();
+    this->sprite.setPosition(x*tileRegistry->getTileSize(), y*tileRegistry->getTileSize());
 }
 
 void Tile::render(sf::RenderTarget & renderTarget) {
     renderTarget.draw(this->sprite);
+}
+
+sf::FloatRect Tile::getGlobalBounds() {
+    return this->sprite.getGlobalBounds();
+}
+
+TilePreset * Tile::getTilePreset() {
+    return this->type;
 }
 
