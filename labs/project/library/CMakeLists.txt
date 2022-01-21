@@ -9,8 +9,8 @@ set(SOURCE_FILES
         src/Level.cpp
         include/Tiles/TileRegistry.h
         src/Tiles/TileRegistry.cpp
-        include/Enemies/Enemy.h
-        include/Enemies/Goomba.h)
+        include/Enemies/Enemy.h src/Enemy.cpp
+        include/Enemies/Goomba.h src/Goomba.cpp include/Enemies/PPlant.h src/PPlant.cpp)
 add_library(Library ${SOURCE_FILES})
 target_include_directories(Library PUBLIC include)
 

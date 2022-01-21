@@ -98,6 +98,12 @@ Level::~Level() {
     delete [] tiles;
 }
 
+void Level::renderEnemy(sf::RenderTarget &target) {
+
+        //target.draw(this->enemies);
+
+}
+
 Tile** Level::getAllTiles() {
 
     return tiles;

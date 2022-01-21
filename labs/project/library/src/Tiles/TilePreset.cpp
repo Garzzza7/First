@@ -8,7 +8,7 @@
 TilePreset::TilePreset(std::string textureAddress, sf::IntRect rect) {
     this->rect = rect;
 
-    if(!this->texture.loadFromFile("../../textures/" + textureAddress)){
+    if(!this->texture.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/" + textureAddress)){
         std::cout << "ERROR: Could not load texture" << "\n";
     }
 }
