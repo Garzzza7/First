@@ -97,3 +97,8 @@ Level::~Level() {
         delete [] tiles[i];
     delete [] tiles;
 }
+void Level::renderEnemy(sf::RenderTarget &target) {
+
+        //target.draw(this->enemies);
+
+}

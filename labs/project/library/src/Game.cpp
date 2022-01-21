@@ -19,6 +19,10 @@ Game * Game::GetInstance() {
 
 Game::Game() {
     this->player = new Player(300,300);
+    this->goomba = new Goomba("da",1,3,4);
+    texture.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/background.png");
+    BG.setTexture(texture);
+    BG.setPosition(1000.f,800.f);
 
     initWindow();
     initLevels();
@@ -27,6 +31,7 @@ Game::Game() {
 
 Game::~Game() {
     delete this->player;
+    delete this->goomba;
 }
 
 void Game::initWindow() {
@@ -47,10 +52,12 @@ void Game::initLevels() {
 
 //Rendering code:
 void Game::render() {
-    this->window.clear(sf::Color::Blue);
-    view.setCenter(this->player->GetPos());
+    this->window.clear(/*sf::Color::Blue*/);
+    this->window.draw(BG);
+    this->view.setCenter(this->player->GetPos());
     this->window.setView(view);
     this->player->render(this->window);
+    this->goomba->render(this->window);
     this->levels.at(0)->render(this->window);
 
     this->window.display();
@@ -64,6 +71,7 @@ void Game::update() {
 
     //Passing on the update event.
     this->player->update(this->window);
+    this->goomba->update(this->window);
 
     if(!this->window.isOpen()) running = false;
 }

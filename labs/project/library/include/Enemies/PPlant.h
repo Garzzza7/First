@@ -1,28 +1,29 @@
-#ifndef OOPPROJECT_GOOMBA_H
-#define OOPPROJECT_GOOMBA_H
+//
+// Created by student on 1/21/22.
+//
 
-#include <SFML/Graphics.hpp>
+#ifndef OOPPROJECT_PPLANT_H
+#define OOPPROJECT_PPLANT_H
+
 #include "Enemy.h"
-#include <ctime>
 
-class Goomba : public Enemy{
-private:
-    sf::Sprite goomba;
-    sf::Texture textureSheet;
-
+class PPlant: public Enemy {
 public:
-    Goomba(std::string id,int hp,int damage,float acceleration);
+    sf::Sprite pplant;
+    sf::Texture textureSheet;
+private:
+    PPlant(std::string id,int hp,int damage);
+    ~PPlant();
 
-    ~Goomba();
-  //  void updatePhysics();
+    //  void updatePhysics();
     //void updateMovement();
     //void move(const float dir_x, const float dir_y) override;
 
     //sf::Event lol;
     //Update functions run every frame.
     void update(sf::RenderTarget & target) override;
-     void updatePhysics() override ;
-     void updateMovement() override;
+    void updatePhysics() override ;
+    void updateMovement() override;
 
     //sf::Vector2f GetPos() {return sprite.getPosition();};
 
@@ -33,6 +34,7 @@ public:
     void render(sf::RenderTarget & target) override;
 
     //void windowBounds(sf::RenderTarget & target);
+
 };
 
-#endif //OOPPROJECT_GOOMBA_H
+#endif //OOPPROJECT_PPLANT_H

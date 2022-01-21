@@ -4,6 +4,7 @@
 #include <vector>
 #include <mutex>
 #include <SFML/Graphics.hpp>
+#include <Enemies/Goomba.h>
 #include "Level.h"
 #include "Player.h"
 
@@ -19,13 +20,16 @@ class Game{
     //The rest of variables:
 
     Player * player;
+    Goomba * goomba;
 
     bool running;
 
     sf::RenderWindow window;
     sf::VideoMode videoMode;
     sf::Event ev;
-    sf::View view {sf::Vector2f(0.0f,0.0f),sf::Vector2f(512.0f,512.0f)};
+    sf::View view {sf::Vector2f(0.0f,0.0f),sf::Vector2f(1000.0f,800.0f)};
+    sf::Texture texture;
+    sf::Sprite BG;
 
     std::vector<Level*> levels;
 

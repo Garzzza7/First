@@ -6,7 +6,8 @@
 
 Player::Player(float x , float y) {
     this->sprite.setPosition(x,y);
-
+    this->sprite.setOrigin(40.f,40.f);
+   // this->sprite.
 
     if(!this->textureSheet.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/player.png")){
         std::cout << "ERROR: Could not load texture" << "\n";
@@ -130,5 +131,5 @@ void Player::windowBounds(sf::RenderTarget & target) {
     if(this->sprite.getGlobalBounds().left <=0.f) this->sprite.setPosition(0.f , this->sprite.getPosition().y);
     else if(this->sprite.getGlobalBounds().left+this->sprite.getGlobalBounds().width>=target.getSize().x) this->sprite.setPosition(target.getSize().x - this->sprite.getGlobalBounds().width,this->sprite.getGlobalBounds().top);
 
-    if(this->sprite.getGlobalBounds().top+this->sprite.getGlobalBounds().height >= target.getSize().y-100.f) this->sprite.setPosition(this->sprite.getGlobalBounds().left, target.getSize().y - this->sprite.getGlobalBounds().height - 100.f);
+    if(this->sprite.getGlobalBounds().top+this->sprite.getGlobalBounds().height >= target.getSize().y /*-100.f*/) this->sprite.setPosition(this->sprite.getGlobalBounds().left, target.getSize().y - this->sprite.getGlobalBounds().height  /*-100.f*/);
 }
