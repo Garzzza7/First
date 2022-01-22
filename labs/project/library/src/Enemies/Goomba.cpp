@@ -6,6 +6,10 @@
 #include "Enemies/Goomba.h"
 
 Goomba::Goomba(ObjectBase * base, int hp, int damage, float acceleration) : Enemy(base, hp, damage, acceleration) {
+    srand((unsigned) time(0));
+    int randomNumber1=1 + (rand() % 6);
+    int randomNumber2=1 + (rand() % 2);
+    this->acceleration=acceleration*randomNumber1*randomNumber2;
 
 }
 
@@ -21,8 +25,8 @@ void Goomba::updatePhysics() {
 }
 void Goomba::updateMovement() {
 
-    srand((unsigned) time(0));
-    int randomNumber=1 + (rand() % 6);;
+
+    int randomNumber=1 + (rand() % 5);;
     if(randomNumber%2==0)
     {
         this->move(-1,0);
