@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Tiles/ObjectBase.h"
+#include "Tiles/Tile.h"
 
 class Enemy{
 
@@ -10,6 +11,9 @@ class Enemy{
 
     int hp;
     int damage;
+
+    void setPositionX(float x);
+    void setPositionY(float y);
 
 protected:
     //Physics:
@@ -22,7 +26,6 @@ protected:
 
 public:
     Enemy(ObjectBase * base,int hp,int damage,float acceleration);
-    ~Enemy();
     //sf::Event lol;
     //Update functions run every frame.
     virtual void update()=0;
@@ -36,6 +39,8 @@ public:
     //void stop(const float dir_x, const float dir_y);
 
     void render(sf::RenderTarget & target);
+
+    void checkCollisions(Tile **tiles, int levelWidth, int levelLength);
 
     void setPosition(float x, float y);
     void setPosition(sf::Vector2f position);

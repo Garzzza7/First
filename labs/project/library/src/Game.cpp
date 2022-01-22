@@ -24,7 +24,7 @@ Game::Game() {
     this->player = new Player(300,300);
     texture.loadFromFile("../../textures/background.png");
     BG.setTexture(texture);
-    BG.setPosition(0.f,0.f);
+    BG.setPosition(-200.f,-200.f);
 
     initWindow();
     initLevels();
@@ -33,7 +33,9 @@ Game::Game() {
 
 Game::~Game() {
     delete this->player;
-    delete this->goomba;
+    for(auto level : levels){
+        delete level;
+    }
 }
 
 void Game::initWindow() {
@@ -43,7 +45,7 @@ void Game::initWindow() {
 
     this->window.create(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
 
-    this->window.setFramerateLimit(60);
+    this->window.setFramerateLimit(120);
 }
 
 void Game::initLevels() {

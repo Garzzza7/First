@@ -120,6 +120,7 @@ void Level::render(sf::RenderTarget & renderTarget) {
 void Level::update() {
     for(auto enemy : enemies){
         enemy->update();
+        enemy->checkCollisions(this->tiles, this->width, this->length);
     }
 }
 
@@ -127,6 +128,9 @@ Level::~Level() {
     for(int i=0;i<width;i++)    //To delete the inner arrays
         delete [] tiles[i];
     delete [] tiles;
+    for(auto enemy : enemies){
+        delete enemy;
+    }
 }
 
 void Level::renderEnemy(sf::RenderTarget &target) {

@@ -17,7 +17,6 @@ class Game{
     //The rest of variables:
 
     Player * player;
-    Goomba * goomba;
 
     bool running;
     int currentLevel{0};

@@ -7,7 +7,6 @@
 
 PPlant::PPlant(ObjectBase * base, int hp, int damage) : Enemy(base, hp, damage,0) {
 
-    this->sprite.setTexture(Enemy::getBase()->texture);
 }
 
 PPlant::~PPlant() {

@@ -7,17 +7,16 @@
 
 Goomba::Goomba(ObjectBase * base, int hp, int damage, float acceleration) : Enemy(base, hp, damage, acceleration) {
 
-    this->sprite.setTexture(Enemy::getBase()->texture);
 }
 
 Goomba::~Goomba() {
-
+    std::cout << "This@!";
 }
 
 
 
 void Goomba::updatePhysics() {
-    velocity.y += gravity/1000;
+    velocity.y += gravity/100;
     this->sprite.move(velocity);
 }
 void Goomba::updateMovement() {
