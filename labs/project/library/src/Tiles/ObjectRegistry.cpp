@@ -26,13 +26,17 @@ void ObjectRegistry::initObjects() {
 
     sf::IntRect basicRect(0, 0, tileSize, tileSize);
 
-    auto* airTile = new ObjectBase(TILE, "air.png", basicRect);
-    auto* brickTile = new ObjectBase(TILE, "brick.png", basicRect);
-    auto* goombaEntity = new ObjectBase(ENTITY, "goomba.png", basicRect);
-    auto* pplantEntity = new ObjectBase(ENTITY, "pplant.png", basicRect);
+    auto* airTile = new ObjectBase(TILE, relativeTexturePath + "Air.png", basicRect);
+    auto* groundTile = new ObjectBase(TILE, relativeTexturePath + "Ground.png", basicRect);
+    auto* brickTile = new ObjectBase(TILE, relativeTexturePath + "BrickBlockBrown.png", basicRect);
+    auto* blockTile = new ObjectBase(TILE, relativeTexturePath + "Block.png", basicRect);
+    auto* goombaEntity = new ObjectBase(ENTITY, relativeTexturePath + "LittleGoomba.gif", basicRect);
+    auto* pplantEntity = new ObjectBase(ENTITY, relativeTexturePath + "PiranhaPlant.gif", basicRect);
 
     objectBases.push_back(airTile);
+    objectBases.push_back(groundTile);
     objectBases.push_back(brickTile);
+    objectBases.push_back(blockTile);
     objectBases.push_back(goombaEntity);
     objectBases.push_back(pplantEntity);
 }

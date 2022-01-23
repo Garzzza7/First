@@ -6,13 +6,16 @@
 #include "Game.h"
 #include "Tiles/ObjectRegistry.h"
 
-Player::Player(float x , float y) {
+Player::Player(float x , float y) : gif("../../textures/Mario.gif"){
 
-    if(!this->textureSheet.loadFromFile("../../textures/player.png")){
+    if(!this->standingTexture.loadFromFile("../../textures/MarioStanding.png")){
         std::cout << "ERROR: Could not load texture" << "\n";
     }
-
-    this->sprite.setTexture(this->textureSheet);
+    if(!this->jumpingTexture.loadFromFile("../../textures/MarioJumping.png")){
+        std::cout << "ERROR: Could not load texture" << "\n";
+    }
+    this->sprite.setTexture(this->standingTexture);
+    this->sprite.setTextureRect({0, 0, (int)this->standingTexture.getSize().x, (int)this->standingTexture.getSize().y});
     this->sprite.setPosition(x,y);
     this->sprite.setOrigin(this->sprite.getTextureRect().width/2, this->sprite.getTextureRect().height);
 }
@@ -54,6 +57,8 @@ void Player::update(sf::RenderTarget & target){
 
     this->updatePhysics();
     this->updateMovement();
+    this->updateAnimations();
+
     this->checkCollisions(target);
 }
 
@@ -66,29 +71,46 @@ void Player::updatePhysics() {
 void Player::updateMovement() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
     {
-        if(!this->textureSheet.loadFromFile("../../textures/marioLeft.png")){
-            std::cout << "ERROR: Could not load texture" << "\n";
+        if(moveBoolDirection){
+            this->sprite.scale(-1.0f, 1.0f);
+            moveBoolDirection = false;
         }
-        this->sprite.setTexture(this->textureSheet);
         this->move(-1,0);
     }
 
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
     {
-        if(!this->textureSheet.loadFromFile("../../textures/player.png")){
-            std::cout << "ERROR: Could not load texture" << "\n";
+        if(!moveBoolDirection){
+            this->sprite.scale(-1.0f, 1.0f);
+            moveBoolDirection = true;
         }
-        this->sprite.setTexture(this->textureSheet);
+
         this->move(1,0);
     }
     if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
         this->velocity.x=0;;
     }
 
-    if(sf::Keyboard::isKeyPressed(::sf::Keyboard::Key::W)){
+    if(sf::Keyboard::isKeyPressed(::sf::Keyboard::Key::W) && (onGround || jumpCount < 2)){
             this->jump(0,-1);
-
+            jumpCount += 1;//TODO: make holding the key "W" down count as a single input.
         }
+}
+
+void Player::updateAnimations() {
+    if(std::abs(this->velocity.y) > 0.2f || !onGround){
+        this->sprite.setTextureRect({0, 0, (int)this->jumpingTexture.getSize().x, (int)this->jumpingTexture.getSize().y});
+        this->sprite.setTexture(this->jumpingTexture);
+    }
+    else if(std::abs(this->velocity.x) > 0.1f){
+        this->gif.update(this->sprite);
+        this->sprite.setTextureRect({0, 0, this->gif.getSize().x, this->gif.getSize().y});
+    }
+    else
+    {
+        this->sprite.setTextureRect({0, 0, (int)this->standingTexture.getSize().x, (int)this->standingTexture.getSize().y});
+        this->sprite.setTexture(this->standingTexture);
+    }
 }
 
 void Player::render(sf::RenderTarget & target) {
@@ -120,12 +142,13 @@ void Player::checkCollisions(sf::RenderTarget & target) {
 
     for (int i = 0; i < currentLevel->getLevelWidth(); ++i) {
         for (int j = 0; j < currentLevel->getLevelLength(); ++j) {
+            if(allTiles[i][j].getTilePreset() == airPreset) continue;
             sf::FloatRect tileBounds = allTiles[i][j].getGlobalBounds();
             //Check if player intersects with any tile in the level
 
 
-            if(tileBounds.intersects(getPlayerBounds()) && allTiles[i][j].getTilePreset() != airPreset)
-            {
+            if(tileBounds.intersects(getPlayerBounds())){
+
                 float tileLeft = tileBounds.left;
                 float tileRight = tileBounds.left + tileBounds.width;
                 float tileTop = tileBounds.top;
@@ -175,7 +198,11 @@ void Player::checkCollisions(sf::RenderTarget & target) {
                 }
                 else{
                     setPositionY(this->sprite.getPosition().y - intersectY - 0.1f);
-                    if(intersectY > 0)lockMovement[2] = true; //Block movement down
+                    if(intersectY > 0){
+                        onGround = true;
+                        jumpCount = 0;
+                        lockMovement[2] = true; //Block movement down
+                    }
                     else lockMovement[0] = true; //Block movement up
                     velocity.y -= velocity.y;
                 }
@@ -189,6 +216,9 @@ void Player::checkCollisions(sf::RenderTarget & target) {
                     lockMovement[2] = false;
                 }
 
+            }
+            else if(std::abs(velocity.y) > 0.2f){
+                onGround = false;
             }
             lockMovement[0] = false;
             lockMovement[1] = false;

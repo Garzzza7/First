@@ -34,9 +34,3 @@ void PPlant::move(const float dir_x, const float dir_y) {
 
     }
 }
-
-void PPlant::update() {
-
-    this->updatePhysics();
-    this->updateMovement();
-}

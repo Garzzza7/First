@@ -62,10 +62,10 @@ Level::Level(const std::string fileName) {
                     Enemy * enemy;
 
                     //I wanted to do it better, but I have no idea how...
-                    if(num == 2){
+                    if(num == 4){
                         enemy = new Goomba(tileRegistry->getPresetById(num),1,3,4);
                     }
-                    if(num == 3){
+                    if(num == 5){
                         enemy = new PPlant(tileRegistry->getPresetById(num),1,3);
                     }
 

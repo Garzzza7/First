@@ -8,14 +8,15 @@
 #include <mutex>
 #include "ObjectBase.h"
 
-
 class ObjectRegistry{
+
+    const std::string relativeTexturePath{"../../textures/"};
+    const unsigned int tileSize{16};
 
     static ObjectRegistry * instance;
     static std::mutex mutex;
 
     std::vector<ObjectBase*> objectBases;
-    const unsigned int tileSize{32};
 
 protected:
     ObjectRegistry();

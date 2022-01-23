@@ -5,11 +5,11 @@
 #include <Tiles/ObjectBase.h>
 #include <iostream>
 
-ObjectBase::ObjectBase(ObjectType type, std::string textureAddress, sf::IntRect rect) {
+ObjectBase::ObjectBase(ObjectType type, std::string textureAddress, sf::IntRect rect) : gif(textureAddress.c_str()){
     this->type = type;
     this->rect = rect;
 
-    if(!this->texture.loadFromFile("../../textures/" + textureAddress)){
+    if(!this->texture.loadFromFile(textureAddress)){
         std::cout << "ERROR: Could not load texture" << "\n";
     }
 }

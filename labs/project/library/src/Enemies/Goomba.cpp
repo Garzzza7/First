@@ -14,7 +14,7 @@ Goomba::Goomba(ObjectBase * base, int hp, int damage, float acceleration) : Enem
 }
 
 Goomba::~Goomba() {
-    std::cout << "This@!";
+
 }
 
 
@@ -39,10 +39,4 @@ void Goomba::move(const float dir_x, const float dir_y) {
         this->velocity.x = this->maxVelocity * ((this->velocity.x < 0.f) ? -1.f : 1.f);
 
     }
-}
-
-void Goomba::update() {
-
-    this->updatePhysics();
-    this->updateMovement();
 }

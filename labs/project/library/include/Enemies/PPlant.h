@@ -20,8 +20,7 @@ public:
 
     //sf::Event lol;
     //Update functions run every frame.
-    void update() override;
-    void updatePhysics() override ;
+    void updatePhysics() override;
     void updateMovement() override;
 
     //sf::Vector2f GetPos() {return sprite.getPosition();};

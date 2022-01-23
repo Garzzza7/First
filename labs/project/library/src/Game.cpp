@@ -24,7 +24,8 @@ Game::Game() {
     this->player = new Player(300,300);
     texture.loadFromFile("../../textures/background.png");
     BG.setTexture(texture);
-    BG.setPosition(-200.f,-200.f);
+    BG.setPosition(-150.f,-250.f);
+    BG.scale(0.45f,0.45f);
 
     initWindow();
     initLevels();
@@ -44,6 +45,8 @@ void Game::initWindow() {
     this->videoMode.width = 1000;
 
     this->window.create(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
+
+    this->view.zoom(0.32f);
 
     this->window.setFramerateLimit(120);
 }

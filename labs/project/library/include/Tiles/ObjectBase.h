@@ -2,6 +2,7 @@
 #define OOPPROJECT_OBJECTBASE_H
 
 #include <SFML/Graphics.hpp>
+#include "AnimatedGif.h"
 
 enum ObjectType{
     TILE,
@@ -16,6 +17,7 @@ class ObjectBase{
 
 public:
     sf::Texture texture;
+    AnimatedGif gif;
 
     ObjectBase(ObjectType type, std::string textureAddress, sf::IntRect rect);
 

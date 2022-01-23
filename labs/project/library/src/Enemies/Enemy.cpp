@@ -20,6 +20,7 @@ void Enemy::render(sf::RenderTarget &target){
 void Enemy::update() {
     this->updatePhysics();
     this->updateMovement();
+    this->base->gif.update(this->sprite);
 }
 
 void Enemy::updatePhysics() {

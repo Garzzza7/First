@@ -28,7 +28,7 @@ public:
     Enemy(ObjectBase * base,int hp,int damage,float acceleration);
     //sf::Event lol;
     //Update functions run every frame.
-    virtual void update()=0;
+    virtual void update();
     virtual void updatePhysics()=0;
     virtual void updateMovement()=0;
 
