@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.21)
+
+message(STATUS ${CMAKE_VERSION})
 
 #Configuration parameters of cmake
 set(CMAKE_CXX_COMPILER g++)#requires g++ to be available on PATH

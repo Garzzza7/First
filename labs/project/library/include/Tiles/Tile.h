@@ -2,6 +2,7 @@
 #define OOPPROJECT_TILE_H
 
 #include <SFML/Graphics.hpp>
+#include "Tiles/ObjectRegistry.h"
 #include "ObjectBase.h"
 
 class Tile{

@@ -1,8 +1,3 @@
-//
-// Created by student on 1/19/22.
-//
-
-#include <iostream>
 #include "Enemies/Goomba.h"
 
 Goomba::Goomba(ObjectBase * base, int hp, int damage, float acceleration) : Enemy(base, hp, damage, acceleration) {

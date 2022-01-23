@@ -1,7 +1,4 @@
-#include <iostream>
 #include "Enemies/Enemy.h"
-#include "Tiles/ObjectRegistry.h"
-
 
 Enemy::Enemy(ObjectBase * base,int hp,int damage,float acceleration) {
     this->base = base;

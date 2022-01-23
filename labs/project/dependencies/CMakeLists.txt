@@ -12,9 +12,11 @@ FetchContent_Declare(
 message(STATUS "Declaring sfml to fetch...")
 
 set(SOURCE_FILES
-        stb/stb_image.h)
-add_library(stb INTERFACE ${SOURCE_FILES})
-target_include_directories(stb INTERFACE stb)
+        stb/stb_image.h
+        animatedgifs/include/AnimatedGif.h
+        animatedgifs/src/AnimatedGif.cpp)
+add_library(stb ${SOURCE_FILES})
+target_include_directories(stb PUBLIC stb animatedgifs/include)
 
 
 add_subdirectory(sfml)

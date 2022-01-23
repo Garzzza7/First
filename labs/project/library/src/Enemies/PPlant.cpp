@@ -1,8 +1,3 @@
-//
-// Created by student on 1/19/22.
-//
-
-#include <iostream>
 #include "Enemies/PPlant.h"
 
 PPlant::PPlant(ObjectBase * base, int hp, int damage) : Enemy(base, hp, damage,0) {

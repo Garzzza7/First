@@ -2,6 +2,8 @@
 #define OOPPROJECT_ENEMY_H
 
 #include <SFML/Graphics.hpp>
+
+#include "Tiles/ObjectRegistry.h"
 #include "Tiles/ObjectBase.h"
 #include "Tiles/Tile.h"
 

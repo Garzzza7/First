@@ -1,9 +1,4 @@
-//
-// Created by specklew on 09.01.2022.
-//
-
 #include "Tiles/Tile.h"
-#include "Tiles/ObjectRegistry.h"
 
 Tile::Tile(ObjectBase * type) {
 

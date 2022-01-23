@@ -1,7 +1,3 @@
-//
-// Created by specklew on 20.01.2022.
-//
-
 #include "Tiles/ObjectRegistry.h"
 
 ObjectRegistry* ObjectRegistry::instance{nullptr};
