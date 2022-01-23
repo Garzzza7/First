@@ -5,8 +5,8 @@
 
 enum ObjectType{
     TILE,
-    ENTITY,
-    PLAYER
+    ANIMATED_TILE,
+    ENTITY
 };
 
 class ObjectBase{

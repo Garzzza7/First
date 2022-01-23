@@ -10,8 +10,11 @@ set(SOURCE_FILES
         include/Tiles/ObjectRegistry.h src/Tiles/ObjectRegistry.cpp
         include/Enemies/Enemy.h src/Enemies/Enemy.cpp
         include/Enemies/Goomba.h src/Enemies/Goomba.cpp
-        include/Enemies/PPlant.h src/Enemies/PPlant.cpp)
+        include/Enemies/PPlant.h src/Enemies/PPlant.cpp include/AnimatedGif.h src/AnimatedGif.cpp)
 add_library(Library ${SOURCE_FILES})
+
+target_link_libraries(Library stb)
+
 target_include_directories(Library PUBLIC include)
 
 #Unit Tests section

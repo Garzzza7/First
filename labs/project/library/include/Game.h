@@ -4,7 +4,6 @@
 #include <vector>
 #include <mutex>
 #include <SFML/Graphics.hpp>
-#include <Enemies/Goomba.h>
 #include "Level.h"
 #include "Player.h"
 
