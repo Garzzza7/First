@@ -1,7 +1,3 @@
-//
-// Created by specklew on 23.01.2022.
-//
-
 #include "AnimatedGif.h"
 
 #define STB_IMAGE_IMPLEMENTATION

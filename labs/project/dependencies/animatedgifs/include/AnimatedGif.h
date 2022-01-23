@@ -1,7 +1,3 @@
-//
-// Created by specklew on 23.01.2022.
-//
-
 #ifndef OOPPROJECT_AnimatedGif_H
 #define OOPPROJECT_AnimatedGif_H
 

@@ -1,12 +1,12 @@
 #include "Enemies/Enemy.h"
 
-Enemy::Enemy(ObjectBase * base,int hp,int damage,float acceleration) {
+Enemy::Enemy(Resource * base, int hp, int damage, float acceleration) {
     this->base = base;
     this->hp = hp;
     this->damage = damage;
     this->acceleration = acceleration;
 
-    this->sprite.setTexture(Enemy::getBase()->texture);
+    this->sprite.setTexture(Enemy::getBase()->getTexture());
     this->sprite.setOrigin(this->sprite.getTextureRect().width/2, this->sprite.getTextureRect().height);
 }
 
@@ -17,7 +17,7 @@ void Enemy::render(sf::RenderTarget &target){
 void Enemy::update() {
     this->updatePhysics();
     this->updateMovement();
-    this->base->gif.update(this->sprite);
+    this->base->getGif().update(this->sprite);
 }
 
 void Enemy::updatePhysics() {
@@ -29,8 +29,8 @@ void Enemy::updateMovement() {}
 void Enemy::checkCollisions(Tile **allTiles, int levelWidth, int levelLength) {
 
     //Get the tile preset that is not solid:
-    ObjectRegistry * tileRegistry = ObjectRegistry::GetInstance();
-    ObjectBase * airPreset = tileRegistry->getPresetById(0);
+    ResourceRegistry * tileRegistry = ResourceRegistry::GetInstance();
+    Resource * airPreset = tileRegistry->getPresetById(0);
 
     for (int i = 0; i < levelWidth; ++i) {
         for (int j = 0; j < levelLength; ++j) {
@@ -83,7 +83,8 @@ void Enemy::checkCollisions(Tile **allTiles, int levelWidth, int levelLength) {
                 }
 
                 if(std::abs(intersectX) < std::abs(intersectY)){
-                    setPositionX(this->sprite.getPosition().x - intersectX - 0.1f);
+                    flipMovement = !flipMovement;
+                    setPositionX(this->sprite.getPosition().x - intersectX);
                 }
                 else{
                     setPositionY(this->sprite.getPosition().y - intersectY - 0.1f);
@@ -116,6 +117,6 @@ void Enemy::setPosition(sf::Vector2f position) {
 }
 
 void Enemy::setTilePosition(float x, float y) {
-    ObjectRegistry * objectRegistry = ObjectRegistry::GetInstance();
+    ResourceRegistry * objectRegistry = ResourceRegistry::GetInstance();
     this->sprite.setPosition(x * objectRegistry->getTileSize(), y * objectRegistry->getTileSize());
 }

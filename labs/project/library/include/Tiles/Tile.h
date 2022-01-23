@@ -2,18 +2,18 @@
 #define OOPPROJECT_TILE_H
 
 #include <SFML/Graphics.hpp>
-#include "Tiles/ObjectRegistry.h"
-#include "ObjectBase.h"
+#include "Resources/ResourceRegistry.h"
+#include "Resources/Resource.h"
 
 class Tile{
 
-    ObjectBase * type;
+    Resource * type;
     sf::Sprite sprite;
 
 public:
 
     Tile(){};
-    Tile(ObjectBase * type);
+    Tile(Resource * type);
     ~Tile();
     void update();
 
@@ -21,7 +21,7 @@ public:
     void render(sf::RenderTarget & renderTarget);
 
     sf::FloatRect getGlobalBounds();
-    ObjectBase * getTilePreset();
+    Resource * getTilePreset();
 };
 
 #endif //OOPPROJECT_TILE_H

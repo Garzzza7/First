@@ -1,13 +1,21 @@
 #ifndef OOPPROJECT_LEVEL_H
 #define OOPPROJECT_LEVEL_H
 
-#include <Enemies/Enemy.h>
+#include <memory>
+
+#include "Resources/ResourceRegistry.h"
 #include "Tiles/Tile.h"
+
+#include "Enemies/EnemyFactory.h"
+#include "Enemies/Enemy.h"
 
 class Level{
 
     Tile ** tiles;
+
+    std::unique_ptr<EnemyFactory> enemyFactory;
     std::vector<Enemy*> enemies;
+
     int length{10};
     int width{10};
 

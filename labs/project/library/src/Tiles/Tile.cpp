@@ -1,9 +1,9 @@
 #include "Tiles/Tile.h"
 
-Tile::Tile(ObjectBase * type) {
+Tile::Tile(Resource * type) {
 
     this->type = type;
-    this->sprite.setTexture(type->texture);
+    this->sprite.setTexture(type->getTexture());
     this->sprite.setTextureRect(type->getRect());
     this->sprite.setScale(1,1);
 
@@ -14,7 +14,7 @@ Tile::~Tile() {
 }
 
 void Tile::setTilePosition(int x, int y) {
-    ObjectRegistry * tileRegistry = ObjectRegistry::GetInstance();
+    ResourceRegistry * tileRegistry = ResourceRegistry::GetInstance();
     this->sprite.setPosition(x*tileRegistry->getTileSize(), y*tileRegistry->getTileSize());
 }
 
@@ -26,7 +26,7 @@ sf::FloatRect Tile::getGlobalBounds() {
     return this->sprite.getGlobalBounds();
 }
 
-ObjectBase * Tile::getTilePreset() {
+Resource * Tile::getTilePreset() {
     return this->type;
 }
 

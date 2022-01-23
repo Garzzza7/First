@@ -3,16 +3,17 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Tiles/ObjectRegistry.h"
-#include "Tiles/ObjectBase.h"
+#include "Resources/ResourceRegistry.h"
+#include "Resources/Resource.h"
 #include "Tiles/Tile.h"
 
 class Enemy{
 
-    ObjectBase * base;
+    Resource * base;
 
     int hp;
     int damage;
+
 
     void setPositionX(float x);
     void setPositionY(float y);
@@ -26,8 +27,10 @@ protected:
 
     sf::Sprite sprite;
 
+    bool flipMovement{false};
+
 public:
-    Enemy(ObjectBase * base,int hp,int damage,float acceleration);
+    Enemy(Resource * base, int hp, int damage, float acceleration);
     //sf::Event lol;
     //Update functions run every frame.
     virtual void update();
@@ -49,7 +52,7 @@ public:
 
     void setTilePosition(float x, float y);
 
-    ObjectBase * getBase(){ return base; };
+    Resource * getBase(){ return base; };
     //void checkCollisions(sf::RenderTarget & target);
 
 };

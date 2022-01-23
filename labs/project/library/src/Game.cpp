@@ -3,7 +3,7 @@
 //
 
 #include "Game.h"
-#include "Tiles/ObjectRegistry.h"
+#include "Resources/ResourceRegistry.h"
 
 //Definitions of static classes.
 Game * Game::instance{nullptr};
@@ -19,7 +19,7 @@ Game * Game::GetInstance() {
 }
 
 Game::Game() {
-    ObjectRegistry * objectRegistry = ObjectRegistry::GetInstance();
+    ResourceRegistry * objectRegistry = ResourceRegistry::GetInstance();
 
     this->player = new Player(300,300);
     texture.loadFromFile("../../textures/background.png");

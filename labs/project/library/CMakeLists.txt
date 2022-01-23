@@ -2,15 +2,16 @@ cmake_minimum_required(VERSION 3.21)
 project(Library)
 
 set(SOURCE_FILES
-        include/Tiles/ObjectBase.h src/Tiles/ObjectBase.cpp
+        include/Resources/Resource.h src/Resources/Resource.cpp
         include/Tiles/Tile.h src/Tiles/Tile.cpp
         include/Player.h src/Player.cpp
         include/Game.h src/Game.cpp
         include/Level.h src/Level.cpp
-        include/Tiles/ObjectRegistry.h src/Tiles/ObjectRegistry.cpp
+        include/Resources/ResourceRegistry.h src/Resources/ResourceRegistry.cpp
         include/Enemies/Enemy.h src/Enemies/Enemy.cpp
         include/Enemies/Goomba.h src/Enemies/Goomba.cpp
-        include/Enemies/PPlant.h src/Enemies/PPlant.cpp)
+        include/Enemies/PPlant.h src/Enemies/PPlant.cpp
+        include/Enemies/EnemyFactory.h src/Enemies/EnemyFactory.cpp)
 add_library(Library ${SOURCE_FILES})
 
 target_link_libraries(Library stb)

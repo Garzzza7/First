@@ -8,7 +8,7 @@
 class Goomba : public Enemy{
 
 public:
-    Goomba(ObjectBase * base, int hp, int damage, float acceleration);
+    Goomba(Resource * base);
 
     ~Goomba();
   //  void updatePhysics();

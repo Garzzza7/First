@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Game.h"
-#include "Tiles/ObjectRegistry.h"
+#include "Resources/ResourceRegistry.h"
 
 Player::Player(float x , float y) : gif("../../textures/Mario.gif"){
 
@@ -75,7 +75,7 @@ void Player::updateMovement() {
             this->sprite.scale(-1.0f, 1.0f);
             moveBoolDirection = false;
         }
-        this->move(-1,0);
+        if(!lockMovement[3]) this->move(-1,0);
     }
 
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
@@ -85,7 +85,7 @@ void Player::updateMovement() {
             moveBoolDirection = true;
         }
 
-        this->move(1,0);
+        if(!lockMovement[1]) this->move(1,0);
     }
     if(!sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && !sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)){
         this->velocity.x=0;;
@@ -137,8 +137,8 @@ void Player::checkCollisions(sf::RenderTarget & target) {
     Tile** allTiles = currentLevel->getAllTiles();
 
     //Get the tile preset that is not solid:
-    ObjectRegistry * tileRegistry = ObjectRegistry::GetInstance();
-    ObjectBase * airPreset = tileRegistry->getPresetById(0);
+    ResourceRegistry * tileRegistry = ResourceRegistry::GetInstance();
+    Resource * airPreset = tileRegistry->getPresetById(0);
 
     for (int i = 0; i < currentLevel->getLevelWidth(); ++i) {
         for (int j = 0; j < currentLevel->getLevelLength(); ++j) {
@@ -192,7 +192,7 @@ void Player::checkCollisions(sf::RenderTarget & target) {
                 }
 
                 if(std::abs(intersectX) < std::abs(intersectY)){
-                    setPositionX(this->sprite.getPosition().x - intersectX - 0.1f);
+                    setPositionX(this->sprite.getPosition().x - intersectX);
                     if(intersectX > 0) lockMovement[1] = true; //Block movement to the right
                     else lockMovement[3] = true; //Block movement to the left
                 }

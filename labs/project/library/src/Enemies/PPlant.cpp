@@ -1,6 +1,6 @@
 #include "Enemies/PPlant.h"
 
-PPlant::PPlant(ObjectBase * base, int hp, int damage) : Enemy(base, hp, damage,0) {
+PPlant::PPlant(Resource * base) : Enemy(base, 1, 3, 0) {
 
 }
 

@@ -11,7 +11,7 @@ class PPlant: public Enemy {
 
     sf::Sprite pplant;
 public:
-    PPlant(ObjectBase * base, int hp, int damage);
+    PPlant(Resource * base);
     ~PPlant();
 
     //  void updatePhysics();
