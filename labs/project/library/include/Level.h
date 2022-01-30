@@ -9,6 +9,8 @@
 #include "Enemies/EnemyFactory.h"
 #include "Enemies/Enemy.h"
 
+//#include "Player.h"
+
 class Level{
 
     Tile ** tiles;
@@ -16,11 +18,13 @@ class Level{
     std::unique_ptr<EnemyFactory> enemyFactory;
     std::vector<Enemy*> enemies;
 
+
     int length{10};
     int width{10};
 
 public:
 
+    friend class Player;
     Level(const std::string fileName);
     ~Level();
 
@@ -35,6 +39,8 @@ public:
 
     void update();
     void renderEnemy(sf::RenderTarget & target);
+
+    void collisionEnemy();
 
 };
 

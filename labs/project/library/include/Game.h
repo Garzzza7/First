@@ -55,6 +55,8 @@ public:
     bool isRunning();
 
     Level * getCurrentLevel();
+
+    void collisionEnemy();
 };
 
 #endif //OOPPROJECT_GAME_H

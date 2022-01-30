@@ -19,7 +19,20 @@ Player::Player(float x , float y) : gif("../../textures/Mario.gif"){
     this->sprite.setPosition(x,y);
     this->sprite.setOrigin(this->sprite.getTextureRect().width/2, this->sprite.getTextureRect().height);
 }
+/*
+//Definitions of static classes.
+Player * Player::instance{nullptr};
+std::mutex Game::mutex;
 
+//Locking the storage location using lock_guard.
+Player * Player::GetInstance() {
+    std::lock_guard<std::mutex> lock(mutex);
+    if(instance == nullptr){
+        instance = new Player();
+    }
+    return instance;
+}
+*/
 Player::~Player() {
 
 }
@@ -58,7 +71,7 @@ void Player::update(sf::RenderTarget & target){
     this->updatePhysics();
     this->updateMovement();
     this->updateAnimations();
-
+    this->enemyCollisions(target);
     this->checkCollisions(target);
 }
 
@@ -226,4 +239,51 @@ void Player::checkCollisions(sf::RenderTarget & target) {
             lockMovement[3] = false;
         }
     }
+}
+void Player::receivedmg(int dmg) {
+    //playerhp-=dmg;
+}
+
+void Player::enemyCollisions(sf::RenderTarget & target) {
+        Game * game = Game::GetInstance();
+        Level * level = game->getCurrentLevel();
+
+
+    for (auto  enemy : level->enemies)
+    {
+        sf::FloatRect playerBounds=getPlayerBounds();
+        sf::FloatRect enemyBounds=enemy->getEnemyBounds();
+        //if(enemyBounds.intersects(getPlayerBounds()))
+        if(sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds()))
+        {
+            //std::cout<<"asdasdasda"<<std::endl;
+            //jump(-100.f,100.f);
+            if(sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+            {
+                velocity.x=0.f;
+                std::cout<<"right"<<std::endl;
+                setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                setPositionY(sprite.getGlobalBounds().top);
+            }
+            if(sprite.getGlobalBounds().left > enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+            {
+                velocity.x=0.f;
+                std::cout<<"left"<<std::endl;
+                setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
+                setPositionY(sprite.getGlobalBounds().top);
+            }
+            if(sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top && sprite.getGlobalBounds().top + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width > enemy->sprite1.getGlobalBounds().left)
+            {
+                std::cout<<"kill"<<std::endl;
+                setPositionX(sprite.getGlobalBounds().left);
+                setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+            }
+        }
+
+    }
+
+
+
+
+
 }

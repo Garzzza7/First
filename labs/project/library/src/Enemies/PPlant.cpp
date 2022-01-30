@@ -10,7 +10,7 @@ PPlant::~PPlant() {
 
 void PPlant::updatePhysics() {
     velocity.y += gravity/1000;
-    this->sprite.move(velocity);
+    this->sprite1.move(velocity);
 }
 void PPlant::updateMovement() {
 

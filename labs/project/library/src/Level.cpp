@@ -120,7 +120,7 @@ Level::~Level() {
 
 void Level::renderEnemy(sf::RenderTarget &target) {
 
-        //target.draw(this->enemies);
+    //target.draw(this->enemies);
 
 }
 
@@ -135,4 +135,8 @@ int Level::getLevelWidth() {
 
 int Level::getLevelLength() {
     return length;
+}
+
+void Level::collisionEnemy() {
+
 }

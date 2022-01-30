@@ -12,10 +12,10 @@ enum ResourceType{
 class Resource{
 
     ResourceType type;
-
     sf::IntRect rect;
     sf::Texture texture;
     AnimatedGif gif;
+    sf::Sprite sprite;
 
 public:
 
@@ -28,6 +28,8 @@ public:
     const sf::Texture &getTexture() const {return texture;}
 
     AnimatedGif &getGif() {return gif;}
+
+    sf::FloatRect getResourceBounds();
 
 };
 

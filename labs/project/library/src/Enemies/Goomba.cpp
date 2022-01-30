@@ -4,7 +4,8 @@ Goomba::Goomba(Resource * base) : Enemy(base, 1, 3, 4) {
     srand((unsigned) time(0));
     int randomNumber1=1 + (rand() % 6);
     int randomNumber2=1 + (rand() % 2);
-    this->acceleration=acceleration*randomNumber1*randomNumber2;
+    int randomNumber3=1 + (rand() % 7);
+    this->acceleration=acceleration*randomNumber1*randomNumber2*randomNumber3;
 
 }
 
@@ -16,7 +17,7 @@ Goomba::~Goomba() {
 
 void Goomba::updatePhysics() {
     velocity.y += gravity/100;
-    this->sprite.move(velocity);
+    this->sprite1.move(velocity);
 }
 void Goomba::updateMovement() {
 

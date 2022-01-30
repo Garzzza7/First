@@ -7,4 +7,9 @@ Resource::Resource(ResourceType type, std::string textureAddress, sf::IntRect re
     if(!this->texture.loadFromFile(textureAddress)){
         throw std::runtime_error("Could not load texture at: " + textureAddress);
     }
+    this->sprite.setTexture(this->texture);
+}
+sf::FloatRect Resource::getResourceBounds() {
+   return this->sprite.getGlobalBounds();
+
 }

@@ -11,8 +11,12 @@ class Enemy{
 
     Resource * base;
 
+
     int hp;
     int damage;
+
+    sf::FloatRect nextPos;
+
 
 
     void setPositionX(float x);
@@ -25,7 +29,7 @@ protected:
     float acceleration{0.2f};
     float gravity{10.f};
 
-    sf::Sprite sprite;
+    sf::Sprite sprite1;
 
     bool flipMovement{false};
 
@@ -36,6 +40,11 @@ public:
     virtual void update();
     virtual void updatePhysics()=0;
     virtual void updateMovement()=0;
+    //virtual void dealDMG()=0;
+
+    sf::FloatRect getEnemyBounds();
+
+    friend class Player;
 
     //sf::Vector2f GetPos() {return sprite.getPosition();};
 
@@ -51,6 +60,8 @@ public:
     void setPosition(sf::Vector2f position);
 
     void setTilePosition(float x, float y);
+
+    void collisionwithmario();
 
     Resource * getBase(){ return base; };
     //void checkCollisions(sf::RenderTarget & target);

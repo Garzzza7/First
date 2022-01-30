@@ -22,10 +22,11 @@ Game::Game() {
     ResourceRegistry * objectRegistry = ResourceRegistry::GetInstance();
 
     this->player = new Player(300,300);
-    texture.loadFromFile("../../textures/background.png");
+    texture.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/background.png");
     BG.setTexture(texture);
     BG.setPosition(-150.f,-250.f);
     BG.scale(0.45f,0.45f);
+
 
     initWindow();
     initLevels();
@@ -54,19 +55,22 @@ void Game::initWindow() {
 void Game::initLevels() {
 
     Level * level1 = new Level("level_1");
+
     levels.push_back(level1);
 }
 
 //Rendering code:
 void Game::render() {
-    this->window.clear(/*sf::Color::Blue*/);
+    this->window.clear();
     this->window.draw(BG);
-
+    this->player->render(this->window);
     this->levels.at(0)->render(this->window);
+
 
     this->view.setCenter(this->player->getPos());
     this->window.setView(view);
-    this->player->render(this->window);
+
+
 
     this->window.display();
 }
@@ -78,10 +82,12 @@ void Game::update() {
     this->render();
 
     //Passing on the update event.
-    this->player->update(this->window);
+
     this->levels.at(currentLevel)->update();
+    this->player->update(this->window);
 
     if(!this->window.isOpen()) running = false;
+
 }
 
 //Event polling
@@ -112,4 +118,5 @@ bool Game::isRunning() {
 Level *Game::getCurrentLevel() {
     return levels.at(this->currentLevel);
 }
+
 
