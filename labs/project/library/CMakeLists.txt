@@ -47,8 +47,8 @@ if(MSVC)
 else()
     find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 endif()
-    #find_package(X11 REQUIRED)
-    #target_link_libraries(Library X11)
+#find_package(X11 REQUIRED)
+#target_link_libraries(Library X11)
 #[[
 
 set(SOURCE_TEST_PLAYER_FILES

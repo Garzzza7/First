@@ -17,9 +17,12 @@ class Player{
     sf::Texture jumpingTexture;
     AnimatedGif gif;
 
+    int x;
+    int y;
+
     bool moveBoolDirection{true};
 
-    int playerhp{5};
+   unsigned int playerhp{5};
 
     sf::Event event;
 
@@ -54,7 +57,7 @@ public:
     void updatePhysics();
     void updateMovement();
     void updateAnimations();
-    void receivedmg(int dmg);
+    void receivedmg(unsigned int& hp);
 
     sf::Vector2f getPos() {return sprite.getPosition();};
     sf::Rect<float> getBounds() {return sprite.getGlobalBounds();};
@@ -69,7 +72,10 @@ public:
 
     static Player * GetInstance();
 
+    int getHP();
     void enemyCollisions(sf::RenderTarget & target);
+
+    void die();
 
 };
 

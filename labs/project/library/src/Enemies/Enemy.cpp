@@ -14,6 +14,7 @@ void Enemy::render(sf::RenderTarget &target){
     target.draw(this->sprite1);
 }
 
+
 void Enemy::update() {
     this->updatePhysics();
     this->updateMovement();
@@ -129,4 +130,9 @@ void Enemy::setTilePosition(float x, float y) {
 sf::FloatRect Enemy::getEnemyBounds() {
     return this->base->getResourceBounds();
 }
+
+
+//void Enemy::kill() {
+  //  delete enemy;
+//}
 

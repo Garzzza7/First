@@ -6,6 +6,8 @@
 #include <ctime>
 
 class Goomba : public Enemy{
+protected:
+    int dmg{1};
 
 public:
     Goomba(Resource * base);
@@ -27,6 +29,7 @@ public:
     //void stop(const float dir_x, const float dir_y);
 
     //void checkCollisions(sf::RenderTarget & target);
+
 };
 
 #endif //OOPPROJECT_GOOMBA_H

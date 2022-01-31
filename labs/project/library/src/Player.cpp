@@ -7,7 +7,8 @@
 #include "Resources/ResourceRegistry.h"
 
 Player::Player(float x , float y) : gif("../../textures/Mario.gif"){
-
+ this->x=x;
+ this->y=y;
     if(!this->standingTexture.loadFromFile("../../textures/MarioStanding.png")){
         std::cout << "ERROR: Could not load texture" << "\n";
     }
@@ -240,8 +241,11 @@ void Player::checkCollisions(sf::RenderTarget & target) {
         }
     }
 }
-void Player::receivedmg(int dmg) {
-    //playerhp-=dmg;
+int Player::getHP() {
+    return playerhp;
+}
+void Player::receivedmg(unsigned int& hp) {
+    hp-=1;
 }
 
 void Player::enemyCollisions(sf::RenderTarget & target) {
@@ -251,39 +255,97 @@ void Player::enemyCollisions(sf::RenderTarget & target) {
 
     for (auto  enemy : level->enemies)
     {
+        long str1{(long) "0x555670ea4820"};
         sf::FloatRect playerBounds=getPlayerBounds();
         sf::FloatRect enemyBounds=enemy->getEnemyBounds();
         //if(enemyBounds.intersects(getPlayerBounds()))
-        if(sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds()))
+        if(reinterpret_cast<long>(enemy->getBase())==str1)
         {
-            //std::cout<<"asdasdasda"<<std::endl;
-            //jump(-100.f,100.f);
-            if(sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+            if(sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds()))
             {
-                velocity.x=0.f;
-                std::cout<<"right"<<std::endl;
-                setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
-                setPositionY(sprite.getGlobalBounds().top);
+                //std::cout<<"asdasdasda"<<std::endl;
+                //jump(-100.f,100.f);
+                if(sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+                {
+                    velocity.x=0.f;
+                    std::cout<<"right"<<std::endl;
+                    setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                    setPositionY(sprite.getGlobalBounds().top);
+                    //playerhp-=enemy->damage;
+                    receivedmg(playerhp);
+                    std::cout<<getHP()<<std::endl;
+                    die();
+                }
+                if(sprite.getGlobalBounds().left > enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+                {
+                    velocity.x=0.f;
+                    std::cout<<"left"<<std::endl;
+
+                    setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
+                    setPositionY(sprite.getGlobalBounds().top);
+                    //playerhp-=enemy->damage;
+                    receivedmg(playerhp);
+                    std::cout<<getHP()<<std::endl;
+                    die();
+                }
+                if(sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top && sprite.getGlobalBounds().top + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width > enemy->sprite1.getGlobalBounds().left)
+                {
+                    std::cout<<"kill"<<std::endl;
+                    setPositionX(sprite.getGlobalBounds().left);
+                    setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+                    //XD???
+                    enemy->setPosition(10000.f,10000.f);
+                }
             }
-            if(sprite.getGlobalBounds().left > enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+        }
+        else //if (reinterpret_cast<long>(enemy->getBase())==reinterpret_cast<long>("0x555670ea6bd0"))
+        {
+            if(sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds()))
             {
-                velocity.x=0.f;
-                std::cout<<"left"<<std::endl;
-                setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
-                setPositionY(sprite.getGlobalBounds().top);
-            }
-            if(sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top && sprite.getGlobalBounds().top + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width > enemy->sprite1.getGlobalBounds().left)
-            {
-                std::cout<<"kill"<<std::endl;
-                setPositionX(sprite.getGlobalBounds().left);
-                setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+                //std::cout<<"asdasdasda"<<std::endl;
+                //jump(-100.f,100.f);
+                if(sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+                {
+                    velocity.x=0.f;
+                    std::cout<<"right"<<std::endl;
+                    setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                    setPositionY(sprite.getGlobalBounds().top);
+                    //playerhp-=enemy->damage;
+                    receivedmg(playerhp);
+                    std::cout<<getHP()<<std::endl;
+                    die();
+                }
+                if(sprite.getGlobalBounds().left > enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+                {
+                    velocity.x=0.f;
+                    std::cout<<"left"<<std::endl;
+
+                    setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
+                    setPositionY(sprite.getGlobalBounds().top);
+                    //playerhp-=enemy->damage;
+                    receivedmg(playerhp);
+                    std::cout<<getHP()<<std::endl;
+                    die();
+                }
+                if(sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top && sprite.getGlobalBounds().top + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width > enemy->sprite1.getGlobalBounds().left)
+                {
+                    std::cout<<"kill"<<std::endl;
+                    setPositionX(sprite.getGlobalBounds().left);
+                    setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+                    //XD???
+                    receivedmg(playerhp);
+                    die();
+                }
             }
         }
 
+
     }
-
-
-
-
-
+}
+void Player::die() {
+    if(getHP()==0){
+        setPositionX(x);
+        setPositionY(y);
+        playerhp+=5;
+    }
 }

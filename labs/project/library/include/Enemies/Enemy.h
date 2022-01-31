@@ -33,6 +33,8 @@ protected:
 
     bool flipMovement{false};
 
+
+
 public:
     Enemy(Resource * base, int hp, int damage, float acceleration);
     //sf::Event lol;
@@ -45,6 +47,8 @@ public:
     sf::FloatRect getEnemyBounds();
 
     friend class Player;
+
+
 
     //sf::Vector2f GetPos() {return sprite.getPosition();};
 
@@ -65,6 +69,8 @@ public:
 
     Resource * getBase(){ return base; };
     //void checkCollisions(sf::RenderTarget & target);
+
+    int getdmg();
 
 };
 
