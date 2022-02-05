@@ -14,12 +14,7 @@ enum ResourceID{
     PPLANT_ENTITY_ID = 5
 };
 
-
 class ResourceRegistry{
-
-    //Constant variables:
-    const std::string relativeTexturePath{"../../textures/"};
-    const unsigned int tileSize{16};
 
     //Singleton stuff:
     static ResourceRegistry * instance;
@@ -33,6 +28,11 @@ protected:
     ~ResourceRegistry() {}
 
 public:
+
+    //Constant variables:
+
+    const std::string relativeTexturePath{"../../textures/"};
+    const unsigned int tileSize{16};
 
     //Singleton stuff:
 

@@ -1,7 +1,3 @@
-//
-// Created by specklew on 08.01.2022.
-//
-
 #include "Game.h"
 #include "Resources/ResourceRegistry.h"
 
@@ -22,7 +18,7 @@ Game::Game() {
     ResourceRegistry * objectRegistry = ResourceRegistry::GetInstance();
 
     this->player = new Player(300,300);
-    texture.loadFromFile("/home/student/OOP/oop21_ww_06/labs/project/textures/background.png");
+    texture.loadFromFile(objectRegistry->relativeTexturePath + "background.png");
     BG.setTexture(texture);
     BG.setPosition(-150.f,-250.f);
     BG.scale(0.45f,0.45f);
@@ -47,9 +43,9 @@ void Game::initWindow() {
 
     this->window.create(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
 
-    this->view.zoom(0.32f);
+    this->view.zoom(0.33f);
 
-    this->window.setFramerateLimit(120);
+    this->window.setFramerateLimit(60);
 }
 
 void Game::initLevels() {
@@ -63,14 +59,12 @@ void Game::initLevels() {
 void Game::render() {
     this->window.clear();
     this->window.draw(BG);
+
     this->player->render(this->window);
     this->levels.at(0)->render(this->window);
 
-
     this->view.setCenter(this->player->getPos());
     this->window.setView(view);
-
-
 
     this->window.display();
 }
@@ -79,7 +73,6 @@ void Game::render() {
 void Game::update() {
 
     this->pollEvents();
-    this->render();
 
     //Passing on the update event.
 
@@ -108,6 +101,7 @@ void Game::pollEvents() {
                 }
                 break;
         }
+        this->player->catchEvents(ev);
     }
 }
 

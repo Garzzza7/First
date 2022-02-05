@@ -1,11 +1,9 @@
-#include <fstream>
-
 #include "Level.h"
 
 
 Level::Level(const std::string fileName) {
 
-    ResourceRegistry * tileRegistry = ResourceRegistry::GetInstance();
+    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
     enemyFactory = std::make_unique<EnemyFactory>();
 
     std::fstream levelFile;
@@ -45,11 +43,11 @@ Level::Level(const std::string fileName) {
 
                 int num = c - 48;
 
-                if(tileRegistry->getPresetById(num)->getType() == TILE) {
-                    Tile *newTile = new Tile(tileRegistry->getPresetById(num));
+                if(resourceRegistry->getPresetById(num)->getType() == TILE) {
+                    Tile *newTile = new Tile(resourceRegistry->getPresetById(num));
                     tiles[j][i - 1] = *newTile;
-                }else if(tileRegistry->getPresetById(num)->getType() == ENTITY){
-                    Tile *newTile = new Tile(tileRegistry->getPresetById(0));
+                }else if(resourceRegistry->getPresetById(num)->getType() == ENTITY){
+                    Tile *newTile = new Tile(resourceRegistry->getPresetById(0));
                     tiles[j][i - 1] = *newTile;
 
                     Enemy * enemy = enemyFactory->CreateEnemy(num);

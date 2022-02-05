@@ -21,7 +21,7 @@ void Goomba::updatePhysics() {
 }
 void Goomba::updateMovement() {
 
-    int randomNumber=1 + (rand() % 5);;
+    int randomNumber = 1 + (rand() % 5);;
 
     bool moveDirection = randomNumber % 2 == 0;
     if(flipMovement) moveDirection != moveDirection;

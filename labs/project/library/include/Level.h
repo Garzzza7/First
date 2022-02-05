@@ -2,6 +2,7 @@
 #define OOPPROJECT_LEVEL_H
 
 #include <memory>
+#include <fstream>
 
 #include "Resources/ResourceRegistry.h"
 #include "Tiles/Tile.h"
