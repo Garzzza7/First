@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <math.h>
 #include "Resources/ResourceRegistry.h"
 #include "AnimatedGif.h"
 #include "Level.h"
@@ -10,7 +11,6 @@
 
 class Player{
 
-    sf::FloatRect nextPos;
     sf::Sprite sprite;
     sf::FloatRect collisionRect;
 
@@ -18,8 +18,8 @@ class Player{
     sf::Texture jumpingTexture;
     AnimatedGif gif;
 
-    int x;
-    int y;
+    int spawnPointPosX;
+    int spawnPointPosY;
 
     bool goingRight{false};
     bool goingLeft{false};
@@ -33,7 +33,7 @@ class Player{
     //Private methods:
 
     void move(float dir_x);
-    void jump(float dir_x, float dir_y);
+    void jump();
 
     void setPositionX(float x);
     void setPositionY(float y);
@@ -43,6 +43,9 @@ class Player{
     void changeToGif(bool moveDirection);
 
     void setOnGround(bool onGround);
+
+    static void receiveDamage(unsigned int& hp);
+    void checkIfPlayerShouldDie();
 
     //Physics:
     sf::Vector2f velocity{0,0};
@@ -54,7 +57,6 @@ class Player{
 public:
 
     Player(int x , int y);
-    ~Player();
 
     //Render works like update but is run before update:
     void render(sf::RenderTarget & target);
@@ -69,17 +71,14 @@ public:
     void updateAnimations();
 
     //Getters:
-    sf::FloatRect getPlayerBounds();
+    sf::FloatRect getPlayerBounds() {return this->sprite.getGlobalBounds();};
     sf::Vector2f getPos() {return sprite.getPosition();};
-    int getHP();
+    unsigned int getHP() const {return playerHealth;};
 
     //Collisions:
+    sf::Vector2f getCollisionIntersection(sf::FloatRect nextPos);
     void checkCollisions();
     void enemyCollisions();
-
-    //Player health functions:
-    void receiveDamage(unsigned int& hp);
-    void die();
 
 };
 

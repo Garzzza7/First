@@ -18,5 +18,4 @@ set(SOURCE_FILES
 add_library(stb ${SOURCE_FILES})
 target_include_directories(stb PUBLIC stb animatedgifs/include)
 
-
 add_subdirectory(sfml)
