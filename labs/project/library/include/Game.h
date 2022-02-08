@@ -27,6 +27,9 @@ class Game{
     sf::Texture texture;
     sf::Sprite BG;
 
+    sf::RectangleShape hitbox;
+
+
     std::vector<Level*> levels;
 
 protected:
@@ -46,6 +49,8 @@ public:
 
     void update();
     void render();
+
+    void screencollision();
 
     void pollEvents();
 

@@ -22,6 +22,12 @@ Game::Game() {
     BG.setTexture(texture);
     BG.setPosition(-150.f,-250.f);
     BG.scale(0.45f,0.45f);
+    hitbox.setPosition(0.f,0.f);
+    hitbox.setSize(sf::Vector2(1600.f,432.f));
+    hitbox.setFillColor(sf::Color::Transparent);
+    hitbox.setOutlineColor(sf::Color::White);
+    hitbox.setOutlineThickness(1.f);
+
 
 
     initWindow();
@@ -59,11 +65,17 @@ void Game::initLevels() {
 void Game::render() {
     this->window.clear();
     this->window.draw(BG);
+    this->window.draw(hitbox);
 
     this->player->render(this->window);
     this->levels.at(0)->render(this->window);
 
-    this->view.setCenter(this->player->getPos());
+
+
+    this->view.setCenter(this->player->getPos()-sf::Vector2f(0.0f,101.0f));
+    if(player->getPos().x<165.f) view.setCenter(sf::Vector2(165.f,player->getPos().y-101.f));
+    if(player->getPos().x>1435.f) view.setCenter(sf::Vector2(1435.f,player->getPos().y-101.f));
+    if(player->getPos().y<200.f) view.setCenter(sf::Vector2(player->getPos().x,100.f));
     this->window.setView(view);
 
     this->window.display();
@@ -111,6 +123,14 @@ bool Game::isRunning() {
 
 Level *Game::getCurrentLevel() {
     return levels.at(this->currentLevel);
+}
+void Game::screencollision() {
+    //left
+   // if(player->getPos().x<400.f) view.setCenter(sf::Vector2(400.f,player->getPos().y));
+    //right
+   // if(player->getPos().x<400.f) view.setCenter(sf::Vector2(400.f,player->getPos().y));
+   // //top
+
 }
 
 

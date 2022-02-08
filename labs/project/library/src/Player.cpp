@@ -147,6 +147,7 @@ sf::Vector2f Player::getCollisionIntersection(sf::FloatRect nextPos) {
     Level * currentLevel = game->getCurrentLevel();
     Tile** allTiles = currentLevel->getAllTiles();
 
+
     //Get the tile preset that is not solid:
     ResourceRegistry * tileRegistry = ResourceRegistry::GetInstance();
     Resource * airPreset = tileRegistry->getPresetById(0);
