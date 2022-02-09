@@ -57,8 +57,10 @@ void Game::initWindow() {
 void Game::initLevels() {
 
     Level * level1 = new Level("level_1");
+    Level * level2 = new Level("level_2");
 
     levels.push_back(level1);
+    levels.push_back(level2);
 }
 
 //Rendering code:
@@ -68,17 +70,45 @@ void Game::render() {
     this->window.draw(hitbox);
 
     this->player->render(this->window);
-    this->levels.at(0)->render(this->window);
+    this->levels.at(currentLevel)->render(this->window);
 
 
+    //The screen is 21 blocks wide
+    //and about 17 block tall.
+    applyCorrectScreenCenter();
 
-    this->view.setCenter(this->player->getPos()-sf::Vector2f(0.0f,101.0f));
-    if(player->getPos().x<165.f) view.setCenter(sf::Vector2(165.f,player->getPos().y-101.f));
-    if(player->getPos().x>1435.f) view.setCenter(sf::Vector2(1435.f,player->getPos().y-101.f));
-    if(player->getPos().y<200.f) view.setCenter(sf::Vector2(player->getPos().x,100.f));
     this->window.setView(view);
 
     this->window.display();
+}
+
+void Game::applyCorrectScreenCenter() {
+    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
+    const auto tileSize = (float)resourceRegistry->getTileSize();
+    const auto levelLength = (float)levels.at(currentLevel)->getLevelLength();
+    const auto levelHeight = (float)levels.at(currentLevel)->getLevelHeight();
+    const float halfScreenHeight = 8.33f;
+    const float halfScreenWidth = 10.33f;
+    float screenX = (float)player->getPos().x;
+    float screenY = (float)player->getPos().y;
+
+    if(player->getPos().x < halfScreenWidth * tileSize){
+        screenX = halfScreenWidth * tileSize;
+    }
+
+    if(player->getPos().x > (levelLength - halfScreenWidth) * tileSize){
+        screenX = (levelLength - halfScreenWidth) * tileSize;
+    }
+
+    if(player->getPos().y < halfScreenHeight * tileSize){
+        screenY = halfScreenHeight * tileSize;
+    }
+
+    if(player->getPos().y > (levelHeight - halfScreenHeight) * tileSize){
+        screenY = (levelHeight - halfScreenHeight) * tileSize;
+    }
+
+    this->view.setCenter(screenX, screenY);
 }
 
 //Code that runs every frame of the game:
@@ -90,6 +120,10 @@ void Game::update() {
 
     this->levels.at(currentLevel)->update();
     this->player->update(this->window);
+    if(this->player->getPos().x > 640){
+        //currentLevel = 1;
+
+    }
 
     if(!this->window.isOpen()) running = false;
 

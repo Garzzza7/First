@@ -154,7 +154,7 @@ sf::Vector2f Player::getCollisionIntersection(sf::FloatRect nextPos) {
 
     sf::Vector2f vectorSum{0,0};
 
-    for (int i = 0; i < currentLevel->getLevelWidth(); ++i) {
+    for (int i = 0; i < currentLevel->getLevelHeight(); ++i) {
         for (int j = 0; j < currentLevel->getLevelLength(); ++j) {
             if (allTiles[i][j].getTilePreset() == airPreset) continue;
             sf::FloatRect tileBounds = allTiles[i][j].getGlobalBounds();

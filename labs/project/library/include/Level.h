@@ -20,8 +20,8 @@ class Level{
     std::vector<Enemy*> enemies;
 
 
+    int height{10};
     int length{10};
-    int width{10};
 
 public:
 
@@ -34,15 +34,11 @@ public:
 
     void render(sf::RenderTarget & renderTarget);
 
-    Tile** getAllTiles();
-    int getLevelWidth();
-    int getLevelLength();
+    Tile** getAllTiles(){return tiles;};
+    int getLevelHeight() {return height;};
+    int getLevelLength() {return length;};
 
     void update();
-    void renderEnemy(sf::RenderTarget & target);
-
-    void collisionEnemy();
-
 };
 
 #endif //OOPPROJECT_LEVEL_H

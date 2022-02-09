@@ -21,13 +21,13 @@ Level::Level(const std::string fileName) {
                 for(char& c : str) {
                     j++;
                     if(c == ';' && !done){
-                        width = stoi(x);
+                        length = stoi(x);
                         done = true;
                         x = "";
                         continue;
                     }
                     if(c == ';'){
-                        length = stoi(x);
+                        height = stoi(x);
                         initArray();
                         continue;
                     }
@@ -37,7 +37,7 @@ Level::Level(const std::string fileName) {
                 continue;
             }
 
-            //Start assigning tiles
+            //Start assigning tiles.
             int j = 0;
             for(char c : str) {
 
@@ -45,15 +45,15 @@ Level::Level(const std::string fileName) {
 
                 if(resourceRegistry->getPresetById(num)->getType() == TILE) {
                     Tile *newTile = new Tile(resourceRegistry->getPresetById(num));
-                    tiles[j][i - 1] = *newTile;
+                    tiles[i - 1][j] = *newTile;
                 }else if(resourceRegistry->getPresetById(num)->getType() == ENTITY){
                     Tile *newTile = new Tile(resourceRegistry->getPresetById(0));
-                    tiles[j][i - 1] = *newTile;
+                    tiles[i - 1][j] = *newTile;
 
                     Enemy * enemy = enemyFactory->CreateEnemy(num);
 
 
-                    enemy->setTilePosition(j, i-1);
+                    enemy->setTilePosition(j, i);
 
                     enemies.push_back(enemy);
                 }
@@ -72,25 +72,26 @@ Level::Level(const std::string fileName) {
 }
 
 void Level::initArray() {
-    tiles = new Tile* [width];
+    tiles = new Tile* [height];
 
-    for (int i=0; i<width; i++)
+    for (int i=0; i < height; ++i)
     {
         tiles[i] = new Tile[length];
     }
 }
 
 void Level::initTilePositions() {
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < length; ++j) {
-            tiles[i][j].setTilePosition(i, j);
+    for(int i = 0; i < height; ++i) {
+        for(int j = 0; j < length; ++j){
+            tiles[i][j].setTilePosition(j, i);
         }
     }
 }
 
 void Level::render(sf::RenderTarget & renderTarget) {
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < length; ++j) {
+
+    for(int i = 0; i < height; ++i) {
+        for(int j = 0; j < length; ++j){
             tiles[i][j].render(renderTarget);
         }
     }
@@ -103,38 +104,15 @@ void Level::render(sf::RenderTarget & renderTarget) {
 void Level::update() {
     for(auto enemy : enemies){
         enemy->update();
-        enemy->checkCollisions(this->tiles, this->width, this->length);
+        enemy->checkCollisions(this->tiles, this->height, this->length);
     }
 }
 
 Level::~Level() {
-    for(int i=0;i<width;i++)    //To delete the inner arrays
+    for(int i=0; i < height; i++)    //To delete the inner arrays
         delete [] tiles[i];
     delete [] tiles;
     for(auto enemy : enemies) {
         delete enemy;
     }
-}
-
-void Level::renderEnemy(sf::RenderTarget &target) {
-
-    //target.draw(this->enemies);
-
-}
-
-Tile** Level::getAllTiles() {
-
-    return tiles;
-}
-
-int Level::getLevelWidth() {
-    return width;
-}
-
-int Level::getLevelLength() {
-    return length;
-}
-
-void Level::collisionEnemy() {
-
 }

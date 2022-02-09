@@ -61,7 +61,7 @@ public:
 
     void render(sf::RenderTarget & target);
 
-    void checkCollisions(Tile **tiles, int levelWidth, int levelLength);
+    void checkCollisions(Tile **tiles, int levelHeight, int levelLength);
 
     void setPosition(float x, float y);
     void setPosition(sf::Vector2f position);
