@@ -21,11 +21,13 @@ class Player{
     int spawnPointPosX;
     int spawnPointPosY;
 
+
+
     bool goingRight{false};
     bool goingLeft{false};
     bool goingToJump{false};
 
-   unsigned int playerHealth{5};
+     unsigned int playerHealth{5};
 
     bool onGround{false};
     unsigned jumpCount{0};
@@ -44,7 +46,7 @@ class Player{
 
     void setOnGround(bool onGround);
 
-    static void receiveDamage(unsigned int& hp);
+    void receiveDamage(unsigned int &hp,int dmg);
     void checkIfPlayerShouldDie();
 
     //Physics:
@@ -73,7 +75,7 @@ public:
     //Getters:
     sf::FloatRect getPlayerBounds() {return this->sprite.getGlobalBounds();};
     sf::Vector2f getPos() {return sprite.getPosition();};
-    unsigned int getHP() const {return playerHealth;};
+     unsigned int getHP()  {return playerHealth;};
 
     //Collisions:
     sf::Vector2f getCollisionIntersection(sf::FloatRect nextPos);

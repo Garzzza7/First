@@ -5,6 +5,7 @@
 #include "Enemies/Enemy.h"
 #include "Enemies/Goomba.h"
 #include "Enemies/PPlant.h"
+#include "Enemies/Coin.h"
 
 class EnemyFactory{
 

@@ -11,7 +11,7 @@ set(SOURCE_FILES
         include/Enemies/Enemy.h src/Enemies/Enemy.cpp
         include/Enemies/Goomba.h src/Enemies/Goomba.cpp
         include/Enemies/PPlant.h src/Enemies/PPlant.cpp
-        include/Enemies/EnemyFactory.h src/Enemies/EnemyFactory.cpp)
+        include/Enemies/EnemyFactory.h src/Enemies/EnemyFactory.cpp src/Enemies/Coin.cpp include/Enemies/Coin.h)
 add_library(Library ${SOURCE_FILES})
 
 target_link_libraries(Library stb)

@@ -1,18 +1,16 @@
-#include "Enemies/PPlant.h"
+#include "Enemies/Coin.h"
 
-PPlant::PPlant(Resource * base) : Enemy(base, 2, 2, 0) {
-
-}
-
-PPlant::~PPlant() {
+Coin::Coin(Resource * base) : Enemy(base, 0, 0, 0) {
 
 }
+Coin::~Coin() {
 
-void PPlant::updatePhysics() {
+}
+void Coin::updatePhysics() {
     velocity.y += gravity/1000;
     this->sprite1.move(velocity);
 }
-void PPlant::updateMovement() {
+void Coin::updateMovement() {
 
     srand((unsigned) time(0));
     int randomNumber=1 + (rand() % 6);;
@@ -22,12 +20,13 @@ void PPlant::updateMovement() {
     } else this->move(1,0);
 
 }
-void PPlant::move(const float dir_x, const float dir_y) {
+void Coin::move(const float dir_x, const float dir_y) {
     this->velocity.x += dir_x * acceleration;
     if (std::abs(this->velocity.x) > this->maxVelocity) {
         this->velocity.x = this->maxVelocity * ((this->velocity.x < 0.f) ? -1.f : 1.f);
 
     }
+
 }
 /*
 int Enemy::getdmg() {

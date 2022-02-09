@@ -10,6 +10,8 @@
 class Enemy{
 
     Resource * base;
+    int id;
+
 
 
     int hp;
@@ -42,6 +44,7 @@ public:
     virtual void update();
     virtual void updatePhysics()=0;
     virtual void updateMovement()=0;
+    virtual int getID();
     //virtual void dealDMG()=0;
 
     sf::FloatRect getEnemyBounds();
@@ -68,9 +71,10 @@ public:
     void collisionwithmario();
 
     Resource * getBase(){ return base; };
+
     //void checkCollisions(sf::RenderTarget & target);
 
-    int getdmg();
+    virtual int getdmg();
 
 };
 

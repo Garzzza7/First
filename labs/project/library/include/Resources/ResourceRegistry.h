@@ -11,10 +11,12 @@ enum ResourceID{
     BRICK_TILE_ID = 2,
     BLOCK_TILE_ID = 3,
     GOOMBA_ENTITY_ID = 4,
-    PPLANT_ENTITY_ID = 5
+    PPLANT_ENTITY_ID = 5,
+    COIN_ENTITY_ID = 6
 };
 
 class ResourceRegistry{
+    ResourceID id;
 
     //Singleton stuff:
     static ResourceRegistry * instance;
@@ -46,6 +48,7 @@ public:
 
     void initObjects();
     void deleteObjects();
+    ResourceID getID() const {return id;}
 
     unsigned int getTileSize();
     Resource * getPresetById(unsigned int id);

@@ -223,93 +223,280 @@ sf::Vector2f Player::getCollisionIntersection(sf::FloatRect nextPos) {
 void Player::enemyCollisions() {
     Game * game = Game::GetInstance();
     Level * level = game->getCurrentLevel();
+    ResourceID lol1;
+    ResourceID lol2;
+    ResourceID lol3;
+    lol1=ResourceID::GOOMBA_ENTITY_ID; //4
+    lol2=ResourceID::PPLANT_ENTITY_ID; //5
+    lol3=ResourceID::COIN_ENTITY_ID; //6
 
 
     for (auto  enemy : level->enemies)
     {
+
+        //std::cout<<enemy->getID()<<std::endl;
+
         long str1{(long) "0x555670ea4820"};
+        //enemy->getBase()->getType()
+
         sf::FloatRect playerBounds=getPlayerBounds();
         sf::FloatRect enemyBounds=enemy->getEnemyBounds();
         //if(enemyBounds.intersects(getPlayerBounds()))
-        if(reinterpret_cast<long>(enemy->getBase())==str1)
-        {
-            if(sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds()))
-            {
-                if(sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
-                {
-                    velocity.x = 0.0f;
-                    std::cout << "right" << std::endl;
+       // enemy->getEnemyBounds();
+        if(enemy->getID()==lol1) {
+            if (sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds())) {
+                std::cout << enemy->getID() << std::endl;
+                if (sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds())) {
+                    if (sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left &&
+                        sprite.getGlobalBounds().left + sprite.getGlobalBounds().width <
+                        enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                        sprite.getGlobalBounds().top <
+                        enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                        sprite.getGlobalBounds().top + sprite.getGlobalBounds().height >
+                        enemy->sprite1.getGlobalBounds().top) {
 
-                    setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
-                    setPositionY(sprite.getGlobalBounds().top);
+                        std::cout << "right" << std::endl;
 
-                    receiveDamage(playerHealth);
 
-                    checkIfPlayerShouldDie();
+
+                        setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                        setPositionY(sprite.getGlobalBounds().top);
+
+                        //receiveDamage(playerHealth, enemy->getdmg());
+                       // std::cout<<playerHealth<<std::endl;
+
+
+                        checkIfPlayerShouldDie();
+                    }
                 }
-                if(sprite.getGlobalBounds().left > enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
-                {
-                    velocity.x = 0.0f;
-                    std::cout << "left" << std::endl;
-
-                    setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
-                    setPositionY(sprite.getGlobalBounds().top);
-
-                    receiveDamage(playerHealth);
-
-                    checkIfPlayerShouldDie();
-                }
-                if(sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top && sprite.getGlobalBounds().top + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width > enemy->sprite1.getGlobalBounds().left)
-                {
-                    setPositionX(sprite.getGlobalBounds().left);
-                    setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
-
-                    enemy->setPosition(10000.f,10000.f);
-                }
-            }
-        }
-        else
-        {
-            if(sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds()))
-            {
-                if(sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
-                {
-                    velocity.x = 0.0f;
-
-                    setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
-                    setPositionY(sprite.getGlobalBounds().top);
-
-                    receiveDamage(playerHealth);
-
-                    checkIfPlayerShouldDie();
-                }
-                if(sprite.getGlobalBounds().left > enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
-                {
+                if (sprite.getGlobalBounds().left >
+                    enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width &&
+                    sprite.getGlobalBounds().left + sprite.getGlobalBounds().width <
+                    enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                    sprite.getGlobalBounds().top <
+                    enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                    sprite.getGlobalBounds().top + sprite.getGlobalBounds().height >
+                    enemy->sprite1.getGlobalBounds().top) {
                     velocity.x = 0.0f;
                     std::cout << "left" << std::endl;
 
                     setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
                     setPositionY(sprite.getGlobalBounds().top);
 
-                    receiveDamage(playerHealth);
+                    //receiveDamage(playerHealth, enemy->getdmg());
+                    //std::cout<<playerHealth<<std::endl;
 
                     checkIfPlayerShouldDie();
                 }
-                if(sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top && sprite.getGlobalBounds().top + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width > enemy->sprite1.getGlobalBounds().left)
-                {
+                if (sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top &&
+                    sprite.getGlobalBounds().top + sprite.getGlobalBounds().width <
+                    enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                    sprite.getGlobalBounds().left <
+                    enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                    sprite.getGlobalBounds().left + sprite.getGlobalBounds().width >
+                    enemy->sprite1.getGlobalBounds().left) {
                     setPositionX(sprite.getGlobalBounds().left);
                     setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
 
-                    receiveDamage(playerHealth);
-
-                    checkIfPlayerShouldDie();
+                    enemy->setPosition(10000.f, 10000.f);
                 }
             }
-        }
+            }
+        else if (enemy->getID() == lol2) {
+                if (sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds())) {
+                    std::cout << enemy->getID() << std::endl;
+                    if (sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds())) {
+                        if (sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left &&
+                            sprite.getGlobalBounds().left + sprite.getGlobalBounds().width <
+                            enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                            sprite.getGlobalBounds().top <
+                            enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                            sprite.getGlobalBounds().top + sprite.getGlobalBounds().height >
+                            enemy->sprite1.getGlobalBounds().top) {
+
+                            std::cout << "right" << std::endl;
+
+                            setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                            setPositionY(sprite.getGlobalBounds().top);
+
+                            //receiveDamage(playerHealth, enemy->getdmg());
+                            //std::cout<<playerHealth<<std::endl;
+
+                            checkIfPlayerShouldDie();
+                        }
+                    }
+                    if (sprite.getGlobalBounds().left >
+                        enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width &&
+                        sprite.getGlobalBounds().left + sprite.getGlobalBounds().width <
+                        enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                        sprite.getGlobalBounds().top <
+                        enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                        sprite.getGlobalBounds().top + sprite.getGlobalBounds().height >
+                        enemy->sprite1.getGlobalBounds().top) {
+
+                        std::cout << "left" << std::endl;
+
+                        setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
+                        setPositionY(sprite.getGlobalBounds().top);
+
+                        //receiveDamage(playerHealth, enemy->getdmg());
+                       // std::cout<<playerHealth<<std::endl;
+
+                        checkIfPlayerShouldDie();
+                    }
+                    if (sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top &&
+                        sprite.getGlobalBounds().top + sprite.getGlobalBounds().width <
+                        enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                        sprite.getGlobalBounds().left <
+                        enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                        sprite.getGlobalBounds().left + sprite.getGlobalBounds().width >
+                        enemy->sprite1.getGlobalBounds().left) {
+                        setPositionX(sprite.getGlobalBounds().left);
+                        setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+
+                        enemy->setPosition(10000.f, 10000.f);
+                    }
+                }
+                } else if (enemy->getID() == lol3) {
+                    if (sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds())) {
+                        std::cout << enemy->getID() << std::endl;
+                        if (sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds())) {
+                            if (sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left &&
+                                sprite.getGlobalBounds().left + sprite.getGlobalBounds().width <
+                                enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                                sprite.getGlobalBounds().top <
+                                enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                                sprite.getGlobalBounds().top + sprite.getGlobalBounds().height >
+                                enemy->sprite1.getGlobalBounds().top) {
+
+                                std::cout << "right" << std::endl;
+
+                                setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                                setPositionY(sprite.getGlobalBounds().top);
+
+                                //receiveDamage(playerHealth, enemy->getdmg());
+                               // std::cout<<playerHealth<<std::endl;
+
+                                checkIfPlayerShouldDie();
+                            }
+                        }
+                        if (sprite.getGlobalBounds().left >
+                            enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width &&
+                            sprite.getGlobalBounds().left + sprite.getGlobalBounds().width <
+                            enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                            sprite.getGlobalBounds().top <
+                            enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                            sprite.getGlobalBounds().top + sprite.getGlobalBounds().height >
+                            enemy->sprite1.getGlobalBounds().top) {
+
+                            std::cout << "left" << std::endl;
+
+                            setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
+                            setPositionY(sprite.getGlobalBounds().top);
+
+                           // receiveDamage(playerHealth, enemy->getdmg());
+                            //std::cout<<playerHealth<<std::endl;
+
+                            checkIfPlayerShouldDie();
+                        }
+                        if (sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top &&
+                            sprite.getGlobalBounds().top + sprite.getGlobalBounds().width <
+                            enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height &&
+                            sprite.getGlobalBounds().left <
+                            enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width &&
+                            sprite.getGlobalBounds().left + sprite.getGlobalBounds().width >
+                            enemy->sprite1.getGlobalBounds().left) {
+                            setPositionX(sprite.getGlobalBounds().left);
+                            setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+
+                            enemy->setPosition(10000.f, 10000.f);
+                        }
+                    }
+                }
+            }
+            /*
+
+            if(reinterpret_cast<long>(enemy->getBase())==str1)
+            {
+                if(sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds()))
+                {
+                    if(sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+                    {
+                        velocity.x = 0.0f;
+                        std::cout << "right" << std::endl;
+
+                        setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                        setPositionY(sprite.getGlobalBounds().top);
+
+                        receiveDamage(playerHealth);
+
+                        checkIfPlayerShouldDie();
+                    }
+                    if(sprite.getGlobalBounds().left > enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+                    {
+                        velocity.x = 0.0f;
+                        std::cout << "left" << std::endl;
+
+                        setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
+                        setPositionY(sprite.getGlobalBounds().top);
+
+                        receiveDamage(playerHealth);
+
+                        checkIfPlayerShouldDie();
+                    }
+                    if(sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top && sprite.getGlobalBounds().top + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width > enemy->sprite1.getGlobalBounds().left)
+                    {
+                        setPositionX(sprite.getGlobalBounds().left);
+                        setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+
+                        enemy->setPosition(10000.f,10000.f);
+                    }
+                }
+            }
+            else
+            {
+                if(sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds()))
+                {
+                    if(sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+                    {
+                        velocity.x = 0.0f;
+
+                        setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                        setPositionY(sprite.getGlobalBounds().top);
+
+                        receiveDamage(playerHealth);
+
+                        checkIfPlayerShouldDie();
+                    }
+                    if(sprite.getGlobalBounds().left > enemy->sprite1.getGlobalBounds().left - enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().top + sprite.getGlobalBounds().height > enemy->sprite1.getGlobalBounds().top)
+                    {
+                        velocity.x = 0.0f;
+                        std::cout << "left" << std::endl;
+
+                        setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
+                        setPositionY(sprite.getGlobalBounds().top);
+
+                        receiveDamage(playerHealth);
+
+                        checkIfPlayerShouldDie();
+                    }
+                    if(sprite.getGlobalBounds().top < enemy->sprite1.getGlobalBounds().top && sprite.getGlobalBounds().top + sprite.getGlobalBounds().width < enemy->sprite1.getGlobalBounds().top + enemy->sprite1.getGlobalBounds().height && sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left + enemy->sprite1.getGlobalBounds().width && sprite.getGlobalBounds().left + sprite.getGlobalBounds().width > enemy->sprite1.getGlobalBounds().left)
+                    {
+                        setPositionX(sprite.getGlobalBounds().left);
+                        setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+
+                        receiveDamage(playerHealth);
+
+                        checkIfPlayerShouldDie();
+                    }
+                }
+            }
+            */
 
 
     }
-}
+
+
 
 #pragma endregion
 
@@ -373,8 +560,8 @@ void Player::jump() {
     }
 }
 
-void Player::receiveDamage(unsigned int& hp) {
-    hp -= 1;
+void Player::receiveDamage(unsigned int &hp,int dmg) {
+     hp -= dmg;
 }
 
 void Player::checkIfPlayerShouldDie() {

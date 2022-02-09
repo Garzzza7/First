@@ -130,7 +130,12 @@ void Enemy::setTilePosition(float x, float y) {
 sf::FloatRect Enemy::getEnemyBounds() {
     return this->base->getResourceBounds();
 }
-
+int Enemy::getID() {
+    return id;
+}
+int Enemy::getdmg() {
+    return damage;
+}
 
 //void Enemy::kill() {
   //  delete enemy;

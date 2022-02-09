@@ -8,6 +8,10 @@
 #include "Enemy.h"
 
 class PPlant: public Enemy {
+    int id{5};
+    int hp{2};
+    int damage{2};
+    float acceleration{0};
 
     sf::Sprite pplant;
 public:
@@ -24,6 +28,8 @@ public:
     void updateMovement() override;
 
     //sf::Vector2f GetPos() {return sprite.getPosition();};
+    int getID() override {return id;};
+    //int getdmg() override;
 
     void move(const float dir_x, const float dir_y) override;
     //void jump(const float dir_x, const float dir_y);

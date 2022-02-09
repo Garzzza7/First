@@ -25,15 +25,19 @@ void ResourceRegistry::initObjects() {
     auto* groundTile = new Resource(TILE, relativeTexturePath + "Ground.png", basicRect);
     auto* brickTile = new Resource(TILE, relativeTexturePath + "BrickBlockBrown.png", basicRect);
     auto* blockTile = new Resource(TILE, relativeTexturePath + "Block.png", basicRect);
+    auto* coinTile = new Resource(ENTITY, relativeTexturePath + "CoinForBlueBG.gif", basicRect);
     auto* goombaEntity = new Resource(ENTITY, relativeTexturePath + "LittleGoomba.gif", basicRect);
     auto* pplantEntity = new Resource(ENTITY, relativeTexturePath + "PiranhaPlant.gif", basicRect);
+
 
     resourceMap.insert({AIR_TILE_ID, airTile});
     resourceMap.insert({GROUND_TILE_ID, groundTile});
     resourceMap.insert({BRICK_TILE_ID, brickTile});
     resourceMap.insert({BLOCK_TILE_ID, blockTile});
+    resourceMap.insert({COIN_ENTITY_ID, coinTile});
     resourceMap.insert({GOOMBA_ENTITY_ID, goombaEntity});
     resourceMap.insert({PPLANT_ENTITY_ID, pplantEntity});
+
 }
 
 void ResourceRegistry::deleteObjects() {

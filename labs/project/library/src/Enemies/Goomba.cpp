@@ -1,6 +1,6 @@
 #include "Enemies/Goomba.h"
 
-Goomba::Goomba(Resource * base) : Enemy(base, 1, 3, 4) {
+Goomba::Goomba(Resource * base) : Enemy(base, 1, 1, 4) {
     srand((unsigned) time(0));
     int randomNumber1=1 + (rand() % 6);
     int randomNumber2=1 + (rand() % 2);
@@ -39,3 +39,8 @@ void Goomba::move(const float dir_x, const float dir_y) {
 
     }
 }
+/*
+int Enemy::getdmg() {
+    return damage;
+}
+ */
