@@ -6,11 +6,12 @@
 #include "Resources/ResourceRegistry.h"
 #include "Resources/Resource.h"
 #include "Tiles/Tile.h"
+#include "Entities/Strategies/CollisionStrategy.h"
 
 class Entity{
 
     Resource * base;
-    //virtual CollisionStrategy strategy = 0;
+    CollisionStrategy * strategy;
     int id;
 
     int hp;
@@ -33,7 +34,8 @@ protected:
     bool flipMovement{false};
 
 public:
-    Entity(Resource * base, int hp, int damage, float acceleration);
+    Entity(Resource *base, int hp, int damage, float acceleration, CollisionStrategy * strategy);
+    ~Entity();
     //sf::Event lol;
     //Update functions run every frame.
     virtual void update();
@@ -61,7 +63,7 @@ public:
 
     void setTilePosition(float x, float y);
 
-    void collisionwithmario();
+    void performCollisionStrategy(int data);
 
     Resource * getBase(){ return base; };
 

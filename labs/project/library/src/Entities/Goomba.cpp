@@ -1,6 +1,6 @@
 #include "Entities/Goomba.h"
 
-Goomba::Goomba(Resource * base) : Entity(base, 1, 1, 4) {
+Goomba::Goomba(Resource * base) : Entity(base, 1, 1, 4, new StrategyDamagePlayer) {
     srand((unsigned) time(0));
     int randomNumber1=1 + (rand() % 6);
     int randomNumber2=1 + (rand() % 2);

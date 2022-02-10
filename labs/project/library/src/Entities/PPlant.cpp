@@ -1,6 +1,6 @@
 #include "Entities/PPlant.h"
 
-PPlant::PPlant(Resource * base) : Entity(base, 2, 2, 0) {
+PPlant::PPlant(Resource * base) : Entity(base, 2, 2, 0, new StrategyDamagePlayer) {
 
 }
 

@@ -3,9 +3,9 @@
 
 #include "CollisionStrategy.h"
 
-class StrategyDamagedPlayer : public CollisionStrategy{
+class StrategyDamagePlayer : public CollisionStrategy{
 public:
-    void performCollisionStrategy(int damage) const override;
+    void performCollisionStrategy(int data) const override;
 };
 
 #endif //OOPPROJECT_STRATEGYDAMAGEPLAYER_H

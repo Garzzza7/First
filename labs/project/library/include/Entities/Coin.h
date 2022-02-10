@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
+#include "Entities/Strategies/StrategyChangeLevel.h"
 #include <ctime>
 
 

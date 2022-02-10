@@ -5,7 +5,7 @@
 
 class StrategyChangeLevel : public CollisionStrategy{
 public:
-    void performCollisionStrategy(int levelId) const override;
+    void performCollisionStrategy(int data) const override;
 };
 
 #endif //OOPPROJECT_STRATEGYCHANGELEVEL_H

@@ -1,7 +1,7 @@
 #include "Entities/Strategies/StrategyChangeLevel.h"
 #include "Game.h"
 
-void StrategyChangeLevel::performCollisionStrategy(int levelId) const {
+void StrategyChangeLevel::performCollisionStrategy(int data) const {
     Game * game = Game::GetInstance();
-    game->changeLevel(levelId);
+    game->changeLevel(data);
 }

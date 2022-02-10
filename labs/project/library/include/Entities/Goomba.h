@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
+#include "Entities/Strategies/StrategyDamagePlayer.h"
 #include <ctime>
 
 //template<class T>

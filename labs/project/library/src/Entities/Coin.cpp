@@ -1,6 +1,6 @@
 #include "Entities/Coin.h"
 
-Coin::Coin(Resource * base) : Entity(base, 0, 0, 0) {
+Coin::Coin(Resource * base) : Entity(base, 0, 0, 0, new StrategyChangeLevel) {
 
 }
 Coin::~Coin() {

@@ -1,7 +1,7 @@
 #include "Entities/Strategies/StrategyDamagePlayer.h"
 #include "Game.h"
 
-void StrategyDamagedPlayer::performCollisionStrategy(int damage) const {
+void StrategyDamagePlayer::performCollisionStrategy(int data) const {
     Game * game = Game::GetInstance();
-    game->player->receiveDamage(damage);
+    game->player->receiveDamage(data);
 }

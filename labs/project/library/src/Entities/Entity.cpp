@@ -1,13 +1,18 @@
 #include "Entities/Entity.h"
 
-Entity::Entity(Resource * base, int hp, int damage, float acceleration) {
+Entity::Entity(Resource *base, int hp, int damage, float acceleration, CollisionStrategy * strategy) {
     this->base = base;
     this->hp = hp;
     this->damage = damage;
     this->acceleration = acceleration;
+    this->strategy = strategy;
 
     this->sprite1.setTexture(Entity::getBase()->getTexture());
     this->sprite1.setOrigin(this->sprite1.getTextureRect().width/2, this->sprite1.getTextureRect().height);
+}
+
+Entity::~Entity() {
+    delete this->strategy;
 }
 
 void Entity::render(sf::RenderTarget &target){
@@ -101,9 +106,9 @@ void Entity::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) 
 void Entity::setPositionX(float x) {
     this->sprite1.setPosition(x, this->sprite1.getPosition().y);
 }
-void Entity::collisionwithmario() {
+void Entity::performCollisionStrategy(int data) {
 
-
+    this->strategy->performCollisionStrategy(data);
 }
 
 void Entity::setPositionY(float y) {

@@ -64,6 +64,7 @@ public:
     bool isRunning();
 
     Level * getCurrentLevel();
+    int getCurrentLevelId() {return currentLevel;};
     void changeLevel(int levelId);
 
     void collisionEnemy();

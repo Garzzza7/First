@@ -6,6 +6,7 @@
 #define OOPPROJECT_PPLANT_H
 
 #include "Entity.h"
+#include "Strategies/StrategyDamagePlayer.h"
 
 class PPlant : public Entity {
     int id{5};
