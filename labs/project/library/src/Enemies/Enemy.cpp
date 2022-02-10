@@ -28,20 +28,19 @@ void Enemy::updatePhysics() {
 }
 //void Enemy::updateMovement() {}
 
-void Enemy::checkCollisions(Tile **allTiles, int levelWidth, int levelLength) {
+void Enemy::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) {
 
     //Get the tile preset that is not solid:
     ResourceRegistry * tileRegistry = ResourceRegistry::GetInstance();
     Resource * airPreset = tileRegistry->getPresetById(0);
 
-    for (int i = 0; i < levelWidth; ++i) {
+    for (int i = 0; i < levelHeight; ++i) {
         for (int j = 0; j < levelLength; ++j) {
             sf::FloatRect tileBounds = allTiles[i][j].getGlobalBounds();
             //Check if player intersects with any tile in the level
 
+            if(tileBounds.intersects(this->sprite1.getGlobalBounds()) && allTiles[i][j].getTilePreset() != airPreset){
 
-            if(tileBounds.intersects(this->sprite1.getGlobalBounds()) && allTiles[i][j].getTilePreset() != airPreset)
-            {
                 float tileLeft = tileBounds.left;
                 float tileRight = tileBounds.left + tileBounds.width;
                 float tileTop = tileBounds.top;
@@ -95,7 +94,6 @@ void Enemy::checkCollisions(Tile **allTiles, int levelWidth, int levelLength) {
             }
         }
     }
-
 }
 
 //Private setters:
@@ -123,8 +121,8 @@ void Enemy::setPosition(sf::Vector2f position) {
 }
 
 void Enemy::setTilePosition(float x, float y) {
-    ResourceRegistry * objectRegistry = ResourceRegistry::GetInstance();
-    this->sprite1.setPosition(x * objectRegistry->getTileSize(), y * objectRegistry->getTileSize());
+    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
+    this->sprite1.setPosition(x * (float)resourceRegistry->getTileSize(), y * (float)resourceRegistry->getTileSize());
 }
 
 sf::FloatRect Enemy::getEnemyBounds() {
@@ -133,7 +131,7 @@ sf::FloatRect Enemy::getEnemyBounds() {
 int Enemy::getID() {
     return id;
 }
-int Enemy::getdmg() {
+int Enemy::getDamage() {
     return damage;
 }
 

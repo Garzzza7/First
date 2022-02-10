@@ -18,7 +18,7 @@ public:
     void updatePhysics() override;
     void updateMovement() override;
     void move(const float dir_x, const float dir_y) override;
-    //int getdmg() override;
+    //int getDamage() override;
 };
 
 #endif //OOPPROJECT_COIN_H

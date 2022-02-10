@@ -32,7 +32,7 @@ public:
     void move(const float dir_x,const float dir_y) override;
     //void jump(const float dir_x, const float dir_y);
     //void stop(const float dir_x, const float dir_y);
-    //int getdmg() override;
+    //int getDamage() override;
 
     //void checkCollisions(sf::RenderTarget & target);
 

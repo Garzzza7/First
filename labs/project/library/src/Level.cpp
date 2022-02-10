@@ -9,8 +9,8 @@ Level::Level(const std::string fileName) {
     std::fstream levelFile;
     levelFile.open( "../../levels/" + fileName, std::ios::in);
 
-    if(levelFile.is_open())
-    {
+    if(levelFile.is_open()){
+
         int i = 0;
         std::string str;
         while(std::getline(levelFile, str)){
@@ -21,23 +21,25 @@ Level::Level(const std::string fileName) {
                 for(char& c : str) {
                     j++;
                     if(c == ';' && !done){
-                        width = stoi(x);
+                        length = stoi(x);
                         done = true;
                         x = "";
                         continue;
                     }
                     if(c == ';'){
-                        length = stoi(x);
+                        height = stoi(x);
                         initArray();
                         continue;
                     }
                     x += c;
                 }
+                initBackgroundTexture();
+
                 i++;
                 continue;
             }
 
-            //Start assigning tiles
+            //Start assigning tiles.
             int j = 0;
             for(char c : str) {
 
@@ -45,15 +47,15 @@ Level::Level(const std::string fileName) {
 
                 if(resourceRegistry->getPresetById(num)->getType() == TILE) {
                     Tile *newTile = new Tile(resourceRegistry->getPresetById(num));
-                    tiles[j][i - 1] = *newTile;
+                    tiles[i - 1][j] = *newTile;
                 }else if(resourceRegistry->getPresetById(num)->getType() == ENTITY){
                     Tile *newTile = new Tile(resourceRegistry->getPresetById(0));
-                    tiles[j][i - 1] = *newTile;
+                    tiles[i - 1][j] = *newTile;
 
                     Enemy * enemy = enemyFactory->CreateEnemy(num);
 
 
-                    enemy->setTilePosition(j, i-1);
+                    enemy->setTilePosition(j, i);
 
                     enemies.push_back(enemy);
                 }
@@ -71,26 +73,49 @@ Level::Level(const std::string fileName) {
     initTilePositions();
 }
 
-void Level::initArray() {
-    tiles = new Tile* [width];
+void Level::initBackgroundTexture() {
 
-    for (int i=0; i<width; i++)
+    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
+
+    backgroundTexture.loadFromFile(resourceRegistry->relativeTexturePath + "background.png");
+    auto backgroundSprite = std::make_shared<sf::Sprite>(backgroundTexture);
+    backgroundSprite->setPosition(0.0F,0.f);
+    backgroundSprite->setScale(0.22f,0.22f);
+
+    backgrounds.push_back(backgroundSprite);
+    for(int i = 1; i * backgroundSprite->getGlobalBounds().width < this->getLevelLength() * resourceRegistry->tileSize; ++i){
+        auto newSprite = std::make_shared<sf::Sprite>(backgroundTexture);
+        newSprite->setPosition(i * backgroundSprite->getGlobalBounds().width, 0.0f);
+        newSprite->setScale(0.22f, 0.22f);
+        backgrounds.push_back(newSprite);
+    }
+}
+
+void Level::initArray() {
+    tiles = new Tile* [height];
+
+    for (int i=0; i < height; ++i)
     {
         tiles[i] = new Tile[length];
     }
 }
 
 void Level::initTilePositions() {
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < length; ++j) {
-            tiles[i][j].setTilePosition(i, j);
+    for(int i = 0; i < height; ++i) {
+        for(int j = 0; j < length; ++j){
+            tiles[i][j].setTilePosition(j, i);
         }
     }
 }
 
 void Level::render(sf::RenderTarget & renderTarget) {
-    for (int i = 0; i < width; ++i) {
-        for (int j = 0; j < length; ++j) {
+
+    for(auto background : backgrounds){
+        renderTarget.draw(*background);
+    }
+
+    for(int i = 0; i < height; ++i) {
+        for(int j = 0; j < length; ++j){
             tiles[i][j].render(renderTarget);
         }
     }
@@ -103,38 +128,15 @@ void Level::render(sf::RenderTarget & renderTarget) {
 void Level::update() {
     for(auto enemy : enemies){
         enemy->update();
-        enemy->checkCollisions(this->tiles, this->width, this->length);
+        enemy->checkCollisions(this->tiles, this->height, this->length);
     }
 }
 
 Level::~Level() {
-    for(int i=0;i<width;i++)    //To delete the inner arrays
+    for(int i=0; i < height; i++)    //To delete the inner arrays
         delete [] tiles[i];
     delete [] tiles;
     for(auto enemy : enemies) {
         delete enemy;
     }
-}
-
-void Level::renderEnemy(sf::RenderTarget &target) {
-
-    //target.draw(this->enemies);
-
-}
-
-Tile** Level::getAllTiles() {
-
-    return tiles;
-}
-
-int Level::getLevelWidth() {
-    return width;
-}
-
-int Level::getLevelLength() {
-    return length;
-}
-
-void Level::collisionEnemy() {
-
 }

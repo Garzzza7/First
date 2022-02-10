@@ -31,8 +31,10 @@ class Game{
 
     sf::RectangleShape hitbox;
 
-
     std::vector<Level*> levels;
+
+    //Private methods:
+    void applyCorrectScreenCenter();
 
 protected:
     //The constructor and destructor are protected to prevent calls with "new/delete".
@@ -52,7 +54,7 @@ public:
     void update();
     void render();
 
-    void screencollision();
+    void screenCollision();
 
     void pollEvents();
 

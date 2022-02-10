@@ -19,9 +19,14 @@ class Level{
     std::unique_ptr<EnemyFactory> enemyFactory;
     std::vector<Enemy*> enemies;
 
+    sf::Texture backgroundTexture;
+    std::vector<std::shared_ptr<sf::Sprite>> backgrounds;
 
+    int height{10};
     int length{10};
-    int width{10};
+
+    //Private methods:
+    void initBackgroundTexture();
 
 public:
 
@@ -34,15 +39,11 @@ public:
 
     void render(sf::RenderTarget & renderTarget);
 
-    Tile** getAllTiles();
-    int getLevelWidth();
-    int getLevelLength();
+    Tile** getAllTiles(){return tiles;};
+    int getLevelHeight() {return height;};
+    int getLevelLength() {return length;};
 
     void update();
-    void renderEnemy(sf::RenderTarget & target);
-
-    void collisionEnemy();
-
 };
 
 #endif //OOPPROJECT_LEVEL_H

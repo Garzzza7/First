@@ -32,6 +32,8 @@ void Player::update(sf::RenderTarget & target){
     this->updateMovement();
 
     this->updateAnimations();
+
+    this->updateFallDamage();
 }
 
 void Player::updatePhysics() {
@@ -81,6 +83,18 @@ void Player::updateMovement() {
 void Player::updateAnimations() {
     if(std::abs(this->velocity.x) > 0.1f && onGround) {
         this->gif.update(this->sprite);
+    }
+}
+
+void Player::updateFallDamage() {
+
+    Game * game = Game::GetInstance();
+    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
+
+    if(this->getPos().y > (float)(game->getCurrentLevel()->height * resourceRegistry->tileSize) + 16.0f){
+
+        this->playerHealth = 0;
+        checkIfPlayerShouldDie();
     }
 }
 
@@ -154,7 +168,7 @@ sf::Vector2f Player::getCollisionIntersection(sf::FloatRect nextPos) {
 
     sf::Vector2f vectorSum{0,0};
 
-    for (int i = 0; i < currentLevel->getLevelWidth(); ++i) {
+    for (int i = 0; i < currentLevel->getLevelHeight(); ++i) {
         for (int j = 0; j < currentLevel->getLevelLength(); ++j) {
             if (allTiles[i][j].getTilePreset() == airPreset) continue;
             sf::FloatRect tileBounds = allTiles[i][j].getGlobalBounds();
@@ -217,6 +231,15 @@ sf::Vector2f Player::getCollisionIntersection(sf::FloatRect nextPos) {
             }
         }
     }
+
+    //Collision with level borders:
+
+    if(nextPos.left + nextPos.width > (float)currentLevel->getLevelLength() * tileRegistry->tileSize){
+        vectorSum.x = -(float)currentLevel->getLevelLength() * (float)tileRegistry->tileSize +  nextPos.left + nextPos.width;
+    }
+    else if(nextPos.left < 0){
+        vectorSum.x = nextPos.left;
+    }
     return vectorSum;
 }
 
@@ -263,7 +286,7 @@ void Player::enemyCollisions() {
                         setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
                         setPositionY(sprite.getGlobalBounds().top);
 
-                        //receiveDamage(playerHealth, enemy->getdmg());
+                        //receiveDamage(playerHealth, enemy->getDamage());
                        // std::cout<<playerHealth<<std::endl;
 
 
@@ -284,7 +307,7 @@ void Player::enemyCollisions() {
                     setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
                     setPositionY(sprite.getGlobalBounds().top);
 
-                    //receiveDamage(playerHealth, enemy->getdmg());
+                    //receiveDamage(playerHealth, enemy->getDamage());
                     //std::cout<<playerHealth<<std::endl;
 
                     checkIfPlayerShouldDie();
@@ -321,7 +344,7 @@ void Player::enemyCollisions() {
                             setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
                             setPositionY(sprite.getGlobalBounds().top);
 
-                            //receiveDamage(playerHealth, enemy->getdmg());
+                            //receiveDamage(playerHealth, enemy->getDamage());
                             //std::cout<<playerHealth<<std::endl;
 
                             checkIfPlayerShouldDie();
@@ -341,7 +364,7 @@ void Player::enemyCollisions() {
                         setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
                         setPositionY(sprite.getGlobalBounds().top);
 
-                        //receiveDamage(playerHealth, enemy->getdmg());
+                        //receiveDamage(playerHealth, enemy->getDamage());
                        // std::cout<<playerHealth<<std::endl;
 
                         checkIfPlayerShouldDie();
@@ -378,7 +401,7 @@ void Player::enemyCollisions() {
                                 setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
                                 setPositionY(sprite.getGlobalBounds().top);
 
-                                //receiveDamage(playerHealth, enemy->getdmg());
+                                //receiveDamage(playerHealth, enemy->getDamage());
                                // std::cout<<playerHealth<<std::endl;
                                 //game->setN();
                                 setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
@@ -410,7 +433,7 @@ void Player::enemyCollisions() {
                             setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
                             setPositionY(sprite.getGlobalBounds().top);
 
-                           // receiveDamage(playerHealth, enemy->getdmg());
+                           // receiveDamage(playerHealth, enemy->getDamage());
                             //std::cout<<playerHealth<<std::endl;
 
                             checkIfPlayerShouldDie();
@@ -589,8 +612,8 @@ void Player::receiveDamage(unsigned int &hp,int dmg) {
 
 void Player::checkIfPlayerShouldDie() {
     if(getHP() == 0){
-        setPositionX(spawnPointPosX);
-        setPositionY(spawnPointPosY);
+        setPositionX((float)spawnPointPosX);
+        setPositionY((float)spawnPointPosY);
         playerHealth += 5;
     }
 }
