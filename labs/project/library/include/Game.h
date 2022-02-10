@@ -29,7 +29,10 @@ class Game{
 
     sf::RectangleShape hitbox;
 
-    std::vector<Level*> levels;
+
+        std::vector<Level*> levels;
+
+
 
     //Private methods:
     void applyCorrectScreenCenter();

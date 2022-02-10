@@ -17,7 +17,8 @@ class Level{
     Tile ** tiles;
 
     std::unique_ptr<EntityFactory> enemyFactory;
-    std::vector<Entity*> enemies;
+
+    std::vector<Entity *> enemies;
 
     sf::Texture backgroundTexture;
     std::vector<std::shared_ptr<sf::Sprite>> backgrounds;

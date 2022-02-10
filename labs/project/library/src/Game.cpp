@@ -56,18 +56,23 @@ void Game::initLevels() {
 
 //Rendering code:
 void Game::render() {
-    this->window.clear();
 
-    this->levels.at(currentLevel)->render(this->window);
-    this->player->render(this->window);
 
-    //The screen is 21 blocks wide
-    //and about 17 block tall.
-    applyCorrectScreenCenter();
+        this->window.clear();
 
-    this->window.setView(view);
+        this->levels.at(currentLevel)->render(this->window);
+        this->player->CoinTouched();
+        this->player->render(this->window);
 
-    this->window.display();
+        //The screen is 21 blocks wide
+        //and about 17 block tall.
+        applyCorrectScreenCenter();
+
+        this->window.setView(view);
+
+        this->window.display();
+
+
 }
 
 void Game::applyCorrectScreenCenter() {
@@ -129,7 +134,7 @@ void Game::pollEvents() {
                 running = false;
                 break;
             case sf::Event::KeyPressed:
-                if (this->ev.key.code == sf::Keyboard::Escape) {
+                if (this->ev.key.code == sf::Keyboard::Escape || currentLevel>levels.size()) {
                     this->window.close();
                     running = false;
                 }

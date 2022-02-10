@@ -65,7 +65,7 @@ public:
     //Catching events before update:
     void catchEvents(sf::Event event);
 
-    bool CoinTouched(){return isTourched;};
+    void CoinTouched(){ isTourched=false;};
 
     //Update functions run every frame.
     void update(sf::RenderTarget & target);
