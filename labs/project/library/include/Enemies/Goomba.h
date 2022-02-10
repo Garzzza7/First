@@ -5,11 +5,12 @@
 #include "Enemy.h"
 #include <ctime>
 
+//template<class T>
 class Goomba : public Enemy{
 protected:
     int hp{1};
     int damage{1};
-    float acceleration;
+    float acceleration{6};
     int id{4};
 
 public:
@@ -28,7 +29,7 @@ public:
 
     //sf::Vector2f GetPos() {return sprite.getPosition();};
 
-    void move(const float dir_x, const float dir_y) override;
+    void move(const float dir_x,const float dir_y) override;
     //void jump(const float dir_x, const float dir_y);
     //void stop(const float dir_x, const float dir_y);
     //int getdmg() override;

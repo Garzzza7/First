@@ -14,14 +14,10 @@
 
 BOOST_AUTO_TEST_SUITE(PlayerTest)
     BOOST_AUTO_TEST_CASE(test1) {
-
+        Player * player;
+        BOOST_REQUIRE_EQUAL(player->getHP(), 5);
     }
-    BOOST_AUTO_TEST_CASE(test2) {
 
-    }
-    BOOST_AUTO_TEST_CASE(test3) {
-
-    }
 
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -234,6 +234,7 @@ void Player::enemyCollisions() {
     for (auto  enemy : level->enemies)
     {
 
+
         //std::cout<<enemy->getID()<<std::endl;
 
         long str1{(long) "0x555670ea4820"};
@@ -314,6 +315,7 @@ void Player::enemyCollisions() {
                             sprite.getGlobalBounds().top + sprite.getGlobalBounds().height >
                             enemy->sprite1.getGlobalBounds().top) {
 
+
                             std::cout << "right" << std::endl;
 
                             setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
@@ -360,6 +362,8 @@ void Player::enemyCollisions() {
                 } else if (enemy->getID() == lol3) {
                     if (sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds())) {
                         std::cout << enemy->getID() << std::endl;
+                        isTourched=true;
+
                         if (sprite.getGlobalBounds().intersects(enemy->sprite1.getGlobalBounds())) {
                             if (sprite.getGlobalBounds().left < enemy->sprite1.getGlobalBounds().left &&
                                 sprite.getGlobalBounds().left + sprite.getGlobalBounds().width <
@@ -376,8 +380,14 @@ void Player::enemyCollisions() {
 
                                 //receiveDamage(playerHealth, enemy->getdmg());
                                // std::cout<<playerHealth<<std::endl;
-
+                                //game->setN();
+                                setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                                setPositionY(sprite.getGlobalBounds().top);
                                 checkIfPlayerShouldDie();
+                                level->enemies.erase(level->enemies.begin());
+                                //isTourched=true;
+
+                              //  isTourched=false;
                             }
                         }
                         if (sprite.getGlobalBounds().left >
@@ -392,6 +402,12 @@ void Player::enemyCollisions() {
                             std::cout << "left" << std::endl;
 
                             setPositionX(enemy->sprite1.getGlobalBounds().left + 100.f);
+                            setPositionY(sprite.getGlobalBounds().top);
+                            //game->setN();
+                           // isTourched=true;
+                            //isTourched=false;
+                            level->enemies.erase(level->enemies.begin());
+                            setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
                             setPositionY(sprite.getGlobalBounds().top);
 
                            // receiveDamage(playerHealth, enemy->getdmg());
@@ -408,6 +424,13 @@ void Player::enemyCollisions() {
                             enemy->sprite1.getGlobalBounds().left) {
                             setPositionX(sprite.getGlobalBounds().left);
                             setPositionY(enemy->sprite1.getGlobalBounds().top - sprite.getGlobalBounds().height);
+
+                           // isTourched=true;
+                            //isTourched=false;
+                            level->enemies.erase(level->enemies.begin());
+                            //game->setN();
+                            setPositionX(enemy->sprite1.getGlobalBounds().left - sprite.getGlobalBounds().width);
+                            setPositionY(sprite.getGlobalBounds().top);
 
                             enemy->setPosition(10000.f, 10000.f);
                         }
@@ -571,5 +594,6 @@ void Player::checkIfPlayerShouldDie() {
         playerHealth += 5;
     }
 }
+
 
 #pragma endregion

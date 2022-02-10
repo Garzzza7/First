@@ -15,6 +15,8 @@ class Game{
 
     //The rest of variables:
 
+    int n{0};
+
     Player * player;
 
     bool running;
@@ -62,6 +64,10 @@ public:
     Level * getCurrentLevel();
 
     void collisionEnemy();
+
+    int nchange() {return n;};
+
+
 };
 
 #endif //OOPPROJECT_GAME_H

@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Resources/ResourceRegistry.h"
+#include <bits/stdc++.h>
 
 //Definitions of static classes.
 Game * Game::instance{nullptr};
@@ -32,6 +33,7 @@ Game::Game() {
 
     initWindow();
     initLevels();
+
     running = true;
 }
 
@@ -59,30 +61,78 @@ void Game::initLevels() {
     Level * level1 = new Level("level_1");
 
     levels.push_back(level1);
+   // levels.push_back(level2);
+   // levels.push_back(level3);
+
+
+
 }
 
 //Rendering code:
 void Game::render() {
-    this->window.clear();
-    this->window.draw(BG);
-    this->window.draw(hitbox);
+    Level * level2 = new Level("level_2");
+    Level * level3 = new Level("level_3");
+    switch (n)
+    {
+        case 0:
+            this->window.clear();
+            this->window.draw(BG);
+            this->window.draw(hitbox);
+            this->player->render(this->window);
+            this->levels.at(0)->render(this->window);
 
-    this->player->render(this->window);
-    this->levels.at(0)->render(this->window);
+            this->view.setCenter(this->player->getPos()-sf::Vector2f(0.0f,101.0f));
+            if(player->getPos().x<165.f) view.setCenter(sf::Vector2(165.f,player->getPos().y-101.f));
+            if(player->getPos().x>1435.f) view.setCenter(sf::Vector2(1435.f,player->getPos().y-101.f));
+            if(player->getPos().y<200.f) view.setCenter(sf::Vector2(player->getPos().x,100.f));
+            this->window.setView(view);
+            this->window.display();
+            break;
+        case 1:
+            this->levels.clear();
+            levels.push_back(level2);
+            this->window.clear();
+            this->window.draw(BG);
+            this->window.draw(hitbox);
+            this->player->render(this->window);
+            this->levels.at(0)->render(this->window);
+
+            this->view.setCenter(this->player->getPos()-sf::Vector2f(0.0f,101.0f));
+            if(player->getPos().x<165.f) view.setCenter(sf::Vector2(165.f,player->getPos().y-101.f));
+            if(player->getPos().x>1435.f) view.setCenter(sf::Vector2(1435.f,player->getPos().y-101.f));
+            if(player->getPos().y<200.f) view.setCenter(sf::Vector2(player->getPos().x,100.f));
+            this->window.setView(view);
+            this->window.display();
+            break;
+        case 2:
+            this->levels.clear();
+            levels.push_back(level3);
+            this->window.clear();
+            this->window.draw(BG);
+            this->window.draw(hitbox);
+            this->player->render(this->window);
+            this->levels.at(0)->render(this->window);
+
+            this->view.setCenter(this->player->getPos()-sf::Vector2f(0.0f,101.0f));
+            if(player->getPos().x<165.f) view.setCenter(sf::Vector2(165.f,player->getPos().y-101.f));
+            if(player->getPos().x>1435.f) view.setCenter(sf::Vector2(1435.f,player->getPos().y-101.f));
+            if(player->getPos().y<200.f) view.setCenter(sf::Vector2(player->getPos().x,100.f));
+            this->window.setView(view);
+            this->window.display();
+            break;
+        default:
+            this->window.close();
+            running = false;
+    }
 
 
 
-    this->view.setCenter(this->player->getPos()-sf::Vector2f(0.0f,101.0f));
-    if(player->getPos().x<165.f) view.setCenter(sf::Vector2(165.f,player->getPos().y-101.f));
-    if(player->getPos().x>1435.f) view.setCenter(sf::Vector2(1435.f,player->getPos().y-101.f));
-    if(player->getPos().y<200.f) view.setCenter(sf::Vector2(player->getPos().x,100.f));
-    this->window.setView(view);
 
-    this->window.display();
 }
 
 //Code that runs every frame of the game:
 void Game::update() {
+
 
     this->pollEvents();
 

@@ -32,7 +32,7 @@ void Goomba::updateMovement() {
         this->move(1,0);
 
 }
-void Goomba::move(const float dir_x, const float dir_y) {
+void Goomba::move(const float dir_x,const float dir_y) {
     this->velocity.x += dir_x * acceleration;
     if (std::abs(this->velocity.x) > this->maxVelocity) {
         this->velocity.x = this->maxVelocity * ((this->velocity.x < 0.f) ? -1.f : 1.f);

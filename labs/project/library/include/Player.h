@@ -8,7 +8,7 @@
 #include "AnimatedGif.h"
 #include "Level.h"
 #include "Enemies/Enemy.h"
-
+//template<class T>
 class Player{
 
     sf::Sprite sprite;
@@ -27,7 +27,7 @@ class Player{
     bool goingLeft{false};
     bool goingToJump{false};
 
-     unsigned int playerHealth{5};
+     unsigned int playerHealth;
 
     bool onGround{false};
     unsigned jumpCount{0};
@@ -56,6 +56,8 @@ class Player{
     float maxVelocity{3.0f};
     float friction{0.5f};
 
+    bool isTourched{false};
+
 public:
 
     Player(int x , int y);
@@ -65,6 +67,8 @@ public:
 
     //Catching events before update:
     void catchEvents(sf::Event event);
+
+    bool CoinTouched(){return isTourched;};
 
     //Update functions run every frame.
     void update(sf::RenderTarget & target);
