@@ -146,6 +146,12 @@ bool Game::isRunning() {
 Level *Game::getCurrentLevel() {
     return levels.at(this->currentLevel);
 }
+
+void Game::changeLevel(int levelId) {
+    currentLevel = levelId;
+    this->player->setPlayerPosition(300,300);
+}
+
 void Game::screenCollision() {
 
 }

@@ -6,10 +6,9 @@
 #include <ctime>
 
 
-class Coin:public Entity{
+class Coin : public Entity{
 private:
-int id{6};
-
+    int id{6};
 
 public:
     Coin(Resource * base);

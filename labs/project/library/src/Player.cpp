@@ -606,8 +606,16 @@ void Player::jump() {
     }
 }
 
-void Player::receiveDamage(unsigned int &hp,int dmg) {
-     hp -= dmg;
+void Player::receiveDamage(int dmg) {
+     playerHealth -= dmg;
+}
+
+void Player::setPlayerPosition(const sf::Vector2f position) {
+    this->sprite.setPosition(position);
+}
+
+void Player::setPlayerPosition(const int x, const int y) {
+    this->sprite.setPosition(x, y);
 }
 
 void Player::checkIfPlayerShouldDie() {

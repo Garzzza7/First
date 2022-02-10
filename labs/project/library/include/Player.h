@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include "Resources/ResourceRegistry.h"
 #include "AnimatedGif.h"
 #include "Level.h"
@@ -44,7 +44,6 @@ class Player{
 
     void setOnGround(bool onGround);
 
-    void receiveDamage(unsigned int &hp,int dmg);
     void checkIfPlayerShouldDie();
 
     //Physics:
@@ -78,12 +77,17 @@ public:
     //Getters:
     sf::FloatRect getPlayerBounds() {return this->sprite.getGlobalBounds();};
     sf::Vector2f getPos() {return sprite.getPosition();};
-     unsigned int getHP()  {return playerHealth;};
+    unsigned int getHP()  {return playerHealth;};
 
     //Collisions:
     sf::Vector2f getCollisionIntersection(sf::FloatRect nextPos);
     void checkCollisions();
     void enemyCollisions();
+
+    void setPlayerPosition(const sf::Vector2f position);
+    void setPlayerPosition(const int x, const int y);
+
+    void receiveDamage(int dmg);
 
 };
 

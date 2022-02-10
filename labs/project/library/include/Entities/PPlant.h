@@ -7,7 +7,7 @@
 
 #include "Entity.h"
 
-class PPlant: public Entity {
+class PPlant : public Entity {
     int id{5};
     int hp{2};
     int damage{2};

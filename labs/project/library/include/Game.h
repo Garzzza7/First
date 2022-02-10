@@ -17,8 +17,6 @@ class Game{
 
     int n{0};
 
-    Player * player;
-
     bool running;
     int currentLevel{0};
 
@@ -42,6 +40,8 @@ protected:
     ~Game();
 public:
 
+    Player * player;
+
     //Singleton functionality.
     //Deletes the possibility to clone the game class.
     Game(Game &other) = delete;
@@ -64,6 +64,7 @@ public:
     bool isRunning();
 
     Level * getCurrentLevel();
+    void changeLevel(int levelId);
 
     void collisionEnemy();
 

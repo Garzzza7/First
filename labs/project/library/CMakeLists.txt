@@ -11,7 +11,14 @@ set(SOURCE_FILES
         include/Entities/Entity.h src/Entities/Entity.cpp
         include/Entities/Goomba.h src/Entities/Goomba.cpp
         include/Entities/PPlant.h src/Entities/PPlant.cpp
-        include/Entities/EntityFactory.h src/Entities/EntityFactory.cpp src/Entities/Coin.cpp include/Entities/Coin.h)
+        include/Entities/EntityFactory.h src/Entities/EntityFactory.cpp
+        src/Entities/Coin.cpp include/Entities/Coin.h
+        include/Entities/Strategies/CollisionStrategy.h
+        include/Entities/Strategies/StrategyDamagePlayer.h
+        include/Entities/Strategies/StrategyChangeLevel.h
+        src/Entities/Strategies/CollisionStrategy.cpp
+        src/Entities/Strategies/StrategyDamagePlayer.cpp
+        src/Entities/Strategies/StrategyChangeLevel.cpp)
 add_library(Library ${SOURCE_FILES})
 
 target_link_libraries(Library stb)

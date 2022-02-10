@@ -10,16 +10,13 @@
 class Entity{
 
     Resource * base;
+    //virtual CollisionStrategy strategy = 0;
     int id;
-
-
 
     int hp;
     int damage;
 
     sf::FloatRect nextPos;
-
-
 
     void setPositionX(float x);
     void setPositionY(float y);
@@ -35,8 +32,6 @@ protected:
 
     bool flipMovement{false};
 
-
-
 public:
     Entity(Resource * base, int hp, int damage, float acceleration);
     //sf::Event lol;
@@ -50,8 +45,6 @@ public:
     sf::FloatRect getEnemyBounds();
 
     friend class Player;
-
-
 
     //sf::Vector2f GetPos() {return sprite.getPosition();};
 
