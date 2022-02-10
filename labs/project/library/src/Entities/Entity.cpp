@@ -1,14 +1,13 @@
 #include "Entities/Entity.h"
 
-Entity::Entity(Resource *base, int hp, int damage, float acceleration, CollisionStrategy * strategy) {
+Entity::Entity(Resource *base, int damage, float acceleration, CollisionStrategy *strategy) {
     this->base = base;
-    this->hp = hp;
     this->damage = damage;
     this->acceleration = acceleration;
     this->strategy = strategy;
 
-    this->sprite1.setTexture(Entity::getBase()->getTexture());
-    this->sprite1.setOrigin(this->sprite1.getTextureRect().width/2, this->sprite1.getTextureRect().height);
+    this->sprite.setTexture(Entity::getBase()->getTexture());
+    this->sprite.setOrigin(this->sprite.getTextureRect().width / 2, this->sprite.getTextureRect().height);
 }
 
 Entity::~Entity() {
@@ -16,22 +15,20 @@ Entity::~Entity() {
 }
 
 void Entity::render(sf::RenderTarget &target){
-    target.draw(this->sprite1);
+    target.draw(this->sprite);
 }
 
 
 void Entity::update() {
     this->updatePhysics();
     this->updateMovement();
-    this->base->getGif().update(this->sprite1);
+    this->base->getGif().update(this->sprite);
 
 }
 
 void Entity::updatePhysics() {
     velocity.y += gravity/1000;
-    //this->goomba.move(velocity);
 }
-//void Entity::updateMovement() {}
 
 void Entity::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) {
 
@@ -44,7 +41,7 @@ void Entity::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) 
             sf::FloatRect tileBounds = allTiles[i][j].getGlobalBounds();
             //Check if player intersects with any tile in the level
 
-            if(tileBounds.intersects(this->sprite1.getGlobalBounds()) && allTiles[i][j].getTilePreset() != airPreset){
+            if(tileBounds.intersects(this->sprite.getGlobalBounds()) && allTiles[i][j].getTilePreset() != airPreset){
 
                 float tileLeft = tileBounds.left;
                 float tileRight = tileBounds.left + tileBounds.width;
@@ -52,12 +49,12 @@ void Entity::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) 
                 float tileBottom = tileBounds.top + tileBounds.height;
                 sf::Vector2f tilePos(tileLeft + tileBounds.width / 2, tileTop + tileBounds.height / 2);
 
-                float playerLeft = this->sprite1.getGlobalBounds().left;
-                float playerRight = this->sprite1.getGlobalBounds().left + this->sprite1.getGlobalBounds().width;
-                float playerTop = this->sprite1.getGlobalBounds().top;
-                float playerBottom = this->sprite1.getGlobalBounds().top + this->sprite1.getGlobalBounds().height;
+                float playerLeft = this->sprite.getGlobalBounds().left;
+                float playerRight = this->sprite.getGlobalBounds().left + this->sprite.getGlobalBounds().width;
+                float playerTop = this->sprite.getGlobalBounds().top;
+                float playerBottom = this->sprite.getGlobalBounds().top + this->sprite.getGlobalBounds().height;
 
-                sf::Vector2f delta = tilePos - this->sprite1.getPosition();
+                sf::Vector2f delta = tilePos - this->sprite.getPosition();
 
                 float intersectX = 0.0f, intersectY = 0.0f;
 
@@ -89,11 +86,10 @@ void Entity::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) 
                 }
 
                 if(std::abs(intersectX) < std::abs(intersectY)){
-                    flipMovement = !flipMovement;
-                    setPositionX(this->sprite1.getPosition().x - intersectX);
+                    setPositionX(this->sprite.getPosition().x - intersectX);
                 }
                 else{
-                    setPositionY(this->sprite1.getPosition().y - intersectY - 0.1f);
+                    setPositionY(this->sprite.getPosition().y - intersectY - 0.1f);
                     velocity.y -= velocity.y;
                 }
             }
@@ -104,7 +100,7 @@ void Entity::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) 
 //Private setters:
 
 void Entity::setPositionX(float x) {
-    this->sprite1.setPosition(x, this->sprite1.getPosition().y);
+    this->sprite.setPosition(x, this->sprite.getPosition().y);
 }
 void Entity::performCollisionStrategy(int data) {
 
@@ -112,35 +108,20 @@ void Entity::performCollisionStrategy(int data) {
 }
 
 void Entity::setPositionY(float y) {
-    this->sprite1.setPosition(this->sprite1.getPosition().x, y);
+    this->sprite.setPosition(this->sprite.getPosition().x, y);
 }
 
 //Public setters:
 
 void Entity::setPosition(float x, float y) {
-    this->sprite1.setPosition(x, y);
+    this->sprite.setPosition(x, y);
 }
 
 void Entity::setPosition(sf::Vector2f position) {
-    this->sprite1.setPosition(position);
+    this->sprite.setPosition(position);
 }
 
-void Entity::setTilePosition(float x, float y) {
+void Entity::setTilePosition(int x, int y) {
     ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
-    this->sprite1.setPosition(x * (float)resourceRegistry->getTileSize(), y * (float)resourceRegistry->getTileSize());
+    this->sprite.setPosition((float)x * (float)resourceRegistry->getTileSize(), (float)y * (float)resourceRegistry->getTileSize());
 }
-
-sf::FloatRect Entity::getEnemyBounds() {
-    return this->base->getResourceBounds();
-}
-int Entity::getID() {
-    return id;
-}
-int Entity::getDamage() {
-    return damage;
-}
-
-//void Entity::kill() {
-  //  delete enemy;
-//}
-

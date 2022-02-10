@@ -10,15 +10,13 @@
 #include "Entities/EntityFactory.h"
 #include "Entities/Entity.h"
 
-//#include "Player.h"
-
 class Level{
 
     Tile ** tiles;
 
-    std::unique_ptr<EntityFactory> enemyFactory;
+    std::unique_ptr<EntityFactory> entityFactory;
 
-    std::vector<Entity *> enemies;
+    std::vector<Entity *> entities;
 
     sf::Texture backgroundTexture;
     std::vector<std::shared_ptr<sf::Sprite>> backgrounds;
@@ -28,21 +26,20 @@ class Level{
 
     //Private methods:
     void initBackgroundTexture();
+    void initArray();
+    void initTilePositions();
 
 public:
 
     friend class Player;
-    Level(const std::string fileName);
+    explicit Level(const std::string& fileName);
     ~Level();
-
-    void initArray();
-    void initTilePositions();
 
     void render(sf::RenderTarget & renderTarget);
 
     Tile** getAllTiles(){return tiles;};
-    int getLevelHeight() {return height;};
-    int getLevelLength() {return length;};
+    int getLevelHeight() const {return height;};
+    int getLevelLength() const {return length;};
 
     void update();
 };

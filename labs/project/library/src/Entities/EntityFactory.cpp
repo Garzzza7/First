@@ -4,7 +4,7 @@ EntityFactory::EntityFactory(){
 this->resourceRegistry = ResourceRegistry::GetInstance();
 }
 
-Entity *EntityFactory::CreateEnemy(unsigned int id) {
+Entity *EntityFactory::CreateEntity(unsigned int id) {
 
     switch (id) {
         case GOOMBA_ENTITY_ID:

@@ -4,8 +4,10 @@
 #include <vector>
 #include <mutex>
 #include <SFML/Graphics.hpp>
+
 #include "Level.h"
 #include "Player.h"
+#include "Resources/ResourceRegistry.h"
 
 class Game{
 
@@ -15,26 +17,22 @@ class Game{
 
     //The rest of variables:
 
-    int n{0};
-
-    bool running;
-    int currentLevel{0};
+    bool running{true};
+    int currentLevelId{0};
 
     sf::RenderWindow window;
     sf::VideoMode videoMode;
-    sf::Event ev;
+    sf::Event event;
     sf::View view {sf::Vector2f(0.0f,0.0f),sf::Vector2f(1000.0f,800.0f)};
-    sf::Texture texture;
-    sf::Sprite BG;
 
-    sf::RectangleShape hitbox;
-
-
-        std::vector<Level*> levels;
-
-
+    std::vector<Level*> levels;
 
     //Private methods:
+    void initWindow();
+    void initLevels();
+
+    void pollEvents();
+
     void applyCorrectScreenCenter();
 
 protected:
@@ -53,28 +51,16 @@ public:
     static Game * GetInstance();
 
     //Game functions:
-
     void update();
     void render();
 
-    void screenCollision();
+    //Getters:
+    bool isRunning() const{return running;};
+    Level * getCurrentLevel(){return levels.at(this->currentLevelId);};
+    int getCurrentLevelId() const {return currentLevelId;};
 
-    void pollEvents();
-
-    void initWindow();
-    void initLevels();
-
-    bool isRunning();
-
-    Level * getCurrentLevel();
-    int getCurrentLevelId() {return currentLevel;};
+    //Sort of setters:
     void changeLevel(int levelId);
-
-    void collisionEnemy();
-
-    int nchange() {return n;};
-
-
 };
 
 #endif //OOPPROJECT_GAME_H

@@ -39,10 +39,10 @@ BOOST_AUTO_TEST_SUITE(PlayerTest)
         Level * level = game->getCurrentLevel();
         ResourceID lol3;
         lol3=ResourceID::COIN_ENTITY_ID;
-       // for (auto  enemy : level->enemies)
+       // for (auto  enemy : level->entities)
         //{
          //   if(enemy->getID()==lol3) {
-          //      if ( player->getPlayerBounds().intersects(enemy->sprite1.getGlobalBounds()))
+          //      if ( player->getPlayerBounds().intersects(enemy->sprite.getGlobalBounds()))
           //      {
           //          BOOST_REQUIRE_EQUAL(player->CoinTouched(), 1);
            //     }

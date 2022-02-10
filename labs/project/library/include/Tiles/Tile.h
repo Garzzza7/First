@@ -12,10 +12,9 @@ class Tile{
 
 public:
 
-    Tile(){};
-    Tile(Resource * type);
+    Tile() = default;
+    explicit Tile(Resource * type);
     ~Tile();
-    void update();
 
     void setTilePosition(int x, int y);
     void render(sf::RenderTarget & renderTarget);

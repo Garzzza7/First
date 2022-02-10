@@ -1,10 +1,10 @@
 #include "Level.h"
 
 
-Level::Level(const std::string fileName) {
+Level::Level(const std::string& fileName) {
 
     ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
-    enemyFactory = std::make_unique<EntityFactory>();
+    entityFactory = std::make_unique<EntityFactory>();
 
     std::fstream levelFile;
     levelFile.open( "../../levels/" + fileName, std::ios::in);
@@ -52,12 +52,12 @@ Level::Level(const std::string fileName) {
                     Tile *newTile = new Tile(resourceRegistry->getPresetById(0));
                     tiles[i - 1][j] = *newTile;
 
-                    Entity * enemy = enemyFactory->CreateEnemy(num);
+                    Entity * entity = entityFactory->CreateEntity(num);
 
 
-                    enemy->setTilePosition(j, i);
+                    entity->setTilePosition(j, i);
 
-                    enemies.push_back(enemy);
+                    entities.push_back(entity);
                 }
 
                 j++;
@@ -83,9 +83,9 @@ void Level::initBackgroundTexture() {
     backgroundSprite->setScale(0.22f,0.22f);
 
     backgrounds.push_back(backgroundSprite);
-    for(int i = 1; i * backgroundSprite->getGlobalBounds().width < this->getLevelLength() * resourceRegistry->tileSize; ++i){
+    for(int i = 1; (float)i * backgroundSprite->getGlobalBounds().width < (float)this->getLevelLength() * (float)resourceRegistry->tileSize; ++i){
         auto newSprite = std::make_shared<sf::Sprite>(backgroundTexture);
-        newSprite->setPosition(i * backgroundSprite->getGlobalBounds().width, 0.0f);
+        newSprite->setPosition((float)i * backgroundSprite->getGlobalBounds().width, 0.0f);
         newSprite->setScale(0.22f, 0.22f);
         backgrounds.push_back(newSprite);
     }
@@ -110,7 +110,7 @@ void Level::initTilePositions() {
 
 void Level::render(sf::RenderTarget & renderTarget) {
 
-    for(auto background : backgrounds){
+    for(const auto& background : backgrounds){
         renderTarget.draw(*background);
     }
 
@@ -120,15 +120,15 @@ void Level::render(sf::RenderTarget & renderTarget) {
         }
     }
 
-    for(auto enemy : enemies){
-        enemy->render(renderTarget);
+    for(auto entity : entities){
+        entity->render(renderTarget);
     }
 }
 
 void Level::update() {
-    for(auto enemy : enemies){
-        enemy->update();
-        enemy->checkCollisions(this->tiles, this->height, this->length);
+    for(auto entity : entities){
+        entity->update();
+        entity->checkCollisions(this->tiles, this->height, this->length);
     }
 }
 
@@ -136,7 +136,7 @@ Level::~Level() {
     for(int i=0; i < height; i++)    //To delete the inner arrays
         delete [] tiles[i];
     delete [] tiles;
-    for(auto enemy : enemies) {
-        delete enemy;
+    for(auto entity : entities) {
+        delete entity;
     }
 }

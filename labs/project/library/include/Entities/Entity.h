@@ -12,12 +12,8 @@ class Entity{
 
     Resource * base;
     CollisionStrategy * strategy;
-    int id;
 
-    int hp;
     int damage;
-
-    sf::FloatRect nextPos;
 
     void setPositionX(float x);
     void setPositionY(float y);
@@ -29,48 +25,34 @@ protected:
     float acceleration{0.2f};
     float gravity{10.f};
 
-    sf::Sprite sprite1;
-
-    bool flipMovement{false};
+    sf::Sprite sprite;
 
 public:
-    Entity(Resource *base, int hp, int damage, float acceleration, CollisionStrategy * strategy);
-    ~Entity();
-    //sf::Event lol;
+
+    friend class Player;
+
+    Entity(Resource *base, int damage, float acceleration, CollisionStrategy *strategy);
+    virtual ~Entity();
+
     //Update functions run every frame.
     virtual void update();
     virtual void updatePhysics()=0;
     virtual void updateMovement()=0;
-    virtual int getID();
-    //virtual void dealDMG()=0;
-
-    sf::FloatRect getEnemyBounds();
-
-    friend class Player;
-
-    //sf::Vector2f GetPos() {return sprite.getPosition();};
-
-    virtual void move(const float dir_x, const float dir_y)=0;
-    //void jump(const float dir_x, const float dir_y);
-    //void stop(const float dir_x, const float dir_y);
 
     void render(sf::RenderTarget & target);
+
+    virtual void move(float dir_x, float dir_y)=0;
 
     void checkCollisions(Tile **tiles, int levelHeight, int levelLength);
 
     void setPosition(float x, float y);
     void setPosition(sf::Vector2f position);
-
-    void setTilePosition(float x, float y);
+    void setTilePosition(int x, int y);
 
     void performCollisionStrategy(int data);
 
+    //Getters
     Resource * getBase(){ return base; };
-
-    //void checkCollisions(sf::RenderTarget & target);
-
-    virtual int getDamage();
-
 };
 
 #endif //OOPPROJECT_ENTITY_H

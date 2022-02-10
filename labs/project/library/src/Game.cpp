@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Resources/ResourceRegistry.h"
 
 //Definitions of static classes.
 Game * Game::instance{nullptr};
@@ -15,7 +14,6 @@ Game * Game::GetInstance() {
 }
 
 Game::Game() {
-    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
 
     this->player = new Player(300,300);
 
@@ -56,30 +54,25 @@ void Game::initLevels() {
 
 //Rendering code:
 void Game::render() {
+    this->window.clear();
 
+    this->levels.at(currentLevelId)->render(this->window);
+    this->player->render(this->window);
 
-        this->window.clear();
+    //The screen is 21 blocks wide
+    //and about 17 block tall.
+    applyCorrectScreenCenter();
 
-        this->levels.at(currentLevel)->render(this->window);
-        this->player->CoinTouched();
-        this->player->render(this->window);
+    this->window.setView(view);
 
-        //The screen is 21 blocks wide
-        //and about 17 block tall.
-        applyCorrectScreenCenter();
-
-        this->window.setView(view);
-
-        this->window.display();
-
-
+    this->window.display();
 }
 
 void Game::applyCorrectScreenCenter() {
     ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
     const auto tileSize = (float)resourceRegistry->getTileSize();
-    const auto levelLength = (float)levels.at(currentLevel)->getLevelLength();
-    const auto levelHeight = (float)levels.at(currentLevel)->getLevelHeight();
+    const auto levelLength = (float)levels.at(currentLevelId)->getLevelLength();
+    const auto levelHeight = (float)levels.at(currentLevelId)->getLevelHeight();
     const float halfScreenHeight = 8.33f;
     const float halfScreenWidth = 10.33f;
     float screenX = (float)player->getPos().x;
@@ -111,52 +104,34 @@ void Game::update() {
 
     //Passing on the update event.
 
-    this->levels.at(currentLevel)->update();
+    this->levels.at(currentLevelId)->update();
     this->player->update(this->window);
-    if(this->player->getPos().x > 640){
-        //currentLevel = 1;
-
-    }
-
-    if(!this->window.isOpen()) running = false;
 
 }
 
 //Event polling
 void Game::pollEvents() {
 
-    while (this->window.pollEvent(this->ev))
+    while (this->window.pollEvent(this->event))
     {
-        switch (this->ev.type)
+        switch (this->event.type)
         {
             case sf::Event::Closed:
                 this->window.close();
                 running = false;
                 break;
             case sf::Event::KeyPressed:
-                if (this->ev.key.code == sf::Keyboard::Escape || currentLevel>levels.size()) {
+                if (this->event.key.code == sf::Keyboard::Escape) {
                     this->window.close();
                     running = false;
                 }
                 break;
         }
-        this->player->catchEvents(ev);
+        this->player->catchEvents(event);
     }
 }
 
-bool Game::isRunning() {
-    return this->running;
-}
-
-Level *Game::getCurrentLevel() {
-    return levels.at(this->currentLevel);
-}
-
 void Game::changeLevel(int levelId) {
-    currentLevel = levelId;
+    currentLevelId = levelId;
     this->player->setPlayerPosition(300,300);
-}
-
-void Game::screenCollision() {
-
 }

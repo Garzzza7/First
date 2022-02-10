@@ -18,24 +18,11 @@ public:
     Goomba(Resource * base);
 
     ~Goomba();
-  //  void updatePhysics();
-    //void updateMovement();
-    //void move(const float dir_x, const float dir_y) override;
 
-    //sf::Event lol;
-    //Update functions run every frame.
-     void updatePhysics() override ;
-     void updateMovement() override;
-    int getID() override {return id;};
-
-    //sf::Vector2f GetPos() {return sprite.getPosition();};
+    void updatePhysics() override ;
+    void updateMovement() override;
 
     void move(const float dir_x,const float dir_y) override;
-    //void jump(const float dir_x, const float dir_y);
-    //void stop(const float dir_x, const float dir_y);
-    //int getDamage() override;
-
-    //void checkCollisions(sf::RenderTarget & target);
 
 };
 

@@ -1,6 +1,6 @@
 #include "Entities/Goomba.h"
 
-Goomba::Goomba(Resource * base) : Entity(base, 1, 1, 4, new StrategyDamagePlayer) {
+Goomba::Goomba(Resource * base) : Entity(base, 1, 4, new StrategyDamagePlayer) {
     srand((unsigned) time(0));
     int randomNumber1=1 + (rand() % 6);
     int randomNumber2=1 + (rand() % 2);
@@ -17,14 +17,11 @@ Goomba::~Goomba() {
 
 void Goomba::updatePhysics() {
     velocity.y += gravity/100;
-    this->sprite1.move(velocity);
+    this->sprite.move(velocity);
 }
 void Goomba::updateMovement() {
 
     int randomNumber = 1 + (rand() % 5);;
-
-    bool moveDirection = randomNumber % 2 == 0;
-    if(flipMovement) moveDirection != moveDirection;
 
     if(randomNumber%2==0)
         this->move(-1,0);

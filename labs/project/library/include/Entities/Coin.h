@@ -14,11 +14,10 @@ private:
 public:
     Coin(Resource * base);
     ~Coin();
-    int getID() override {return id;};
     void updatePhysics() override;
     void updateMovement() override;
-    void move(const float dir_x, const float dir_y) override;
-    //int getDamage() override;
+    void move(float dir_x, float dir_y) override;
+
 };
 
 #endif //OOPPROJECT_COIN_H

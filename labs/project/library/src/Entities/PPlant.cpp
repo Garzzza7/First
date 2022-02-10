@@ -1,6 +1,6 @@
 #include "Entities/PPlant.h"
 
-PPlant::PPlant(Resource * base) : Entity(base, 2, 2, 0, new StrategyDamagePlayer) {
+PPlant::PPlant(Resource * base) : Entity(base, 2, 0, new StrategyDamagePlayer) {
 
 }
 
@@ -10,7 +10,7 @@ PPlant::~PPlant() {
 
 void PPlant::updatePhysics() {
     velocity.y += gravity/1000;
-    this->sprite1.move(velocity);
+    this->sprite.move(velocity);
 }
 void PPlant::updateMovement() {
 

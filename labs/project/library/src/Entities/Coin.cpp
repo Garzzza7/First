@@ -1,6 +1,6 @@
 #include "Entities/Coin.h"
 
-Coin::Coin(Resource * base) : Entity(base, 0, 0, 0, new StrategyChangeLevel) {
+Coin::Coin(Resource * base) : Entity(base, 0, 0, new StrategyChangeLevel) {
 
 }
 Coin::~Coin() {
@@ -8,7 +8,7 @@ Coin::~Coin() {
 }
 void Coin::updatePhysics() {
     velocity.y += gravity/1000;
-    this->sprite1.move(velocity);
+    this->sprite.move(velocity);
 }
 void Coin::updateMovement() {
 

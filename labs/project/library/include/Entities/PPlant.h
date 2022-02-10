@@ -19,24 +19,10 @@ public:
     PPlant(Resource * base);
     ~PPlant();
 
-    //  void updatePhysics();
-    //void updateMovement();
-    //void move(const float dir_x, const float dir_y) override;
-
-    //sf::Event lol;
-    //Update functions run every frame.
     void updatePhysics() override;
     void updateMovement() override;
 
-    //sf::Vector2f GetPos() {return sprite.getPosition();};
-    int getID() override {return id;};
-    //int getDamage() override;
-
-    void move(const float dir_x, const float dir_y) override;
-    //void jump(const float dir_x, const float dir_y);
-    //void stop(const float dir_x, const float dir_y);
-
-    //void checkCollisions(sf::RenderTarget & target);
+    void move(float dir_x, float dir_y) override;
 
 };
 

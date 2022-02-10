@@ -4,22 +4,21 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
+
 #include "Resources/ResourceRegistry.h"
 #include "AnimatedGif.h"
 #include "Level.h"
 #include "Entities/Entity.h"
-//template<class T>
+
 class Player{
 
     sf::Sprite sprite;
-    sf::FloatRect collisionRect;
 
     sf::Texture standingTexture;
     sf::Texture jumpingTexture;
     AnimatedGif gif;
 
-    int spawnPointPosX;
-    int spawnPointPosY;
+    sf::Vector2f spawnPointPos;
 
     bool goingRight{false};
     bool goingLeft{false};
@@ -28,9 +27,21 @@ class Player{
     unsigned int playerHealth{5};
 
     bool onGround{false};
-    unsigned jumpCount{0};
+    unsigned int jumpCount{0};
+
+    //Physics:
+    sf::Vector2f velocity{0,0};
+    float gravity{10.f};
+    float acceleration{0.2f};
+    float maxVelocity{3.0f};
+    float friction{0.5f};
 
     //Private methods:
+
+    void updatePhysics();
+    void updateMovement();
+    void updateAnimations();
+    void updateFallDamage();
 
     void move(float dir_x);
     void jump();
@@ -46,14 +57,10 @@ class Player{
 
     void checkIfPlayerShouldDie();
 
-    //Physics:
-    sf::Vector2f velocity{0,0};
-    float gravity{10.f};
-    float acceleration{0.2f};
-    float maxVelocity{3.0f};
-    float friction{0.5f};
+    //Collisions:
+    sf::Vector2f getCollisionIntersection(sf::FloatRect nextPos);
+    void enemyCollisions();
 
-    bool isTourched{false};
 
 public:
 
@@ -65,30 +72,17 @@ public:
     //Catching events before update:
     void catchEvents(sf::Event event);
 
-    void CoinTouched(){ isTourched=false;};
-
     //Update functions run every frame.
     void update(sf::RenderTarget & target);
-    void updatePhysics();
-    void updateMovement();
-    void updateAnimations();
-    void updateFallDamage();
 
     //Getters:
     sf::FloatRect getPlayerBounds() {return this->sprite.getGlobalBounds();};
     sf::Vector2f getPos() {return sprite.getPosition();};
-    unsigned int getHP()  {return playerHealth;};
+    unsigned int getHP() const  {return playerHealth;};
 
-    //Collisions:
-    sf::Vector2f getCollisionIntersection(sf::FloatRect nextPos);
-    void checkCollisions();
-    void enemyCollisions();
-
-    void setPlayerPosition(const sf::Vector2f position);
-    void setPlayerPosition(const int x, const int y);
+    void setPlayerPosition(sf::Vector2f position);
+    void setPlayerPosition(int x, int y);
 
     void receiveDamage(int dmg);
-
 };
-
 #endif //OOPPROJECT_PLAYER_H

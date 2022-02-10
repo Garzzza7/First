@@ -9,13 +9,11 @@ Tile::Tile(Resource * type) {
 
 }
 
-Tile::~Tile() {
-
-}
+Tile::~Tile() = default;
 
 void Tile::setTilePosition(int x, int y) {
     ResourceRegistry * tileRegistry = ResourceRegistry::GetInstance();
-    this->sprite.setPosition(x*tileRegistry->getTileSize(), y*tileRegistry->getTileSize());
+    this->sprite.setPosition((float)(x*tileRegistry->getTileSize()), (float)(y*tileRegistry->getTileSize()));
 }
 
 void Tile::render(sf::RenderTarget & renderTarget) {

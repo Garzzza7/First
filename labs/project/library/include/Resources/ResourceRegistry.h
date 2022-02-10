@@ -44,7 +44,6 @@ public:
 
     static ResourceRegistry *GetInstance();
 
-    //My stuff:
 
     void initObjects();
     void deleteObjects();

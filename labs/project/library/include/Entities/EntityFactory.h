@@ -15,7 +15,7 @@ public:
     EntityFactory();
     ~EntityFactory(){};
 
-    Entity * CreateEnemy(unsigned int id);
+    Entity * CreateEntity(unsigned int id);
 };
 
 #endif //OOPPROJECT_ENTITYFACTORY_H
