@@ -1,6 +1,6 @@
-#include "Enemies/Coin.h"
+#include "Entities/Coin.h"
 
-Coin::Coin(Resource * base) : Enemy(base, 0, 0, 0) {
+Coin::Coin(Resource * base) : Entity(base, 0, 0, 0) {
 
 }
 Coin::~Coin() {
@@ -29,7 +29,7 @@ void Coin::move(const float dir_x, const float dir_y) {
 
 }
 /*
-int Enemy::getDamage() {
+int Entity::getDamage() {
     return damage;
 }
  */

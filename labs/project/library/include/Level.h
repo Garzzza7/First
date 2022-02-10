@@ -7,8 +7,8 @@
 #include "Resources/ResourceRegistry.h"
 #include "Tiles/Tile.h"
 
-#include "Enemies/EnemyFactory.h"
-#include "Enemies/Enemy.h"
+#include "Entities/EntityFactory.h"
+#include "Entities/Entity.h"
 
 //#include "Player.h"
 
@@ -16,8 +16,8 @@ class Level{
 
     Tile ** tiles;
 
-    std::unique_ptr<EnemyFactory> enemyFactory;
-    std::vector<Enemy*> enemies;
+    std::unique_ptr<EntityFactory> enemyFactory;
+    std::vector<Entity*> enemies;
 
     sf::Texture backgroundTexture;
     std::vector<std::shared_ptr<sf::Sprite>> backgrounds;

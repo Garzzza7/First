@@ -47,9 +47,11 @@ void Game::initLevels() {
 
     auto * level1 = new Level("level_1");
     auto * level2 = new Level("level_2");
+    auto * level3 = new Level("level_3");
 
     levels.push_back(level1);
     levels.push_back(level2);
+    levels.push_back(level3);
 }
 
 //Rendering code:

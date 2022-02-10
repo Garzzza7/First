@@ -2,11 +2,11 @@
 #define OOPPROJECT_GOOMBA_H
 
 #include <SFML/Graphics.hpp>
-#include "Enemy.h"
+#include "Entity.h"
 #include <ctime>
 
 //template<class T>
-class Goomba : public Enemy{
+class Goomba : public Entity{
 protected:
     int hp{1};
     int damage{1};

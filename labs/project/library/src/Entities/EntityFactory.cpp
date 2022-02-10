@@ -1,10 +1,10 @@
-#include "Enemies/EnemyFactory.h"
+#include "Entities/EntityFactory.h"
 
-EnemyFactory::EnemyFactory(){
+EntityFactory::EntityFactory(){
 this->resourceRegistry = ResourceRegistry::GetInstance();
 }
 
-Enemy *EnemyFactory::CreateEnemy(unsigned int id) {
+Entity *EntityFactory::CreateEnemy(unsigned int id) {
 
     switch (id) {
         case GOOMBA_ENTITY_ID:
@@ -15,7 +15,7 @@ Enemy *EnemyFactory::CreateEnemy(unsigned int id) {
             return new Coin(resourceRegistry->getPresetById(COIN_ENTITY_ID));
         default:
             throw std::runtime_error(
-                    "Enemy factory could not find the enemy assigned with this enemy id: " + std::to_string(id));
+                    "Entity factory could not find the enemy assigned with this enemy id: " + std::to_string(id));
     }
 
 }

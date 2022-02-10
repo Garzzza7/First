@@ -1,6 +1,6 @@
-#include "Enemies/PPlant.h"
+#include "Entities/PPlant.h"
 
-PPlant::PPlant(Resource * base) : Enemy(base, 2, 2, 0) {
+PPlant::PPlant(Resource * base) : Entity(base, 2, 2, 0) {
 
 }
 
@@ -30,7 +30,7 @@ void PPlant::move(const float dir_x, const float dir_y) {
     }
 }
 /*
-int Enemy::getDamage() {
+int Entity::getDamage() {
     return damage;
 }
  */

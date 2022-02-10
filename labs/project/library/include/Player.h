@@ -7,7 +7,7 @@
 #include "Resources/ResourceRegistry.h"
 #include "AnimatedGif.h"
 #include "Level.h"
-#include "Enemies/Enemy.h"
+#include "Entities/Entity.h"
 //template<class T>
 class Player{
 

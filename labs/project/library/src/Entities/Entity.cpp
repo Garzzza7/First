@@ -1,34 +1,34 @@
-#include "Enemies/Enemy.h"
+#include "Entities/Entity.h"
 
-Enemy::Enemy(Resource * base, int hp, int damage, float acceleration) {
+Entity::Entity(Resource * base, int hp, int damage, float acceleration) {
     this->base = base;
     this->hp = hp;
     this->damage = damage;
     this->acceleration = acceleration;
 
-    this->sprite1.setTexture(Enemy::getBase()->getTexture());
+    this->sprite1.setTexture(Entity::getBase()->getTexture());
     this->sprite1.setOrigin(this->sprite1.getTextureRect().width/2, this->sprite1.getTextureRect().height);
 }
 
-void Enemy::render(sf::RenderTarget &target){
+void Entity::render(sf::RenderTarget &target){
     target.draw(this->sprite1);
 }
 
 
-void Enemy::update() {
+void Entity::update() {
     this->updatePhysics();
     this->updateMovement();
     this->base->getGif().update(this->sprite1);
 
 }
 
-void Enemy::updatePhysics() {
+void Entity::updatePhysics() {
     velocity.y += gravity/1000;
     //this->goomba.move(velocity);
 }
-//void Enemy::updateMovement() {}
+//void Entity::updateMovement() {}
 
-void Enemy::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) {
+void Entity::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) {
 
     //Get the tile preset that is not solid:
     ResourceRegistry * tileRegistry = ResourceRegistry::GetInstance();
@@ -98,44 +98,44 @@ void Enemy::checkCollisions(Tile **allTiles, int levelHeight, int levelLength) {
 
 //Private setters:
 
-void Enemy::setPositionX(float x) {
+void Entity::setPositionX(float x) {
     this->sprite1.setPosition(x, this->sprite1.getPosition().y);
 }
-void Enemy::collisionwithmario() {
+void Entity::collisionwithmario() {
 
 
 }
 
-void Enemy::setPositionY(float y) {
+void Entity::setPositionY(float y) {
     this->sprite1.setPosition(this->sprite1.getPosition().x, y);
 }
 
 //Public setters:
 
-void Enemy::setPosition(float x, float y) {
+void Entity::setPosition(float x, float y) {
     this->sprite1.setPosition(x, y);
 }
 
-void Enemy::setPosition(sf::Vector2f position) {
+void Entity::setPosition(sf::Vector2f position) {
     this->sprite1.setPosition(position);
 }
 
-void Enemy::setTilePosition(float x, float y) {
+void Entity::setTilePosition(float x, float y) {
     ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
     this->sprite1.setPosition(x * (float)resourceRegistry->getTileSize(), y * (float)resourceRegistry->getTileSize());
 }
 
-sf::FloatRect Enemy::getEnemyBounds() {
+sf::FloatRect Entity::getEnemyBounds() {
     return this->base->getResourceBounds();
 }
-int Enemy::getID() {
+int Entity::getID() {
     return id;
 }
-int Enemy::getDamage() {
+int Entity::getDamage() {
     return damage;
 }
 
-//void Enemy::kill() {
+//void Entity::kill() {
   //  delete enemy;
 //}
 

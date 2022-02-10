@@ -8,10 +8,10 @@ set(SOURCE_FILES
         include/Game.h src/Game.cpp
         include/Level.h src/Level.cpp
         include/Resources/ResourceRegistry.h src/Resources/ResourceRegistry.cpp
-        include/Enemies/Enemy.h src/Enemies/Enemy.cpp
-        include/Enemies/Goomba.h src/Enemies/Goomba.cpp
-        include/Enemies/PPlant.h src/Enemies/PPlant.cpp
-        include/Enemies/EnemyFactory.h src/Enemies/EnemyFactory.cpp src/Enemies/Coin.cpp include/Enemies/Coin.h)
+        include/Entities/Entity.h src/Entities/Entity.cpp
+        include/Entities/Goomba.h src/Entities/Goomba.cpp
+        include/Entities/PPlant.h src/Entities/PPlant.cpp
+        include/Entities/EntityFactory.h src/Entities/EntityFactory.cpp src/Entities/Coin.cpp include/Entities/Coin.h)
 add_library(Library ${SOURCE_FILES})
 
 target_link_libraries(Library stb)

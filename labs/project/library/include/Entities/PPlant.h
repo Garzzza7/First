@@ -5,9 +5,9 @@
 #ifndef OOPPROJECT_PPLANT_H
 #define OOPPROJECT_PPLANT_H
 
-#include "Enemy.h"
+#include "Entity.h"
 
-class PPlant: public Enemy {
+class PPlant: public Entity {
     int id{5};
     int hp{2};
     int damage{2};

@@ -1,9 +1,9 @@
 #include <boost/test/unit_test.hpp>
 /*
-#include "Enemies/Enemy.h"
-#include "Enemies/EnemyFactory.h"
-#include "Enemies/Goomba.h"
-#include "Enemies/PPlant.h"
+#include "Entities/Entity.h"
+#include "Entities/EntityFactory.h"
+#include "Entities/Goomba.h"
+#include "Entities/PPlant.h"
 #include "Resources/Resource.h"
 #include "Resources/ResourceRegistry.h"
 #include "Tiles/Tile.h"

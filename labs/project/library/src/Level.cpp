@@ -4,7 +4,7 @@
 Level::Level(const std::string fileName) {
 
     ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
-    enemyFactory = std::make_unique<EnemyFactory>();
+    enemyFactory = std::make_unique<EntityFactory>();
 
     std::fstream levelFile;
     levelFile.open( "../../levels/" + fileName, std::ios::in);
@@ -52,7 +52,7 @@ Level::Level(const std::string fileName) {
                     Tile *newTile = new Tile(resourceRegistry->getPresetById(0));
                     tiles[i - 1][j] = *newTile;
 
-                    Enemy * enemy = enemyFactory->CreateEnemy(num);
+                    Entity * enemy = enemyFactory->CreateEnemy(num);
 
 
                     enemy->setTilePosition(j, i);

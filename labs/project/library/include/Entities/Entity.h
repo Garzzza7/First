@@ -1,5 +1,5 @@
-#ifndef OOPPROJECT_ENEMY_H
-#define OOPPROJECT_ENEMY_H
+#ifndef OOPPROJECT_ENTITY_H
+#define OOPPROJECT_ENTITY_H
 
 #include <SFML/Graphics.hpp>
 
@@ -7,7 +7,7 @@
 #include "Resources/Resource.h"
 #include "Tiles/Tile.h"
 
-class Enemy{
+class Entity{
 
     Resource * base;
     int id;
@@ -38,7 +38,7 @@ protected:
 
 
 public:
-    Enemy(Resource * base, int hp, int damage, float acceleration);
+    Entity(Resource * base, int hp, int damage, float acceleration);
     //sf::Event lol;
     //Update functions run every frame.
     virtual void update();
@@ -78,4 +78,4 @@ public:
 
 };
 
-#endif //OOPPROJECT_ENEMY_H
+#endif //OOPPROJECT_ENTITY_H

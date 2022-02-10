@@ -2,11 +2,11 @@
 #define OOPPROJECT_COIN_H
 
 #include <SFML/Graphics.hpp>
-#include "Enemy.h"
+#include "Entity.h"
 #include <ctime>
 
 
-class Coin:public Enemy{
+class Coin:public Entity{
 private:
 int id{6};
 
