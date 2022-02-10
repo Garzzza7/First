@@ -1,9 +1,16 @@
-#include <iostream>
-#include "Student.h"
-int main ()
-{
-std::cout <<"Hello, OOP1!"<<std::endl;
-Student student("Thomas", "Edison");
-std::cout<<"Student"<<student.firstName<<" "<<student.lastName<<std::endl;
-return 0;
+#include "Game.h"
+
+int main() {
+
+    Game * game = Game::GetInstance(); //Creating a game singleton.
+
+
+    while (game->isRunning())
+    {
+        game->render();
+        game->update();
+
+    }
+
+    return 0;
 }
