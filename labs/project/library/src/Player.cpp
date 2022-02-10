@@ -32,6 +32,8 @@ void Player::update(sf::RenderTarget & target){
     this->updateMovement();
 
     this->updateAnimations();
+
+    this->updateFallDamage();
 }
 
 void Player::updatePhysics() {
@@ -81,6 +83,18 @@ void Player::updateMovement() {
 void Player::updateAnimations() {
     if(std::abs(this->velocity.x) > 0.1f && onGround) {
         this->gif.update(this->sprite);
+    }
+}
+
+void Player::updateFallDamage() {
+
+    Game * game = Game::GetInstance();
+    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
+
+    if(this->getPos().y > (float)(game->getCurrentLevel()->height * resourceRegistry->tileSize) + 16.0f){
+
+        this->playerHealth = 0;
+        checkIfPlayerShouldDie();
     }
 }
 

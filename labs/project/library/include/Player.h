@@ -71,6 +71,7 @@ public:
     void updatePhysics();
     void updateMovement();
     void updateAnimations();
+    void updateFallDamage();
 
     //Getters:
     sf::FloatRect getPlayerBounds() {return this->sprite.getGlobalBounds();};
