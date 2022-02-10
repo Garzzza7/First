@@ -21,8 +21,11 @@ class ResourceRegistry{
     static ResourceRegistry * instance;
     static std::mutex mutex;
 
-    //Map of resources
+    //Map of resources:
     std::map<unsigned int, Resource*> resourceMap;
+
+    //Private methods:
+    void initObjects();
 
 protected:
     ResourceRegistry();
@@ -43,8 +46,6 @@ public:
 
     static ResourceRegistry *GetInstance();
 
-
-    void initObjects();
 
     unsigned int getTileSize() const;
 

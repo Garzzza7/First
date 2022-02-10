@@ -12,10 +12,11 @@ enum ResourceType{
 class Resource{
 
     ResourceType type;
+
     sf::IntRect rect;
+
     sf::Texture texture;
     AnimatedGif gif;
-    sf::Sprite sprite;
 
 public:
 
