@@ -49,15 +49,23 @@ else()
 endif()
 #find_package(X11 REQUIRED)
 #target_link_libraries(Library X11)
-#[[
-
-set(SOURCE_TEST_PLAYER_FILES
-        test/Player.cpp
-        test/PlayerTest.cpp)
+#
 
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${Boost_INCLUDE_DIRS}
 )
 
-add_executable (TestHuman ${SOURCE_TEST_PLAYER_FILES})]]
+set(SOURCE_TEST_PLAYER_FILES
+        test/master.cpp
+        test/PlayerTest.cpp)
+
+add_executable (TestPlayer ${SOURCE_TEST_PLAYER_FILES})
+
+target_link_libraries(TestPlayer
+        Library
+        ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+        sfml-audio
+        sfml-graphics
+        sfml-system
+        sfml-window)

@@ -21,13 +21,11 @@ class Player{
     int spawnPointPosX;
     int spawnPointPosY;
 
-
-
     bool goingRight{false};
     bool goingLeft{false};
     bool goingToJump{false};
 
-     unsigned int playerHealth;
+    unsigned int playerHealth{5};
 
     bool onGround{false};
     unsigned jumpCount{0};

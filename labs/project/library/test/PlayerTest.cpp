@@ -14,8 +14,9 @@
 
 BOOST_AUTO_TEST_SUITE(PlayerTest)
     BOOST_AUTO_TEST_CASE(test1) {
-        Player * player;
+        Player * player = new Player(0,0);
         BOOST_REQUIRE_EQUAL(player->getHP(), 5);
+        delete player;
     }
 
 
