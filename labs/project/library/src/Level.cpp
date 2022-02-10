@@ -9,8 +9,8 @@ Level::Level(const std::string fileName) {
     std::fstream levelFile;
     levelFile.open( "../../levels/" + fileName, std::ios::in);
 
-    if(levelFile.is_open())
-    {
+    if(levelFile.is_open()){
+
         int i = 0;
         std::string str;
         while(std::getline(levelFile, str)){
@@ -33,6 +33,8 @@ Level::Level(const std::string fileName) {
                     }
                     x += c;
                 }
+                initBackgroundTexture();
+
                 i++;
                 continue;
             }
@@ -71,6 +73,24 @@ Level::Level(const std::string fileName) {
     initTilePositions();
 }
 
+void Level::initBackgroundTexture() {
+
+    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
+
+    backgroundTexture.loadFromFile(resourceRegistry->relativeTexturePath + "background.png");
+    auto backgroundSprite = std::make_shared<sf::Sprite>(backgroundTexture);
+    backgroundSprite->setPosition(0.0F,0.f);
+    backgroundSprite->setScale(0.22f,0.22f);
+
+    backgrounds.push_back(backgroundSprite);
+    for(int i = 1; i * backgroundSprite->getGlobalBounds().width < this->getLevelLength() * resourceRegistry->tileSize; ++i){
+        auto newSprite = std::make_shared<sf::Sprite>(backgroundTexture);
+        newSprite->setPosition(i * backgroundSprite->getGlobalBounds().width, 0.0f);
+        newSprite->setScale(0.22f, 0.22f);
+        backgrounds.push_back(newSprite);
+    }
+}
+
 void Level::initArray() {
     tiles = new Tile* [height];
 
@@ -89,6 +109,10 @@ void Level::initTilePositions() {
 }
 
 void Level::render(sf::RenderTarget & renderTarget) {
+
+    for(auto background : backgrounds){
+        renderTarget.draw(*background);
+    }
 
     for(int i = 0; i < height; ++i) {
         for(int j = 0; j < length; ++j){

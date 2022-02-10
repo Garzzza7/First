@@ -15,20 +15,9 @@ Game * Game::GetInstance() {
 }
 
 Game::Game() {
-    ResourceRegistry * objectRegistry = ResourceRegistry::GetInstance();
+    ResourceRegistry * resourceRegistry = ResourceRegistry::GetInstance();
 
     this->player = new Player(300,300);
-    texture.loadFromFile(objectRegistry->relativeTexturePath + "background.png");
-    BG.setTexture(texture);
-    BG.setPosition(-150.f,-250.f);
-    BG.scale(0.45f,0.45f);
-    hitbox.setPosition(0.f,0.f);
-    hitbox.setSize(sf::Vector2(1600.f,432.f));
-    hitbox.setFillColor(sf::Color::Transparent);
-    hitbox.setOutlineColor(sf::Color::White);
-    hitbox.setOutlineThickness(1.f);
-
-
 
     initWindow();
     initLevels();
@@ -47,7 +36,7 @@ void Game::initWindow() {
     this->videoMode.height = 800;
     this->videoMode.width = 1000;
 
-    this->window.create(this->videoMode, "SFML Window", sf::Style::Titlebar | sf::Style::Close);
+    this->window.create(this->videoMode, "Supa mario", sf::Style::Titlebar | sf::Style::Close);
 
     this->view.zoom(0.33f);
 
@@ -56,8 +45,8 @@ void Game::initWindow() {
 
 void Game::initLevels() {
 
-    Level * level1 = new Level("level_1");
-    Level * level2 = new Level("level_2");
+    auto * level1 = new Level("level_1");
+    auto * level2 = new Level("level_2");
 
     levels.push_back(level1);
     levels.push_back(level2);
@@ -66,12 +55,9 @@ void Game::initLevels() {
 //Rendering code:
 void Game::render() {
     this->window.clear();
-    this->window.draw(BG);
-    this->window.draw(hitbox);
 
-    this->player->render(this->window);
     this->levels.at(currentLevel)->render(this->window);
-
+    this->player->render(this->window);
 
     //The screen is 21 blocks wide
     //and about 17 block tall.
@@ -158,13 +144,6 @@ bool Game::isRunning() {
 Level *Game::getCurrentLevel() {
     return levels.at(this->currentLevel);
 }
-void Game::screencollision() {
-    //left
-   // if(player->getPos().x<400.f) view.setCenter(sf::Vector2(400.f,player->getPos().y));
-    //right
-   // if(player->getPos().x<400.f) view.setCenter(sf::Vector2(400.f,player->getPos().y));
-   // //top
+void Game::screenCollision() {
 
 }
-
-

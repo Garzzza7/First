@@ -19,9 +19,14 @@ class Level{
     std::unique_ptr<EnemyFactory> enemyFactory;
     std::vector<Enemy*> enemies;
 
+    sf::Texture backgroundTexture;
+    std::vector<std::shared_ptr<sf::Sprite>> backgrounds;
 
     int height{10};
     int length{10};
+
+    //Private methods:
+    void initBackgroundTexture();
 
 public:
 

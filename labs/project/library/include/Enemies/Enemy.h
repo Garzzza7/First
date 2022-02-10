@@ -74,7 +74,7 @@ public:
 
     //void checkCollisions(sf::RenderTarget & target);
 
-    virtual int getdmg();
+    virtual int getDamage();
 
 };
 

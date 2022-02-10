@@ -29,7 +29,7 @@ void Coin::move(const float dir_x, const float dir_y) {
 
 }
 /*
-int Enemy::getdmg() {
+int Enemy::getDamage() {
     return damage;
 }
  */

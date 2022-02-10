@@ -52,7 +52,7 @@ public:
     void update();
     void render();
 
-    void screencollision();
+    void screenCollision();
 
     void pollEvents();
 

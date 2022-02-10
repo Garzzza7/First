@@ -29,7 +29,7 @@ public:
 
     //sf::Vector2f GetPos() {return sprite.getPosition();};
     int getID() override {return id;};
-    //int getdmg() override;
+    //int getDamage() override;
 
     void move(const float dir_x, const float dir_y) override;
     //void jump(const float dir_x, const float dir_y);
