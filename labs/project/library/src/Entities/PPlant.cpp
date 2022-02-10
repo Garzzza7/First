@@ -12,6 +12,7 @@ void PPlant::updatePhysics() {
     velocity.y += gravity/1000;
     this->sprite.move(velocity);
 }
+
 void PPlant::updateMovement() {
 
     srand((unsigned) time(0));
@@ -22,6 +23,7 @@ void PPlant::updateMovement() {
     } else this->move(1,0);
 
 }
+
 void PPlant::move(const float dir_x, const float dir_y) {
     this->velocity.x += dir_x * acceleration;
     if (std::abs(this->velocity.x) > this->maxVelocity) {
@@ -29,8 +31,3 @@ void PPlant::move(const float dir_x, const float dir_y) {
 
     }
 }
-/*
-int Entity::getDamage() {
-    return damage;
-}
- */

@@ -13,7 +13,7 @@ class EntityFactory{
 
 public:
     EntityFactory();
-    ~EntityFactory(){};
+    ~EntityFactory()= default;
 
     Entity * CreateEntity(unsigned int id);
 };

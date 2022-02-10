@@ -16,7 +16,6 @@ enum ResourceID{
 };
 
 class ResourceRegistry{
-    ResourceID id;
 
     //Singleton stuff:
     static ResourceRegistry * instance;
@@ -27,7 +26,7 @@ class ResourceRegistry{
 
 protected:
     ResourceRegistry();
-    ~ResourceRegistry() {}
+    ~ResourceRegistry();
 
 public:
 
@@ -46,10 +45,9 @@ public:
 
 
     void initObjects();
-    void deleteObjects();
-    ResourceID getID() const {return id;}
 
-    unsigned int getTileSize();
+    unsigned int getTileSize() const;
+
     Resource * getPresetById(unsigned int id);
 
 };

@@ -28,9 +28,6 @@ public:
     const sf::Texture &getTexture() const {return texture;}
 
     AnimatedGif &getGif() {return gif;}
-
-    sf::FloatRect getResourceBounds();
-
 };
 
 #endif //OOPPROJECT_RESOURCE_H

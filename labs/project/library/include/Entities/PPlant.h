@@ -1,7 +1,3 @@
-//
-// Created by student on 1/21/22.
-//
-
 #ifndef OOPPROJECT_PPLANT_H
 #define OOPPROJECT_PPLANT_H
 
@@ -9,12 +5,9 @@
 #include "Strategies/StrategyDamagePlayer.h"
 
 class PPlant : public Entity {
-    int id{5};
-    int hp{2};
     int damage{2};
     float acceleration{0};
 
-    sf::Sprite pplant;
 public:
     PPlant(Resource * base);
     ~PPlant();

@@ -8,12 +8,11 @@
 
 
 class Coin : public Entity{
-private:
-    int id{6};
 
 public:
     Coin(Resource * base);
     ~Coin();
+
     void updatePhysics() override;
     void updateMovement() override;
     void move(float dir_x, float dir_y) override;

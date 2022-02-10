@@ -9,7 +9,3 @@ Resource::Resource(ResourceType type, std::string textureAddress, sf::IntRect re
     }
     this->sprite.setTexture(this->texture);
 }
-sf::FloatRect Resource::getResourceBounds() {
-   return this->sprite.getGlobalBounds();
-
-}

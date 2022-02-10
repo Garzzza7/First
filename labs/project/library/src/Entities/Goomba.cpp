@@ -13,8 +13,6 @@ Goomba::~Goomba() {
 
 }
 
-
-
 void Goomba::updatePhysics() {
     velocity.y += gravity/100;
     this->sprite.move(velocity);
@@ -36,8 +34,3 @@ void Goomba::move(const float dir_x,const float dir_y) {
 
     }
 }
-/*
-int Entity::getDamage() {
-    return damage;
-}
- */

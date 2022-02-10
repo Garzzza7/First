@@ -7,6 +7,12 @@ ResourceRegistry::ResourceRegistry() {
     initObjects();
 }
 
+ResourceRegistry::~ResourceRegistry(){
+    for(auto object : resourceMap){
+        delete object.second;
+    }
+}
+
 ResourceRegistry * ResourceRegistry::GetInstance()
 {
     std::lock_guard<std::mutex> lock(mutex);
@@ -19,7 +25,7 @@ ResourceRegistry * ResourceRegistry::GetInstance()
 
 void ResourceRegistry::initObjects() {
 
-    sf::IntRect basicRect(0, 0, tileSize, tileSize);
+    sf::IntRect basicRect(0, 0, (int)tileSize, (int)tileSize);
 
     auto* airTile = new Resource(TILE, relativeTexturePath + "Air.png", basicRect);
     auto* groundTile = new Resource(TILE, relativeTexturePath + "Ground.png", basicRect);
@@ -40,13 +46,7 @@ void ResourceRegistry::initObjects() {
 
 }
 
-void ResourceRegistry::deleteObjects() {
-    for(auto object : resourceMap){
-        delete object.second;
-    }
-}
-
-unsigned int ResourceRegistry::getTileSize() {
+unsigned int ResourceRegistry::getTileSize() const {
     return tileSize;
 }
 
